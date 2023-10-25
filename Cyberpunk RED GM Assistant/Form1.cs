@@ -33,7 +33,12 @@ namespace Cyberpunk_RED_GM_Assistant
 
             for(int i = 0; i < 10; i++)
             {
-            PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
+                PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
+            }
+
+            for(int i = 0; i < 5; i++)
+            {
+                AddWeapon();
             }
             // testing ends
         }
@@ -43,12 +48,12 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             FlowLayoutPanel characterPanel = new FlowLayoutPanel();
             characterPanel.Size = new Size(255, 60);
+            characterPanel.FlowDirection = FlowDirection.TopDown;
 
             Label nameLabel = new Label();
             nameLabel.AutoSize = true;
             nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
-            string nameText = $"1. Joe Mama"; // find character from charsInQueue
-            nameLabel.Text = nameText;
+            nameLabel.Text = $"1. Joe Mama"; // find character from charsInQueue
             characterPanel.Controls.Add(nameLabel);
 
             Label statsLabel = new Label();
@@ -71,13 +76,67 @@ namespace Cyberpunk_RED_GM_Assistant
             Label conditionLabel = new Label();
             conditionLabel.AutoSize = true;
             conditionLabel.Font = new Font(conditionLabel.Font.Name, 13f);
-            string text = $"Condition"; // find condition here
-            conditionLabel.Text = text;
+            conditionLabel.Text = $"Condition"; // find condition here
             conditionPanel.Controls.Add(conditionLabel);
 
             conditionsFlowPanel.Controls.Add(conditionPanel);
         }
 
+        // needs character id in parameters to get weapon IDs
+        // then searches for weapon IDs and formats attributes into panels
+        private void AddWeapon()
+        {
+            // for each weapon create a new flow layout panel and add to the weapons flow panel
+            FlowLayoutPanel weaponPanel = new FlowLayoutPanel();
+            weaponPanel.Size = new Size(372, 75);
+            weaponPanel.FlowDirection = FlowDirection.LeftToRight;
+
+            // Weapon name
+            Label nameLabel = new Label();
+            nameLabel.Size = new Size(180, 20);
+            nameLabel.Font = new Font(nameLabel.Font.Name, 13f);
+            nameLabel.Text = $"SPAS-12"; // find name here
+            weaponPanel.Controls.Add(nameLabel);
+
+            // Weapon type
+            Label typeLabel = new Label();
+            typeLabel.Size = new Size(180, 20);
+            typeLabel.Font = new Font(typeLabel.Font.Name, 13f);
+            typeLabel.Text = $"Shotgun"; // find type here
+            weaponPanel.Controls.Add(typeLabel);
+
+            // Weapon damage
+            Label dmgLabel = new Label();
+            dmgLabel.Size = new Size(180, 20);
+            dmgLabel.Font = new Font(dmgLabel.Font.Name, 13f);
+            dmgLabel.Text = $"DMG 5d6"; // find damage here
+            weaponPanel.Controls.Add(dmgLabel);
+
+            // Weapon rate of fire
+            Label rofLabel = new Label();
+            rofLabel.Size = new Size(180, 20);
+            rofLabel.Font = new Font(rofLabel.Font.Name, 13f);
+            rofLabel.Text = $"ROF 1"; // find rate of fire here
+            weaponPanel.Controls.Add(rofLabel);
+
+            // Current ammo / Reserve Ammo
+            Label ammoLabel = new Label();
+            ammoLabel.Size = new Size(180, 20);
+            ammoLabel.Font = new Font(ammoLabel.Font.Name, 13f);
+            ammoLabel.Text = $"3 / 16"; // find current ammo and reserve ammo here
+            weaponPanel.Controls.Add(ammoLabel);
+
+            // Ammo type (WIP, currently has no functional use)
+            Label ammoTypeLabel = new Label();
+            ammoTypeLabel.Size = new Size(180, 20);
+            ammoTypeLabel.Font = new Font(ammoTypeLabel.Font.Name, 13f);
+            ammoTypeLabel.Text = $"Shotgun"; // find type here
+            weaponPanel.Controls.Add(ammoTypeLabel);
+
+            weaponsFlowPanel.Controls.Add(weaponPanel);
+        }
+
+        // Prints a string to the combat log
         private void PrintCombatLog(string str)
         {
             Panel logPanel = new Panel();

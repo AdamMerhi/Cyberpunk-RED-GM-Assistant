@@ -93,7 +93,9 @@
             // 
             // weaponsFlowPanel
             // 
+            this.weaponsFlowPanel.AutoScroll = true;
             this.weaponsFlowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.weaponsFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.weaponsFlowPanel.Location = new System.Drawing.Point(212, 49);
             this.weaponsFlowPanel.Name = "weaponsFlowPanel";
             this.weaponsFlowPanel.Size = new System.Drawing.Size(399, 313);
