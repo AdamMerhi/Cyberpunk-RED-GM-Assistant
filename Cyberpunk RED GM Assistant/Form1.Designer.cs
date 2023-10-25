@@ -53,7 +53,11 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.attackBtn = new System.Windows.Forms.Button();
+            this.reloadBtn = new System.Windows.Forms.Button();
+            this.endTurnBtn = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -201,6 +205,9 @@
             // 
             this.panel3.AutoScroll = true;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.endTurnBtn);
+            this.panel3.Controls.Add(this.reloadBtn);
+            this.panel3.Controls.Add(this.attackBtn);
             this.panel3.Location = new System.Drawing.Point(303, 469);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(630, 380);
@@ -332,6 +339,36 @@
             this.label16.Text = "SP";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // attackBtn
+            // 
+            this.attackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attackBtn.Location = new System.Drawing.Point(11, 12);
+            this.attackBtn.Name = "attackBtn";
+            this.attackBtn.Size = new System.Drawing.Size(150, 30);
+            this.attackBtn.TabIndex = 0;
+            this.attackBtn.Text = "Attack";
+            this.attackBtn.UseVisualStyleBackColor = true;
+            // 
+            // reloadBtn
+            // 
+            this.reloadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reloadBtn.Location = new System.Drawing.Point(11, 48);
+            this.reloadBtn.Name = "reloadBtn";
+            this.reloadBtn.Size = new System.Drawing.Size(150, 30);
+            this.reloadBtn.TabIndex = 1;
+            this.reloadBtn.Text = "Reload";
+            this.reloadBtn.UseVisualStyleBackColor = true;
+            // 
+            // endTurnBtn
+            // 
+            this.endTurnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endTurnBtn.Location = new System.Drawing.Point(11, 84);
+            this.endTurnBtn.Name = "endTurnBtn";
+            this.endTurnBtn.Size = new System.Drawing.Size(150, 30);
+            this.endTurnBtn.TabIndex = 2;
+            this.endTurnBtn.Text = "End Turn";
+            this.endTurnBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,6 +389,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -383,6 +421,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button attackBtn;
+        private System.Windows.Forms.Button endTurnBtn;
+        private System.Windows.Forms.Button reloadBtn;
     }
 }
 

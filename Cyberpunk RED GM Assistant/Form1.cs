@@ -13,7 +13,9 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form1 : Form
     {
-        public List<int> charsInQueue;
+        public List<int> charsInQueue; // List of character IDs of characters in Initiative Queue
+        // public Character activeCharacter
+        // public Character focusedCharacter
 
         public Form1()
         {
