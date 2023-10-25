@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace Cyberpunk_RED_GM_Assistant
 {
@@ -26,6 +27,7 @@ namespace Cyberpunk_RED_GM_Assistant
             for(int i = 0; i < 20; i++)
             {
                 AddToQueue();
+                AddConditions();
             }
         }
 
@@ -52,7 +54,24 @@ namespace Cyberpunk_RED_GM_Assistant
             queueFlowPanel.Controls.Add(characterPanel);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        // needs character id in parameters to generate label with correct conditions
+        private void AddConditions()
+        {
+            // for each condition create a new panel with text and add to the conditions flow panel
+            Panel conditionPanel = new Panel();
+            conditionPanel.Size = new Size(110, 25);
+
+            Label conditionLabel = new Label();
+            conditionLabel.AutoSize = true;
+            conditionLabel.Font = new Font(conditionLabel.Font.Name, 13f);
+            string text = $"Condition"; // find condition here
+            conditionLabel.Text = text;
+            conditionPanel.Controls.Add(conditionLabel);
+
+            conditionsFlowPanel.Controls.Add(conditionPanel);
+        }
+
+        private void queueLabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -133,6 +152,20 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+        private void queueFlowPanel_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, queueFlowPanel.ClientRectangle, 
+                Color.Red, 2, ButtonBorderStyle.Solid,
+                Color.Red, 2, ButtonBorderStyle.Solid,
+                Color.Red, 2, ButtonBorderStyle.Solid,
+                Color.Red, 2, ButtonBorderStyle.Solid);
+        }
+
+        private void conditionsFlowPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }
