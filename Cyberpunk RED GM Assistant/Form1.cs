@@ -24,11 +24,18 @@ namespace Cyberpunk_RED_GM_Assistant
 
             InitializeComponent();
 
+            // testing starts
             for(int i = 0; i < 20; i++)
             {
                 AddToQueue();
                 AddConditions();
             }
+
+            for(int i = 0; i < 10; i++)
+            {
+            PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
+            }
+            // testing ends
         }
 
         // needs character id in parameters to generate panel with correct text
@@ -69,6 +76,22 @@ namespace Cyberpunk_RED_GM_Assistant
             conditionPanel.Controls.Add(conditionLabel);
 
             conditionsFlowPanel.Controls.Add(conditionPanel);
+        }
+
+        private void PrintCombatLog(string str)
+        {
+            Panel logPanel = new Panel();
+            logPanel.AutoSize = true;
+
+            Label logLabel = new Label();
+            logLabel.MaximumSize = new Size(600, 0);
+            logLabel.AutoSize = true;
+            logLabel.Font = new Font(logLabel.Font.Name, 13f);
+            logLabel.ForeColor = Color.White;
+            logLabel.Text = str;
+            logPanel.Controls.Add(logLabel);
+
+            combatLogFlowPanel.Controls.Add(logPanel);
         }
 
         private void queueLabel_Click(object sender, EventArgs e)
@@ -166,6 +189,11 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void conditionsFlowPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label12_Click_1(object sender, EventArgs e)
         {
 
         }
