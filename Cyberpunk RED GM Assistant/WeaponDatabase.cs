@@ -33,5 +33,4 @@ namespace Cyberpunk_RED_GM_Tool
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=SchoolDb;Trusted_Connection=True;");
         }
     }
-}
-*/
+}*/
