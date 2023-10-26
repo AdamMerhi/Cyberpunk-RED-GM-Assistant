@@ -51,3 +51,55 @@ C:\School\uni\Year Two\SEM TWO\Development .NET\Assignment 2\Cyberpunk-RED-GM-As
 C:\School\uni\Year Two\SEM TWO\Development .NET\Assignment 2\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\bin\Debug\characterDb.mdf
 C:\School\uni\Year Two\SEM TWO\Development .NET\Assignment 2\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\bin\Debug\characterDb_log.ldf
 C:\School\uni\Year Two\SEM TWO\Development .NET\Assignment 2\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Form3.resources
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\characterDb.mdf
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\characterDb_log.ldf
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\BouncyCastle.Crypto.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\EntityFramework.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\EntityFramework.SqlServer.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Google.Protobuf.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Compression.LZ4.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Compression.LZ4.Streams.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Hash.xxHash.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\MySql.Data.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\MySql.Data.EntityFramework.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Buffers.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Configuration.ConfigurationManager.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.IO.Pipelines.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Memory.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Numerics.Vectors.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\ZstdSharp.dll
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\BouncyCastle.Crypto.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\EntityFramework.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\EntityFramework.SqlServer.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Google.Protobuf.pdb
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Google.Protobuf.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Compression.LZ4.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Compression.LZ4.Streams.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\K4os.Hash.xxHash.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\MySql.Data.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\MySql.Data.EntityFramework.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Buffers.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.IO.Pipelines.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Memory.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Numerics.Vectors.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.AssemblyReference.cache
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Form1.resources
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Form2.resources
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Form3.resources
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Properties.Resources.resources
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.GenerateResource.cache
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.CoreCompileInputs.cache
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.CopyComplete
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.exe
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.pdb
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Cyberpunk RED GM Assistant.exe.config
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Cyberpunk RED GM Assistant.exe
+F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Cyberpunk RED GM Assistant.pdb

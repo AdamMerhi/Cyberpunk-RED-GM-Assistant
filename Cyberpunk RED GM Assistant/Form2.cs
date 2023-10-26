@@ -16,6 +16,7 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form2 : Form
     {
+        public const string dbFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
         private List<Character> characterList = new List<Character>();
 
@@ -47,7 +48,7 @@ namespace Cyberpunk_RED_GM_Assistant
             IntOnlyText(textBox28);
             IntOnlyText(textBox29);
 
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\School\\uni\\Year Two\\SEM TWO\\Development .NET\\Assignment 2\\Cyberpunk-RED-GM-Assistant\\Cyberpunk RED GM Assistant\\characterDb.mdf\";Integrated Security=True";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
             characterDatabase  = new CharacterDatabase(connectionString);
 
         }
