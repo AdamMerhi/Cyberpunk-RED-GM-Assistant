@@ -157,3 +157,5 @@ D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-
 D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.CopyComplete
 D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.exe
 D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.pdb
+D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\bin\Debug\WeaponDB.mdf
+D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\bin\Debug\WeaponDB_log.ldf
