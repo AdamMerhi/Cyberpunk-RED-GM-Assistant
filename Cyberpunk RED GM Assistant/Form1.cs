@@ -615,6 +615,8 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            viewAllForm.Show();
         }
     }
 }
