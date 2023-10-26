@@ -14,9 +14,11 @@ namespace Cyberpunk_RED_GM_Assistant
         [STAThread]
         static void Main()
         {
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form3(11));
         }
     }
 }

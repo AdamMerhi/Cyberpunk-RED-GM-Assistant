@@ -16,5 +16,7 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             InitializeComponent();
         }
+
+      
     }
 }
