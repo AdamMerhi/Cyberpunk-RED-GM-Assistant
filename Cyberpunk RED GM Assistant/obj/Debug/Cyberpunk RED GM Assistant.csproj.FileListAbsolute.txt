@@ -2,7 +2,6 @@ F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Cyberpunk RED GM Assistant.exe
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\bin\Debug\Cyberpunk RED GM Assistant.pdb
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.AssemblyReference.cache
-F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.SuggestedBindingRedirects.cache
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Form1.resources
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk_RED_GM_Assistant.Properties.Resources.resources
 F:\Documents\University\App Dev .Net\Cyberpunk RED GM Assistant\Cyberpunk RED GM Assistant\obj\Debug\Cyberpunk RED GM Assistant.csproj.GenerateResource.cache

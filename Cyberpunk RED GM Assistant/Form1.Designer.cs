@@ -29,35 +29,50 @@
         private void InitializeComponent()
         {
             this.queueLabel = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.weaponsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.conditionsFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.currentTurnPnl = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.weaponsFPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.conditionsFPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.label18 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.focusPnl = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.queueFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.combatLogFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.attackBtn = new System.Windows.Forms.Button();
-            this.reloadBtn = new System.Windows.Forms.Button();
+            this.actionPnl = new System.Windows.Forms.Panel();
             this.endTurnBtn = new System.Windows.Forms.Button();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
+            this.reloadBtn = new System.Windows.Forms.Button();
+            this.attackBtn = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.queueFPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.combatLogFPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.attackPnl = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.executeAttackBtn = new System.Windows.Forms.Button();
+            this.weaponCBox = new System.Windows.Forms.ComboBox();
+            this.targetCBox = new System.Windows.Forms.ComboBox();
+            this.aimCBox = new System.Windows.Forms.ComboBox();
+            this.distanceTBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.attackRollTBox = new System.Windows.Forms.TextBox();
+            this.attackRollBtn = new System.Windows.Forms.Button();
+            this.currentTurnPnl.SuspendLayout();
+            this.actionPnl.SuspendLayout();
+            this.attackPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -71,50 +86,143 @@
             this.queueLabel.Text = "INITIATIVE QUEUE";
             this.queueLabel.Click += new System.EventHandler(this.queueLabel_Click);
             // 
-            // panel2
+            // currentTurnPnl
             // 
-            this.panel2.AutoScroll = true;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label13);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.label16);
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.label12);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.weaponsFlowPanel);
-            this.panel2.Controls.Add(this.conditionsFlowPanel);
-            this.panel2.Controls.Add(this.label18);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Location = new System.Drawing.Point(303, 43);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(630, 380);
-            this.panel2.TabIndex = 1;
+            this.currentTurnPnl.AutoScroll = true;
+            this.currentTurnPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.currentTurnPnl.Controls.Add(this.label13);
+            this.currentTurnPnl.Controls.Add(this.label14);
+            this.currentTurnPnl.Controls.Add(this.label15);
+            this.currentTurnPnl.Controls.Add(this.label16);
+            this.currentTurnPnl.Controls.Add(this.label8);
+            this.currentTurnPnl.Controls.Add(this.label9);
+            this.currentTurnPnl.Controls.Add(this.label11);
+            this.currentTurnPnl.Controls.Add(this.label12);
+            this.currentTurnPnl.Controls.Add(this.label1);
+            this.currentTurnPnl.Controls.Add(this.weaponsFPnl);
+            this.currentTurnPnl.Controls.Add(this.conditionsFPnl);
+            this.currentTurnPnl.Controls.Add(this.label18);
+            this.currentTurnPnl.Controls.Add(this.label10);
+            this.currentTurnPnl.Controls.Add(this.label7);
+            this.currentTurnPnl.Controls.Add(this.label6);
+            this.currentTurnPnl.Location = new System.Drawing.Point(303, 43);
+            this.currentTurnPnl.Name = "currentTurnPnl";
+            this.currentTurnPnl.Size = new System.Drawing.Size(630, 380);
+            this.currentTurnPnl.TabIndex = 1;
             // 
-            // weaponsFlowPanel
+            // label13
             // 
-            this.weaponsFlowPanel.AutoScroll = true;
-            this.weaponsFlowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.weaponsFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.weaponsFlowPanel.Location = new System.Drawing.Point(212, 49);
-            this.weaponsFlowPanel.Name = "weaponsFlowPanel";
-            this.weaponsFlowPanel.Size = new System.Drawing.Size(399, 313);
-            this.weaponsFlowPanel.TabIndex = 17;
-            this.weaponsFlowPanel.WrapContents = false;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(122, 99);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 20);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "7";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // conditionsFlowPanel
+            // label14
             // 
-            this.conditionsFlowPanel.AutoScroll = true;
-            this.conditionsFlowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.conditionsFlowPanel.Location = new System.Drawing.Point(17, 130);
-            this.conditionsFlowPanel.Name = "conditionsFlowPanel";
-            this.conditionsFlowPanel.Size = new System.Drawing.Size(179, 233);
-            this.conditionsFlowPanel.TabIndex = 16;
-            this.conditionsFlowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.conditionsFlowPanel_Paint);
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(58, 99);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 20);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "7";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(103, 99);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(13, 20);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "/";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(13, 99);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(39, 25);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "SP";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(122, 74);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(39, 20);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "7";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(58, 74);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 20);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "7";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(103, 74);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 20);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "/";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(13, 74);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(39, 25);
+            this.label12.TabIndex = 19;
+            this.label12.Text = "SP";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label12.Click += new System.EventHandler(this.label12_Click_1);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(122, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 20);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "60";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // weaponsFPnl
+            // 
+            this.weaponsFPnl.AutoScroll = true;
+            this.weaponsFPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.weaponsFPnl.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.weaponsFPnl.Location = new System.Drawing.Point(212, 49);
+            this.weaponsFPnl.Name = "weaponsFPnl";
+            this.weaponsFPnl.Size = new System.Drawing.Size(399, 313);
+            this.weaponsFPnl.TabIndex = 17;
+            this.weaponsFPnl.WrapContents = false;
+            // 
+            // conditionsFPnl
+            // 
+            this.conditionsFPnl.AutoScroll = true;
+            this.conditionsFPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.conditionsFPnl.Location = new System.Drawing.Point(17, 130);
+            this.conditionsFPnl.Name = "conditionsFPnl";
+            this.conditionsFPnl.Size = new System.Drawing.Size(179, 233);
+            this.conditionsFPnl.TabIndex = 16;
+            this.conditionsFPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.conditionsFlowPanel_Paint);
             // 
             // label18
             // 
@@ -181,14 +289,14 @@
             this.label2.Text = "CURRENT TURN";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // panel4
+            // focusPnl
             // 
-            this.panel4.AutoScroll = true;
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(942, 43);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(630, 380);
-            this.panel4.TabIndex = 2;
+            this.focusPnl.AutoScroll = true;
+            this.focusPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.focusPnl.Location = new System.Drawing.Point(942, 43);
+            this.focusPnl.Name = "focusPnl";
+            this.focusPnl.Size = new System.Drawing.Size(630, 380);
+            this.focusPnl.TabIndex = 2;
             // 
             // label4
             // 
@@ -201,17 +309,48 @@
             this.label4.Text = "FOCUSED CHARACTER";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // panel3
+            // actionPnl
             // 
-            this.panel3.AutoScroll = true;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.endTurnBtn);
-            this.panel3.Controls.Add(this.reloadBtn);
-            this.panel3.Controls.Add(this.attackBtn);
-            this.panel3.Location = new System.Drawing.Point(303, 469);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(630, 380);
-            this.panel3.TabIndex = 2;
+            this.actionPnl.AutoScroll = true;
+            this.actionPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.actionPnl.Controls.Add(this.attackPnl);
+            this.actionPnl.Controls.Add(this.endTurnBtn);
+            this.actionPnl.Controls.Add(this.reloadBtn);
+            this.actionPnl.Controls.Add(this.attackBtn);
+            this.actionPnl.Location = new System.Drawing.Point(303, 469);
+            this.actionPnl.Name = "actionPnl";
+            this.actionPnl.Size = new System.Drawing.Size(630, 380);
+            this.actionPnl.TabIndex = 2;
+            // 
+            // endTurnBtn
+            // 
+            this.endTurnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.endTurnBtn.Location = new System.Drawing.Point(11, 84);
+            this.endTurnBtn.Name = "endTurnBtn";
+            this.endTurnBtn.Size = new System.Drawing.Size(150, 30);
+            this.endTurnBtn.TabIndex = 2;
+            this.endTurnBtn.Text = "End Turn";
+            this.endTurnBtn.UseVisualStyleBackColor = true;
+            // 
+            // reloadBtn
+            // 
+            this.reloadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reloadBtn.Location = new System.Drawing.Point(11, 48);
+            this.reloadBtn.Name = "reloadBtn";
+            this.reloadBtn.Size = new System.Drawing.Size(150, 30);
+            this.reloadBtn.TabIndex = 1;
+            this.reloadBtn.Text = "Reload";
+            this.reloadBtn.UseVisualStyleBackColor = true;
+            // 
+            // attackBtn
+            // 
+            this.attackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attackBtn.Location = new System.Drawing.Point(11, 12);
+            this.attackBtn.Name = "attackBtn";
+            this.attackBtn.Size = new System.Drawing.Size(150, 30);
+            this.attackBtn.TabIndex = 0;
+            this.attackBtn.Text = "Attack";
+            this.attackBtn.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -224,172 +363,212 @@
             this.label5.Text = "COMBAT LOG";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // queueFlowPanel
+            // queueFPnl
             // 
-            this.queueFlowPanel.AutoScroll = true;
-            this.queueFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.queueFlowPanel.Location = new System.Drawing.Point(12, 43);
-            this.queueFlowPanel.Name = "queueFlowPanel";
-            this.queueFlowPanel.Size = new System.Drawing.Size(279, 806);
-            this.queueFlowPanel.TabIndex = 7;
-            this.queueFlowPanel.WrapContents = false;
-            this.queueFlowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.queueFlowPanel_Paint);
+            this.queueFPnl.AutoScroll = true;
+            this.queueFPnl.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.queueFPnl.Location = new System.Drawing.Point(12, 43);
+            this.queueFPnl.Name = "queueFPnl";
+            this.queueFPnl.Size = new System.Drawing.Size(279, 806);
+            this.queueFPnl.TabIndex = 7;
+            this.queueFPnl.WrapContents = false;
+            this.queueFPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.queueFlowPanel_Paint);
             // 
-            // combatLogFlowPanel
+            // combatLogFPnl
             // 
-            this.combatLogFlowPanel.AutoScroll = true;
-            this.combatLogFlowPanel.BackColor = System.Drawing.Color.DimGray;
-            this.combatLogFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.combatLogFlowPanel.Location = new System.Drawing.Point(942, 469);
-            this.combatLogFlowPanel.Name = "combatLogFlowPanel";
-            this.combatLogFlowPanel.Size = new System.Drawing.Size(630, 380);
-            this.combatLogFlowPanel.TabIndex = 8;
-            this.combatLogFlowPanel.WrapContents = false;
+            this.combatLogFPnl.AutoScroll = true;
+            this.combatLogFPnl.BackColor = System.Drawing.Color.DimGray;
+            this.combatLogFPnl.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
+            this.combatLogFPnl.Location = new System.Drawing.Point(942, 469);
+            this.combatLogFPnl.Name = "combatLogFPnl";
+            this.combatLogFPnl.Size = new System.Drawing.Size(630, 380);
+            this.combatLogFPnl.TabIndex = 8;
+            this.combatLogFPnl.WrapContents = false;
             // 
-            // label1
+            // attackPnl
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(122, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 20);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "60";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.attackPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.attackPnl.Controls.Add(this.attackRollBtn);
+            this.attackPnl.Controls.Add(this.attackRollTBox);
+            this.attackPnl.Controls.Add(this.label23);
+            this.attackPnl.Controls.Add(this.distanceTBox);
+            this.attackPnl.Controls.Add(this.aimCBox);
+            this.attackPnl.Controls.Add(this.targetCBox);
+            this.attackPnl.Controls.Add(this.weaponCBox);
+            this.attackPnl.Controls.Add(this.executeAttackBtn);
+            this.attackPnl.Controls.Add(this.label22);
+            this.attackPnl.Controls.Add(this.label21);
+            this.attackPnl.Controls.Add(this.label20);
+            this.attackPnl.Controls.Add(this.label19);
+            this.attackPnl.Controls.Add(this.label17);
+            this.attackPnl.Location = new System.Drawing.Point(209, 12);
+            this.attackPnl.Name = "attackPnl";
+            this.attackPnl.Size = new System.Drawing.Size(402, 349);
+            this.attackPnl.TabIndex = 3;
             // 
-            // label8
+            // label17
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(122, 74);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 20);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "7";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(3, 3);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(87, 25);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "Weapon";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label9
+            // label19
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(58, 74);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 20);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "7";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(3, 39);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(69, 25);
+            this.label19.TabIndex = 28;
+            this.label19.Text = "Target";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
-            // label11
+            // label20
             // 
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(103, 74);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(13, 20);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "/";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(3, 75);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(46, 25);
+            this.label20.TabIndex = 29;
+            this.label20.Text = "Aim";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label12
+            // label21
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(13, 74);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 25);
-            this.label12.TabIndex = 19;
-            this.label12.Text = "SP";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label12.Click += new System.EventHandler(this.label12_Click_1);
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(3, 111);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(88, 25);
+            this.label21.TabIndex = 30;
+            this.label21.Text = "Distance";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label13
+            // label22
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(122, 99);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 20);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "7";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(3, 147);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(44, 25);
+            this.label22.TabIndex = 31;
+            this.label22.Text = "Roll";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label14
+            // executeAttackBtn
             // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(58, 99);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 20);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "7";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.executeAttackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.executeAttackBtn.Location = new System.Drawing.Point(93, 199);
+            this.executeAttackBtn.Name = "executeAttackBtn";
+            this.executeAttackBtn.Size = new System.Drawing.Size(150, 30);
+            this.executeAttackBtn.TabIndex = 4;
+            this.executeAttackBtn.Text = "Execute";
+            this.executeAttackBtn.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // weaponCBox
             // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(103, 99);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 20);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "/";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.weaponCBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.weaponCBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.weaponCBox.FormattingEnabled = true;
+            this.weaponCBox.Location = new System.Drawing.Point(96, 3);
+            this.weaponCBox.Name = "weaponCBox";
+            this.weaponCBox.Size = new System.Drawing.Size(150, 28);
+            this.weaponCBox.TabIndex = 32;
+            this.weaponCBox.SelectedIndexChanged += new System.EventHandler(this.weaponCBox_SelectedIndexChanged);
             // 
-            // label16
+            // targetCBox
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(13, 99);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(39, 25);
-            this.label16.TabIndex = 23;
-            this.label16.Text = "SP";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.targetCBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.targetCBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.targetCBox.FormattingEnabled = true;
+            this.targetCBox.Location = new System.Drawing.Point(96, 39);
+            this.targetCBox.Name = "targetCBox";
+            this.targetCBox.Size = new System.Drawing.Size(150, 28);
+            this.targetCBox.TabIndex = 33;
             // 
-            // attackBtn
+            // aimCBox
             // 
-            this.attackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.attackBtn.Location = new System.Drawing.Point(11, 12);
-            this.attackBtn.Name = "attackBtn";
-            this.attackBtn.Size = new System.Drawing.Size(150, 30);
-            this.attackBtn.TabIndex = 0;
-            this.attackBtn.Text = "Attack";
-            this.attackBtn.UseVisualStyleBackColor = true;
+            this.aimCBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.aimCBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aimCBox.FormattingEnabled = true;
+            this.aimCBox.Items.AddRange(new object[] {
+            "Hipfire",
+            "Head",
+            "Held Item",
+            "Leg"});
+            this.aimCBox.Location = new System.Drawing.Point(96, 75);
+            this.aimCBox.Name = "aimCBox";
+            this.aimCBox.Size = new System.Drawing.Size(150, 28);
+            this.aimCBox.TabIndex = 34;
             // 
-            // reloadBtn
+            // distanceTBox
             // 
-            this.reloadBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reloadBtn.Location = new System.Drawing.Point(11, 48);
-            this.reloadBtn.Name = "reloadBtn";
-            this.reloadBtn.Size = new System.Drawing.Size(150, 30);
-            this.reloadBtn.TabIndex = 1;
-            this.reloadBtn.Text = "Reload";
-            this.reloadBtn.UseVisualStyleBackColor = true;
+            this.distanceTBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.distanceTBox.Location = new System.Drawing.Point(96, 112);
+            this.distanceTBox.Name = "distanceTBox";
+            this.distanceTBox.Size = new System.Drawing.Size(73, 27);
+            this.distanceTBox.TabIndex = 35;
             // 
-            // endTurnBtn
+            // label23
             // 
-            this.endTurnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endTurnBtn.Location = new System.Drawing.Point(11, 84);
-            this.endTurnBtn.Name = "endTurnBtn";
-            this.endTurnBtn.Size = new System.Drawing.Size(150, 30);
-            this.endTurnBtn.TabIndex = 2;
-            this.endTurnBtn.Text = "End Turn";
-            this.endTurnBtn.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(175, 111);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(71, 25);
+            this.label23.TabIndex = 36;
+            this.label23.Text = "metres";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // attackRollTBox
+            // 
+            this.attackRollTBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attackRollTBox.Location = new System.Drawing.Point(96, 148);
+            this.attackRollTBox.Name = "attackRollTBox";
+            this.attackRollTBox.Size = new System.Drawing.Size(73, 27);
+            this.attackRollTBox.TabIndex = 37;
+            // 
+            // attackRollBtn
+            // 
+            this.attackRollBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attackRollBtn.Location = new System.Drawing.Point(175, 147);
+            this.attackRollBtn.Name = "attackRollBtn";
+            this.attackRollBtn.Size = new System.Drawing.Size(106, 28);
+            this.attackRollBtn.TabIndex = 38;
+            this.attackRollBtn.Text = "Roll 1d10";
+            this.attackRollBtn.UseVisualStyleBackColor = true;
+            this.attackRollBtn.Click += new System.EventHandler(this.attackRollBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
-            this.Controls.Add(this.combatLogFlowPanel);
-            this.Controls.Add(this.queueFlowPanel);
+            this.Controls.Add(this.combatLogFPnl);
+            this.Controls.Add(this.queueFPnl);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.actionPnl);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.focusPnl);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.currentTurnPnl);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.queueLabel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
+            this.currentTurnPnl.ResumeLayout(false);
+            this.currentTurnPnl.PerformLayout();
+            this.actionPnl.ResumeLayout(false);
+            this.attackPnl.ResumeLayout(false);
+            this.attackPnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,21 +576,21 @@
 
         #endregion
         private System.Windows.Forms.Label queueLabel;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel currentTurnPnl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel focusPnl;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel actionPnl;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.FlowLayoutPanel queueFlowPanel;
-        private System.Windows.Forms.FlowLayoutPanel conditionsFlowPanel;
-        private System.Windows.Forms.FlowLayoutPanel weaponsFlowPanel;
-        private System.Windows.Forms.FlowLayoutPanel combatLogFlowPanel;
+        private System.Windows.Forms.FlowLayoutPanel queueFPnl;
+        private System.Windows.Forms.FlowLayoutPanel conditionsFPnl;
+        private System.Windows.Forms.FlowLayoutPanel weaponsFPnl;
+        private System.Windows.Forms.FlowLayoutPanel combatLogFPnl;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
@@ -424,6 +603,20 @@
         private System.Windows.Forms.Button attackBtn;
         private System.Windows.Forms.Button endTurnBtn;
         private System.Windows.Forms.Button reloadBtn;
+        private System.Windows.Forms.Panel attackPnl;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button executeAttackBtn;
+        private System.Windows.Forms.ComboBox weaponCBox;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox distanceTBox;
+        private System.Windows.Forms.ComboBox aimCBox;
+        private System.Windows.Forms.ComboBox targetCBox;
+        private System.Windows.Forms.TextBox attackRollTBox;
+        private System.Windows.Forms.Button attackRollBtn;
     }
 }
 

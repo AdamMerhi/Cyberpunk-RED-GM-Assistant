@@ -17,12 +17,20 @@ namespace Cyberpunk_RED_GM_Assistant
         // public Character activeCharacter
         // public Character focusedCharacter
 
+        // list of different action panels, e.g. attack panel, reload panel
+        // need this so that all panels can be looped over and all but one can be hidden
+        // for each panel in panels if (panel != activePanel) hide panel
+        public List<Panel> actionPanels;
+
         public Form1()
         {
             charsInQueue = new List<int>(); // placeholder for list of character IDs
             charsInQueue.Add(1);
             charsInQueue.Add(2);
             charsInQueue.Add(3);
+
+            actionPanels = new List<Panel>();
+            actionPanels.Add(attackPnl);
 
             InitializeComponent();
 
@@ -42,6 +50,8 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 AddWeapon();
             }
+
+            ShowAttackPanel(); // only called on Attack action
             // testing ends
         }
 
@@ -65,7 +75,7 @@ namespace Cyberpunk_RED_GM_Assistant
             statsLabel.Text = statsText;
             characterPanel.Controls.Add(statsLabel);
 
-            queueFlowPanel.Controls.Add(characterPanel);
+            queueFPnl.Controls.Add(characterPanel);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -81,7 +91,7 @@ namespace Cyberpunk_RED_GM_Assistant
             conditionLabel.Text = $"Condition"; // find condition here
             conditionPanel.Controls.Add(conditionLabel);
 
-            conditionsFlowPanel.Controls.Add(conditionPanel);
+            conditionsFPnl.Controls.Add(conditionPanel);
         }
 
         // needs character id in parameters to get weapon IDs
@@ -135,7 +145,7 @@ namespace Cyberpunk_RED_GM_Assistant
             ammoTypeLabel.Text = $"Shotgun"; // find type here
             weaponPanel.Controls.Add(ammoTypeLabel);
 
-            weaponsFlowPanel.Controls.Add(weaponPanel);
+            weaponsFPnl.Controls.Add(weaponPanel);
         }
 
         // Prints a string to the combat log
@@ -152,7 +162,336 @@ namespace Cyberpunk_RED_GM_Assistant
             logLabel.Text = str;
             logPanel.Controls.Add(logLabel);
 
-            combatLogFlowPanel.Controls.Add(logPanel);
+            combatLogFPnl.Controls.Add(logPanel);
+        }
+
+        // needs character id as input to get all weapons that the character has
+        private void ShowAttackPanel()
+        {
+            // Hide all action panels and show attack action panel
+
+            // Weapon select
+            // for each weapon in character's weapons
+            weaponCBox.Items.Add("SPAS-12");
+            weaponCBox.Items.Add("FN P90");
+
+            // Target select
+            // for each character in initiative queue
+            // make sure current character is excluded
+            targetCBox.Items.Add("Mike Hock");
+            targetCBox.Items.Add("Deez Nuts");
+            targetCBox.Items.Add("Ho-Lee Phuc");
+            targetCBox.Items.Add("Oliver Closoff");
+            targetCBox.Items.Add("Hugh Jass");
+        }
+
+        private void ProcessAttackAction()
+        {
+            int roll = Convert.ToInt32(attackRollTBox.Text);
+            int dv = RangedDV("Shotgun", Convert.ToInt32(distanceTBox.Text));
+            
+            // Aimed shots rulebook page 171
+            // If not hipfiring then subtract 8 from roll
+            if(aimCBox.SelectedItem != aimCBox.Items[0])
+            {
+                roll -= 8;
+            }
+
+            // Subtract ammo from weapon
+
+            // Check if attack hits
+            if(roll > dv)
+            {
+                // attack hits
+                // show roll damage panel
+                Console.WriteLine("Attack hits");
+            }
+            else
+            {
+                // attack misses
+                // show attack result panel
+                Console.WriteLine("Attack misses");
+            }
+        }
+
+        // Returns a list of random integers
+        private List<int> RollDice(int diceAmount, int diceType)
+        {
+            Random rnd = new Random();
+            List<int> rolls = new List<int>();
+
+            for(int i = 0; i < diceAmount; i++)
+            {
+                rolls.Add(rnd.Next(1, diceType + 1));
+            }
+
+            return rolls;
+        }
+
+        // Returns an integer for a ranged attack difficulty value given a weapon type and distance
+        private int RangedDV(string type, int distance)
+        {
+            int dv = 99;
+            switch(type)
+            {
+                case "Pistol":
+                    switch(distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 13; 
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 30;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 30;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 99;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 99;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "SMG":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 13;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 30;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 99;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Shotgun":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 13;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 30;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 35;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 99;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 99;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Assault Rifle":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 17;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 16;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 13;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 30;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Sniper Rifle":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 30;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 16;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 17;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 20;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Bow/Crossbow":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 13;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 17;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 22;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 99;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 99;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Grenade Launcher":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 16;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 17;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 22;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 99;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+                case "Rocket Launcher":
+                    switch (distance)
+                    {
+                        case int i when (i >= 0 && i <= 6):
+                            dv = 17;
+                            break;
+                        case int i when (i >= 7 && i <= 12):
+                            dv = 16;
+                            break;
+                        case int i when (i >= 13 && i <= 25):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 26 && i <= 50):
+                            dv = 15;
+                            break;
+                        case int i when (i >= 51 && i <= 100):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 101 && i <= 200):
+                            dv = 20;
+                            break;
+                        case int i when (i >= 201 && i <= 400):
+                            dv = 25;
+                            break;
+                        case int i when (i >= 401 && i <= 800):
+                            dv = 30;
+                            break;
+                        default:
+                            dv = 99;
+                            break;
+                    }
+                    break;
+            }
+            return dv;
         }
 
         private void queueLabel_Click(object sender, EventArgs e)
@@ -242,7 +581,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void queueFlowPanel_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, queueFlowPanel.ClientRectangle, 
+            ControlPaint.DrawBorder(e.Graphics, queueFPnl.ClientRectangle, 
                 Color.Red, 2, ButtonBorderStyle.Solid,
                 Color.Red, 2, ButtonBorderStyle.Solid,
                 Color.Red, 2, ButtonBorderStyle.Solid,
@@ -257,6 +596,21 @@ namespace Cyberpunk_RED_GM_Assistant
         private void label12_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void label19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void weaponCBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void attackRollBtn_Click(object sender, EventArgs e)
+        {
+            attackRollTBox.Text = Convert.ToString(RollDice(1, 10)[0]);
         }
     }
 }
