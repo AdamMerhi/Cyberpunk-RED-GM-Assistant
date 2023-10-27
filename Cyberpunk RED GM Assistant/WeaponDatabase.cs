@@ -53,12 +53,13 @@ namespace Cyberpunk_RED_GM_Assistant
                         //while()
                         while (reader.Read())// keep reading stuff from database
                         {
-                            int ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            if (ID < 200)
+                            //int ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                            if (reader.GetInt32(reader.GetOrdinal("RangedWeaponType")) != null)
+                            //if (ID < 200)
                             {
                                 RangedWeapon weapon = new RangedWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damage = reader.GetInt32(reader.GetOrdinal("Damage")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
@@ -72,11 +73,11 @@ namespace Cyberpunk_RED_GM_Assistant
                                 //return weapon;
                                 allWeapons.Add(weapon);
                             }
-                            else
+                            else if (reader.GetInt32(reader.GetOrdinal("MeleeWeaponType")) != null)
                             {
                                 MeleeWeapon weapon = new MeleeWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damage = reader.GetInt32(reader.GetOrdinal("Damage")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
@@ -124,12 +125,13 @@ namespace Cyberpunk_RED_GM_Assistant
                             // Weapon ID conventions:
                             // ID Starts with 1: RangedWeapon
                             // ID Starts with 2: MeleeWeapon
-                            int ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            if (ID < 200)
+                            /*int retrievedWeaponID = reader.GetInt32(reader.GetOrdinal("weaponID"));
+                            if (retrievedWeaponID < 200)*/
+                            if (reader.GetInt32(reader.GetOrdinal("RangedWeaponType")) != null)
                             {
                                 RangedWeapon weapon = new RangedWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damage = reader.GetInt32(reader.GetOrdinal("Damage")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
@@ -142,11 +144,11 @@ namespace Cyberpunk_RED_GM_Assistant
                                 };
                                 return weapon;
                             }
-                            else
+                            else if (reader.GetInt32(reader.GetOrdinal("MeleeWeaponType")) != null)
                             {
                                 MeleeWeapon weapon = new MeleeWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damage = reader.GetInt32(reader.GetOrdinal("Damage")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
@@ -177,16 +179,22 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 connection.Open();
 
-                string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, HandsRequired, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
-                "VALUES (@weaponID, @name, @damage, @ROF, @handsRequired, @range, @cost, @type, @maxAmmoCount)";
+                /*string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, HandsRequired, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
+                "VALUES (@ID, @Name, @Damage, @ROF, @HandsRequired, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
+                /*string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
+                "VALUES (@ID, @Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
+                string insertQuery = "INSERT INTO Weapon (Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
+                "VALUES (@Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";
+                /*string insertQuery = "INSERT INTO Weapon (weaponID, Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
+                "VALUES (@weaponID, @Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@ID", weapon.weaponID);
+                    //command.Parameters.AddWithValue("@ID", weapon.weaponID);
                     command.Parameters.AddWithValue("@Name", weapon.name);
                     command.Parameters.AddWithValue("@Damage", weapon.damage);
                     command.Parameters.AddWithValue("@ROF", weapon.ROF);
-                    command.Parameters.AddWithValue("@HandsRequired", weapon.handsRequired);
+                    //command.Parameters.AddWithValue("@HandsRequired", weapon.handsRequired);
                     command.Parameters.AddWithValue("@Range", weapon.range);
                     command.Parameters.AddWithValue("@Cost", weapon.cost);
                     command.Parameters.AddWithValue("@RangedWeaponType", (int)weapon.type);
@@ -204,16 +212,21 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 connection.Open();
 
-                string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, HandsRequired, Range, Cost, MeleeWeaponType, CanConceal) " +
-                "VALUES (@weaponID, @name, @damage, @ROF, @handsRequired, @range, @cost, @type, @canConceal)";
+                /*string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, HandsRequired, Range, Cost, MeleeWeaponType, CanConceal) " +
+                "VALUES (@weaponID, @name, @damage, @ROF, @handsRequired, @range, @cost, @type, @canConceal)";*/
+                string insertQuery = "INSERT INTO Weapon (Name, Damage, ROF, Range, Cost, MeleeWeaponType, CanConceal) " +
+                "VALUES (@Name, @Damage, @ROF, @Range, @Cost, @MeleeWeaponType, @CanConceal)";
+
+                /*string insertQuery = "INSERT INTO Weapon (weaponID, Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
+                "VALUES (@weaponID, @Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@ID", weapon.weaponID);
+                    //command.Parameters.AddWithValue("@ID", weapon.weaponID);
                     command.Parameters.AddWithValue("@Name", weapon.name);
                     command.Parameters.AddWithValue("@Damage", weapon.damage);
                     command.Parameters.AddWithValue("@ROF", weapon.ROF);
-                    command.Parameters.AddWithValue("@HandsRequired", weapon.handsRequired);
+                    //command.Parameters.AddWithValue("@HandsRequired", weapon.handsRequired);
                     command.Parameters.AddWithValue("@Range", weapon.range);
                     command.Parameters.AddWithValue("@Cost", weapon.cost);
                     command.Parameters.AddWithValue("@MeleeWeaponType", (int)weapon.type);
