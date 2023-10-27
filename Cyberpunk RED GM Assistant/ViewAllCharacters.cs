@@ -68,10 +68,11 @@ namespace Cyberpunk_RED_GM_Assistant
 
             // IDK in-game definition for melee weapon types,
             // so I am just setting up the data in my freestyle,
-            // feel free to change if u want
+            // I just comment them out here so it won't execure.
+            // feel free to change if u want.
 
             // weaponID, name, range, ROF, ammoCount, type, handsRequired, cost, damage
-            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 5, 900, 50, 0, 1, 10, 8));
+            /*weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 5, 900, 50, 0, 1, 10, 8));
             weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 10, 900, 50, 1, 1, 10, 10));
             weaponDatabase.InsertWeapon(new RangedWeapon(103, "M870", 3, 900, 50, 2, 2, 10, 50));
             weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 20, 900, 50, 3, 2, 10, 20));
@@ -84,7 +85,7 @@ namespace Cyberpunk_RED_GM_Assistant
             weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 1, 100, 0, 1, 10, true, 10));
             weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 1, 100, 1, 1, 10, true, 10));
             weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 100, 2, 2, 10, false, 10));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));*/
         }
 
         /*public enum RangedWeaponType
@@ -114,9 +115,11 @@ namespace Cyberpunk_RED_GM_Assistant
             CheckCharacterView.Show();
         }
 
+        // Delete Character Button
         private void button3_Click(object sender, EventArgs e)
         {
-
+            // This is a untested function, IDK if it works or not
+            //characterDatabase.RemoveCharacterByID(000);
         }
 
         // Create Character Button
@@ -126,6 +129,7 @@ namespace Cyberpunk_RED_GM_Assistant
             CreateCharacterView.Show();
         }
 
+        // Close Window Button
         private void button5_Click(object sender, EventArgs e)
         {
             // Simply closes this window
@@ -158,6 +162,41 @@ namespace Cyberpunk_RED_GM_Assistant
             characterPanel.Controls.Add(statsLabel);
 
             flowLayoutPanel1.Controls.Add(characterPanel);
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
         }
 
         /*// needs character id in parameters to generate panel with correct text
