@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cyberpunk_RED_GM_Tool
+namespace Cyberpunk_RED_GM_Assistant
 {
     internal abstract class Weapon
     {
-        public string weaponID { get; set; }
+        //public string weaponID { get; set; }
+        public int weaponID {  get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public int damage { get; set; }

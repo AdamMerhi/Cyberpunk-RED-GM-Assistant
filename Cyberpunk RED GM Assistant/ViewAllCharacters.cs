@@ -18,7 +18,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public const string weaponDBFilePath = "WeaponDb.mdf";
         public const string characterDBFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
-        //private WeaponDatabase weaponDatabase;
+        private WeaponDatabase weaponDatabase;
 
         public ViewAllCharacters()
         {
@@ -27,6 +27,9 @@ namespace Cyberpunk_RED_GM_Assistant
             string characterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"characterDBFilePath\";Integrated Security=True";
             string weaponConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"weaponDBFilePath\";Integrated Security=True";
             characterDatabase = new CharacterDatabase(characterConnectionString);
+            weaponDatabase = new WeaponDatabase(weaponConnectionString);
+
+            //weaponDatabase.InsertWeapon(new RangedWeapon(101, "FN P90", 10, 900, 50, 1, 1, 10, 10));
             //LoadCharacterData(characterID);
         }
 
@@ -45,9 +48,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
         }
 
+        // Add to Queue
         private void button1_Click(object sender, EventArgs e)
         {
-
+            weaponDatabase.InsertWeapon(new RangedWeapon(101, "FN P90", 10, 900, 50, 1, 1, 10, 10));
         }
 
         // View Character Button

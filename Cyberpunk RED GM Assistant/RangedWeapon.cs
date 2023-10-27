@@ -16,7 +16,7 @@ public enum RangedWeaponType
     RPG
 }
 
-namespace Cyberpunk_RED_GM_Tool
+namespace Cyberpunk_RED_GM_Assistant
 {
     internal class RangedWeapon : Weapon
     {
@@ -26,9 +26,10 @@ namespace Cyberpunk_RED_GM_Tool
         public int maxAmmoCount { get; set; }
 
         // Initiase a ranged weapon object by passing in data. 
-        public RangedWeapon(string weaponID, int range, int ROF, int ammoCount, int type, int handsRequired, int cost, int damage)
+        public RangedWeapon(int weaponID, string name, int range, int ROF, int ammoCount, int type, int handsRequired, int cost, int damage)
         {
             this.weaponID = weaponID;
+            this.name = name;
             this.range = range;
             this.ROF = ROF;
             currentAmmoCount = ammoCount;
@@ -40,9 +41,14 @@ namespace Cyberpunk_RED_GM_Tool
         }
 
         // Initiase a ranged weapon object by passing in an ID, and retrieve the information from database using this ID. WIP
-        public RangedWeapon(string weaponID)
+        public RangedWeapon(int weaponID)
         {
             this.weaponID = weaponID;
+        }
+
+        public RangedWeapon()
+        {
+
         }
 
         // Simply decreases ammoCount when taking shot

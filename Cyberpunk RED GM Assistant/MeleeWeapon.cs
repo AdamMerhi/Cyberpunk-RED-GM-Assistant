@@ -12,7 +12,7 @@ public enum MeleeWeaponType
     VeryHeavy
 }
 
-namespace Cyberpunk_RED_GM_Tool
+namespace Cyberpunk_RED_GM_Assistant
 {
     internal class MeleeWeapon : Weapon
     {
@@ -21,8 +21,9 @@ namespace Cyberpunk_RED_GM_Tool
         public bool isConcealed { get; set; }
 
         // Initiase a melee weapon object by passing in data. 
-        public MeleeWeapon(string weaponID, int range, int ROF, int type, int handsRequired, int cost, bool canConceal, int damage)
+        public MeleeWeapon(int weaponID, string name, int range, int ROF, int type, int handsRequired, int cost, bool canConceal, int damage)
         {
+            this.name = name;
             this.weaponID = weaponID;
             this.range = range;
             this.ROF = ROF;
@@ -34,9 +35,14 @@ namespace Cyberpunk_RED_GM_Tool
         }
 
         // Initiase a melee weapon object by passing in an ID, and retrieve the information from database using this ID. WIP
-        public MeleeWeapon(string weaponID)
+        public MeleeWeapon(int weaponID)
         {
             this.weaponID = weaponID;
+        }
+
+        public MeleeWeapon()
+        {
+
         }
 
         // Change the isConcelaed status on this melee weapon
