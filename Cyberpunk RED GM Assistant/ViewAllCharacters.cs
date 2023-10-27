@@ -24,8 +24,16 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             InitializeComponent();
 
+            /*string characterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"characterDBFilePath\";Integrated Security=True";
+            string weaponConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={weaponDBFilePath};Integrated Security=True";
+            */
             string characterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"characterDBFilePath\";Integrated Security=True";
-            string weaponConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"weaponDBFilePath\";Integrated Security=True";
+            //string weaponConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{weaponDBFilePath}\";Integrated Security=True";
+            string weaponConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={weaponDBFilePath};Integrated Security=True";
+
+            //$"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbFilePath};Integrated Security=True"
+
+
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
 
