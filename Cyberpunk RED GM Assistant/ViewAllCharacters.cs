@@ -15,7 +15,7 @@ namespace Cyberpunk_RED_GM_Assistant
     public partial class ViewAllCharacters : Form
     {
 
-        public const string weaponDBFilePath = "WeaponDb.mdf";
+        public const string weaponDBFilePath = "WeaponDB.mdf";
         public const string characterDBFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
         private WeaponDatabase weaponDatabase;
