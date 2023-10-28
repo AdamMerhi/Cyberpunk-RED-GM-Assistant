@@ -48,7 +48,8 @@ namespace Cyberpunk_RED_GM_Assistant
             IntOnlyText(textBox28);
             IntOnlyText(textBox29);
 
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
+            //string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
             characterDatabase  = new CharacterDatabase(connectionString);
 
         }
