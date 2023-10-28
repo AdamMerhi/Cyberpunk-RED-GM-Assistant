@@ -166,23 +166,25 @@ namespace Cyberpunk_RED_GM_Assistant
             // so I am just setting up the data in my freestyle,
             // I just comment them out here so it won't execure.
             // feel free to change if u want.
-                        
+
             // weaponID, name, ROF, type, damage, maxAmmoCount, magazineAmmoCount 
-            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 2, 0, 10, 30, 10));
-            weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 2, 1, 10, 100, 50));
-            weaponDatabase.InsertWeapon(new RangedWeapon(103, "SPAS-12", 1, 2, 20, 16, 8));
-            weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 1, 3, 30, 90, 30));
-            weaponDatabase.InsertWeapon(new RangedWeapon(105, "M82A1", 1, 4, 40, 10, 5));
-            weaponDatabase.InsertWeapon(new RangedWeapon(106, "Crossbow", 1, 5, 20, 10, 1));
-            weaponDatabase.InsertWeapon(new RangedWeapon(107, "M320 GL", 1, 6, 50, 2, 1));
-            weaponDatabase.InsertWeapon(new RangedWeapon(108, "RPG", 1, 7, 80, 2, 1));
+            // weaponID, name, ROF, type, damageAmount, diceType, maxAmmoCount, magazineAmmoCount
+            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 2, 0, 2, 6, 36, 12));
+            weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 1, 1, 2, 6, 90, 30));
+            weaponDatabase.InsertWeapon(new RangedWeapon(103, "SPAS-12", 1, 2, 5, 6, 12, 4));
+            weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 1, 3, 5, 6, 75, 25));
+            weaponDatabase.InsertWeapon(new RangedWeapon(105, "M82A1", 1, 4, 5, 6, 12, 4));
+            weaponDatabase.InsertWeapon(new RangedWeapon(106, "Crossbow", 1, 5, 4, 6, 10, 1));
+            weaponDatabase.InsertWeapon(new RangedWeapon(107, "M320 GL", 1, 6, 6, 6, 6, 2));
+            weaponDatabase.InsertWeapon(new RangedWeapon(108, "RPG", 1, 7, 8, 6, 3, 1));
 
             // weaponID, name, range, ROF, type, handsRequired, cost, damage, canConceal
-            // weaponID, name, ROF, type, damage)
-            weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 2, 0, 20));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 2, 1, 30));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 2, 40));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 3, 50));
+            // weaponID, name, ROF, type, damage
+            // weaponID, name, ROF, type, damageAmount, diceType
+            weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 2, 0, 1, 6));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 2, 1, 2, 6));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 2, 3, 6));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 3, 4, 6));
 
             /*public enum RangedWeaponType
             {

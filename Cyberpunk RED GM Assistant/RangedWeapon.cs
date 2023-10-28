@@ -22,14 +22,16 @@ namespace Cyberpunk_RED_GM_Assistant
     {
 
         public RangedWeaponType type { get; set; }
+        // const
         public int maxAmmoCount { get; set; }
-        public int magazineSize {  get; set; }
+        // const
+        public int magazineSize { get; set; }
         public int magazineAmmoCount { get; set; }        
-        public int reserveAmmoCount {  get; set; }
+        public int reserveAmmoCount { get; set; }
 
         // Initiase a ranged weapon object by passing in data. 
         //public RangedWeapon(int weaponID, string name, int range, int ROF, int maxAmmoCount, int magazineAmmoCount, int type, int handsRequired, int cost, int damage)
-        public RangedWeapon(int weaponID, string name, int ROF, int type, int damage, int maxAmmoCount, int magazineAmmoCount)
+        public RangedWeapon(int weaponID, string name, int ROF, int type, int damageAmount, int diceType, int maxAmmoCount, int magazineAmmoCount)
         {
             this.weaponID = weaponID;
             this.name = name;
@@ -38,7 +40,8 @@ namespace Cyberpunk_RED_GM_Assistant
             this.type = (RangedWeaponType)type;
             /*this.handsRequired = handsRequired;
             this.cost = cost;*/
-            this.damage = damage;
+            this.damageDiceAmount = damageAmount;
+            this.damageDiceType = diceType;
 
             this.maxAmmoCount = maxAmmoCount;
             this.reserveAmmoCount = maxAmmoCount;

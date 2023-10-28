@@ -62,7 +62,8 @@ namespace Cyberpunk_RED_GM_Assistant
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
-                                    damage = reader.GetInt32(reader.GetOrdinal("Damage")),
+                                    damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
                                     //range = reader.GetInt32(reader.GetOrdinal("Range")),
                                     //cost = reader.GetInt32(reader.GetOrdinal("Cost")),
@@ -80,7 +81,8 @@ namespace Cyberpunk_RED_GM_Assistant
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
-                                    damage = reader.GetInt32(reader.GetOrdinal("Damage")),
+                                    damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
                                     //range = reader.GetInt32(reader.GetOrdinal("Range")),
                                     //cost = reader.GetInt32(reader.GetOrdinal("Cost")),
@@ -134,7 +136,11 @@ namespace Cyberpunk_RED_GM_Assistant
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
-                                    damage = reader.GetInt32(reader.GetOrdinal("Damage")),
+
+                                    damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
+
+                                    //damage = reader.GetInt32(reader.GetOrdinal("Damage")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
                                     //range = reader.GetInt32(reader.GetOrdinal("Range")),
                                     //cost = reader.GetInt32(reader.GetOrdinal("Cost")),
@@ -151,7 +157,8 @@ namespace Cyberpunk_RED_GM_Assistant
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
-                                    damage = reader.GetInt32(reader.GetOrdinal("Damage")),
+                                    damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
                                     ROF = reader.GetInt32(reader.GetOrdinal("ROF")),
                                     //range = reader.GetInt32(reader.GetOrdinal("Range")),
                                     //cost = reader.GetInt32(reader.GetOrdinal("Cost")),
@@ -189,18 +196,20 @@ namespace Cyberpunk_RED_GM_Assistant
                 /*string insertQuery = "INSERT INTO Weapon (weaponID, Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
                 "VALUES (@weaponID, @Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
 
-                string insertQuery = "INSERT INTO Weapon (Name, Damage, ROF, RangedWeaponType, MaxAmmoCount, MagazineAmmoCount) " +
-                "VALUES (@Name, @Damage, @ROF, @RangedWeaponType, @MaxAmmoCount, @MagazineAmmoCount)";
+                string insertQuery = "INSERT INTO Weapon (Name, ROF, RangedWeaponType, MaxAmmoCount, MagazineAmmoCount, DamageDiceAmount, DamageDiceType) " +
+                "VALUES (@Name, @ROF, @RangedWeaponType, @MaxAmmoCount, @MagazineAmmoCount, @DamageDiceAmount, @DamageDiceType)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
                     //command.Parameters.AddWithValue("@ID", weapon.weaponID);
                     command.Parameters.AddWithValue("@Name", weapon.name);
-                    command.Parameters.AddWithValue("@Damage", weapon.damage);
+                    command.Parameters.AddWithValue("@DamageDiceAmount", weapon.damageDiceAmount);
+                    command.Parameters.AddWithValue("@DamageDiceType", weapon.damageDiceType);
                     command.Parameters.AddWithValue("@ROF", weapon.ROF);                    
                     command.Parameters.AddWithValue("@RangedWeaponType", (int)weapon.type);
                     command.Parameters.AddWithValue("@MaxAmmoCount", weapon.maxAmmoCount);
                     command.Parameters.AddWithValue("@MagazineAmmoCount", weapon.magazineSize);
+
 
                     command.ExecuteNonQuery();
                 }
@@ -216,8 +225,8 @@ namespace Cyberpunk_RED_GM_Assistant
 
                 /*string insertQuery = "INSERT INTO Weapon (ID, Name, Damage, ROF, HandsRequired, Range, Cost, MeleeWeaponType, CanConceal) " +
                 "VALUES (@weaponID, @name, @damage, @ROF, @handsRequired, @range, @cost, @type, @canConceal)";*/
-                string insertQuery = "INSERT INTO Weapon (Name, Damage, ROFMeleeWeaponType) " +
-                "VALUES (@Name, @Damage, @ROF, @MeleeWeaponType)";
+                string insertQuery = "INSERT INTO Weapon (Name, ROF, MeleeWeaponType, DamageDiceAmount, DamageDiceType) " +
+                "VALUES (@Name, @ROF, @MeleeWeaponType, @DamageDiceAmount, @DamageDiceType)";
 
                 /*string insertQuery = "INSERT INTO Weapon (weaponID, Name, Damage, ROF, Range, Cost, RangedWeaponType, MaxAmmoCount) " +
                 "VALUES (@weaponID, @Name, @Damage, @ROF, @Range, @Cost, @RangedWeaponType, @MaxAmmoCount)";*/
@@ -226,7 +235,8 @@ namespace Cyberpunk_RED_GM_Assistant
                 {
                     //command.Parameters.AddWithValue("@ID", weapon.weaponID);
                     command.Parameters.AddWithValue("@Name", weapon.name);
-                    command.Parameters.AddWithValue("@Damage", weapon.damage);
+                    command.Parameters.AddWithValue("@DamageDiceAmount", weapon.damageDiceAmount);
+                    command.Parameters.AddWithValue("@DamageDiceType", weapon.damageDiceType);
                     command.Parameters.AddWithValue("@ROF", weapon.ROF);
                     command.Parameters.AddWithValue("@MeleeWeaponType", (int)weapon.type);
 
@@ -238,3 +248,5 @@ namespace Cyberpunk_RED_GM_Assistant
 
     }
 }
+
+// Database attributes: Name, Damage, ROF, RangedWeaponType, MeleeWeaponType, MaxAmmoCount, MagazineAmmoCount, DamageDiceAmount, DamageDiceType

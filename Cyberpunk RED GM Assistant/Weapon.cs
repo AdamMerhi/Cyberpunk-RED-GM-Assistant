@@ -12,12 +12,6 @@ namespace Cyberpunk_RED_GM_Assistant
         public int weaponID {  get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int damage { get; set; }
-
-        // this one is my bad, didn't make clear in reqs doc but can you change damage to two variables please?
-        // i need one called damageDiceAmount which is the number of dice you roll when you land a hit,
-        // and i need another called damageDiceType, which is the type of dice you roll;
-        // e.g. 2d10 means damageDiceAmount = 2, damageDiceType = 10
 
         // The number of dice you roll when you land a hit
         public int damageDiceAmount {  get; set; }

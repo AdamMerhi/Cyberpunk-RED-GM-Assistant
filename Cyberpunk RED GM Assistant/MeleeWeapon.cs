@@ -22,17 +22,15 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Initiase a melee weapon object by passing in data. 
         //public MeleeWeapon(int weaponID, string name, int range, int ROF, int type, int handsRequired, int cost, bool canConceal, int damage)
-        public MeleeWeapon(int weaponID, string name, int ROF, int type, int damage)
+        public MeleeWeapon(int weaponID, string name, int ROF, int type, int damageAmount, int diceType)
         {
             this.name = name;
             this.weaponID = weaponID;
             //this.range = range;
             this.ROF = ROF;
             this.type = (MeleeWeaponType)type;
-            //this.handsRequired = handsRequired;
-            //this.cost = cost;
-            //this.canConceal = canConceal;
-            this.damage = damage;
+            this.damageDiceAmount = damageAmount;
+            this.damageDiceType = diceType;
         }
 
         // Initiase a melee weapon object by passing in an ID, and retrieve the information from database using this ID. WIP
