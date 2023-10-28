@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cyberpunk_RED_GM_Assistant
 {
@@ -28,8 +29,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
         public ViewAllCharacters()
         {
-            InitializeComponent();            
-            
+            InitializeComponent();
+
+            IntOnlyText(textBox1);
+
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
         }
@@ -58,7 +61,8 @@ namespace Cyberpunk_RED_GM_Assistant
         // View Character Button
         private void button2_Click(object sender, EventArgs e)
         {
-            Form3 CheckCharacterView = new Form3(11);
+            int characterID = int.Parse(textBox1.Text);
+            Form3 CheckCharacterView = new Form3(characterID);
             CheckCharacterView.Show();
         }
 
@@ -180,6 +184,28 @@ namespace Cyberpunk_RED_GM_Assistant
         private void button7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //TEXT BOXES INT ONLY
+        public void IntOnlyText(System.Windows.Forms.TextBox textBox)
+        {
+            textBox.KeyPress += (sender, e) =>
+            {
+                if (!char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && !char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+
+                if ((e.KeyChar == '.') && (sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1)
+                {
+                    e.Handled = true;
+                }
+            };
         }
 
         /*public enum RangedWeaponType
