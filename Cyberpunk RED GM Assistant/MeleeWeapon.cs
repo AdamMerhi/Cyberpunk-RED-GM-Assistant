@@ -14,7 +14,7 @@ public enum MeleeWeaponType
 
 namespace Cyberpunk_RED_GM_Assistant
 {
-    internal class MeleeWeapon : Weapon
+    public class MeleeWeapon : Weapon
     {
         public MeleeWeaponType type { get; set; }
         public bool canConceal { get; set; }

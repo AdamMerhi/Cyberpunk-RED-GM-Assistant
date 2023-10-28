@@ -13,8 +13,11 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form1 : Form
     {
+        public const string dbFilePath = "characterDb.mdf";
+        private CharacterDatabase characterDatabase;
+
         public List<int> charsInQueue; // List of character IDs of characters in Initiative Queue
-        // public Character activeCharacter
+        public Character activeCharacter;
         // public Character focusedCharacter
 
         // list of different action panels, e.g. attack panel, reload panel
@@ -25,6 +28,11 @@ namespace Cyberpunk_RED_GM_Assistant
         public Form1()
         {
             InitializeComponent();
+
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
+            characterDatabase = new CharacterDatabase(connectionString);
+
+            activeCharacter = characterDatabase.GetCharacterByID(12);
 
             charsInQueue = new List<int>(); // placeholder for list of character IDs
             charsInQueue.Add(1);
@@ -38,13 +46,12 @@ namespace Cyberpunk_RED_GM_Assistant
             };
 
             // testing starts
-            for(int i = 0; i < 20; i++)
-            {
-                AddToQueue();
-                AddConditions();
-            }
+            
 
-            for(int i = 0; i < 2; i++)
+            AddToQueue(activeCharacter.ID);
+            AddConditions();
+
+            for(int i = 0; i < 1; i++)
             {
                 PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
             }
@@ -74,8 +81,10 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // needs character id in parameters to generate panel with correct text
-        private void AddToQueue()
+        private void AddToQueue(int characterID)
         {
+            Character c = characterDatabase.GetCharacterByID(characterID);
+
             FlowLayoutPanel characterPanel = new FlowLayoutPanel();
             characterPanel.Size = new Size(255, 60);
             characterPanel.FlowDirection = FlowDirection.TopDown;
@@ -84,13 +93,13 @@ namespace Cyberpunk_RED_GM_Assistant
             Label nameLabel = new Label();
             nameLabel.AutoSize = true;
             nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
-            nameLabel.Text = $"1. Joe Mama"; // find character from charsInQueue
+            nameLabel.Text = $"1. {c.Name}"; // find character from charsInQueue
             characterPanel.Controls.Add(nameLabel);
 
             Label statsLabel = new Label();
             statsLabel.AutoSize = true;
             statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
-            string statsText = $"HP 60 | SP 7 | SP 7"; // get character stats and chuck them in here
+            string statsText = $"HP {c.CurrentHp} | SP {c.Helmet} | SP {c.BodyArmor}"; // get character stats and chuck them in here
             statsLabel.Text = statsText;
             characterPanel.Controls.Add(statsLabel);
 
@@ -245,7 +254,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
             foreach(TextBox tBox in tBoxes)
             {
-                roll += Convert.ToInt32(tBox.Text);
+                if (int.TryParse(tBox.Text, out int i))
+                {
+                    roll += i;
+                }
             }
 
             // subtract damage here
@@ -772,6 +784,12 @@ namespace Cyberpunk_RED_GM_Assistant
         private void rollDmgBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void viewAllCharactersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            viewAllForm.Show();
         }
     }
 }

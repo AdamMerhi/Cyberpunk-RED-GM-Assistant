@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cyberpunk_RED_GM_Assistant
 {
-    internal abstract class Weapon
+    public abstract class Weapon
     {
         //public string weaponID { get; set; }
         public int weaponID {  get; set; }

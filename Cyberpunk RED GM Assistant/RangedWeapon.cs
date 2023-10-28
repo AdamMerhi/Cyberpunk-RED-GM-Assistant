@@ -18,7 +18,7 @@ public enum RangedWeaponType
 
 namespace Cyberpunk_RED_GM_Assistant
 {
-    internal class RangedWeapon : Weapon
+    public class RangedWeapon : Weapon
     {
 
         public RangedWeaponType type { get; set; }

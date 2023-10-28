@@ -194,11 +194,6 @@ namespace Cyberpunk_RED_GM_Assistant
             SaveCharacterData(9);
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void textBox28_TextChanged(object sender, EventArgs e)
         {
 

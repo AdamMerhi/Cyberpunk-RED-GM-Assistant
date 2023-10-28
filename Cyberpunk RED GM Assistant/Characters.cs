@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cyberpunk_RED_GM_Assistant
 {
-    internal class Character
+    public class Character
     {
         public int ID { get; set; } // set randomly on character creation
         public string Name { get; set; }
