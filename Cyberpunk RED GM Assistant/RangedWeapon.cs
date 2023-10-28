@@ -89,6 +89,13 @@ namespace Cyberpunk_RED_GM_Assistant
             reserveAmmoCount = maxAmmoCount;
         }
 
+        // Use this function to check if a weapon is ranged or melee
+        // True = Ranged, False = Melee
+        override public bool isRangedWeapon()
+        {
+            return true;
+        }
+
     }// end of: RangedWeapon() class
 
 }
