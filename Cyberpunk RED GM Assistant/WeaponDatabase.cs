@@ -60,7 +60,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             {
                                 RangedWeapon weapon = new RangedWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
                                     damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
@@ -79,7 +79,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             {
                                 MeleeWeapon weapon = new MeleeWeapon
                                 {
-                                    weaponID = ID,
+                                    weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
                                     damageDiceAmount = reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
                                     damageDiceType = reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
