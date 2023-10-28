@@ -61,7 +61,7 @@ namespace Cyberpunk_RED_GM_Assistant
                                 currentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
                                 maxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
                                 weapons = reader.GetString(reader.GetOrdinal("Weapons")),
-                                helmet = reader.GetInt32(reader.GetOrdinal("Helmet")),
+                                helmetArmor = reader.GetInt32(reader.GetOrdinal("HelmetArmor")),
                                 bodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor"))
                             };
 
@@ -81,10 +81,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
                 string insertQuery = "INSERT INTO Character (Name, Intelligence, Reflexes, Dexterity, Technique, Cool, " +
                     "Will, Luck, Move, Body, Empathy, Concentration, Perception, Athletics, Brawling, Evasion, " +
-                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapons, Helmet, BodyArmor) " +
+                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapons, HelmetArmor, BodyArmor) " +
                     "VALUES (@Name, @Intelligence, @Reflexes, @Dexterity, @Technique, @Cool, @Will, @Luck, @Move, @Body, " +
                     "@Empathy, @Concentration, @Perception, @Athletics, @Brawling, @Evasion, @MeleeWeapon, @Archery, " +
-                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapons, @Helmet, @BodyArmor)";
+                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapons, @HelmetArmor, @BodyArmor)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
@@ -113,7 +113,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     command.Parameters.AddWithValue("@CurrentHp", character.currentHp);
                     command.Parameters.AddWithValue("@MaxHp", character.maxHp);
                     command.Parameters.AddWithValue("@Weapons", character.weapons);
-                    command.Parameters.AddWithValue("@Helmet", character.helmet);
+                    command.Parameters.AddWithValue("@HelmetArmor", character.helmetArmor);
                     command.Parameters.AddWithValue("@BodyArmor", character.bodyArmor);
 
 
@@ -153,7 +153,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     "CurrentHp = @CurrentHp, " +
                     "MaxHp = @MaxHp, " +
                     "Weapons = @Weapons, " +
-                    "Helmet = @Helmet, " +
+                    "HelmetArmor = @HelmetArmor, " +
                     "BodyArmor = @BodyArmor " +
                     "WHERE ID = @CharacterID";
 
@@ -185,7 +185,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     cmd.Parameters.AddWithValue("@CurrentHp", character.currentHp);
                     cmd.Parameters.AddWithValue("@MaxHp", character.maxHp);
                     cmd.Parameters.AddWithValue("@Weapons", character.weapons);
-                    cmd.Parameters.AddWithValue("@Helmet", character.helmet);
+                    cmd.Parameters.AddWithValue("@HelmetArmor", character.helmetArmor);
                     cmd.Parameters.AddWithValue("@BodyArmor", character.bodyArmor);
 
                     cmd.ExecuteNonQuery();

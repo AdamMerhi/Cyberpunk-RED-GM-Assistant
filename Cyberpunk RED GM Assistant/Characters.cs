@@ -36,7 +36,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public int currentHp { get; set; }
         public int maxHp { get; set; }
         public string weapons { get; set; }
-        public int helmet { get; set; }
+        public int helmetArmor { get; set; }
         public int bodyArmor { get; set; }
         public Character()
         {
@@ -49,7 +49,7 @@ namespace Cyberpunk_RED_GM_Assistant
                    $"Body={body}, Empathy={empathy}, Concentration={concentration}, Perception={perception}, " +
                    $"Athletics={athletics}, Brawling={brawling}, Evasion={evasion}, " +
                    $"MeleeWeapon={meleeWeapon}, Archery={archery}, Autofire={autofire}, " +
-                   $"Handgun={handgun}, HeavyWeapons={heavyWeapons}, ShoulderArms={shoulderArms}, CurrentHp={currentHp}, MaxHp={maxHp}, Weapons={weapons}, Helmet={helmet}, BodyArmor={bodyArmor} ";
+                   $"Handgun={handgun}, HeavyWeapons={heavyWeapons}, ShoulderArms={shoulderArms}, CurrentHp={currentHp}, MaxHp={maxHp}, Weapons={weapons}, HelmetArmor={helmetArmor}, BodyArmor={bodyArmor} ";
         }
     }
 }
