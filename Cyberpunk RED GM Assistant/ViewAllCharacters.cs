@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using MySql.Data.MySqlClient;
 
 namespace Cyberpunk_RED_GM_Assistant
@@ -32,16 +33,36 @@ namespace Cyberpunk_RED_GM_Assistant
 
             //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\WeaponDB.mdf";Integrated Security=True
 
-            string characterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"characterDBFilePath\";Integrated Security=True";
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\WeaponDB.mdf");
+
+            //string characterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"characterDBFilePath\";Integrated Security=True";
             //string weaponConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{weaponDBFilePath}\";Integrated Security=True";
-            //string weaponConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{weaponDBFilePath}\";Integrated Security=True";
-            string weaponConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\Ryan\\Study\\University\\2023 Spring\\31927 DotNet\\Assignment 3\\Cyberpunk-RED-GM-Assistant\\Cyberpunk RED GM Assistant\\WeaponDB.mdf\";Integrated Security=True";
+            //string weaponConnectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"../../{weaponDBFilePath}\";Integrated Security=True";
+            //string weaponConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\Ryan\\Study\\University\\2023 Spring\\31927 DotNet\\Assignment 3\\Cyberpunk-RED-GM-Assistant\\Cyberpunk RED GM Assistant\\WeaponDB.mdf\";Integrated Security=True";
+            //string weaponConnectionString = $"Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename =\"{path}\";Integrated Security=True";
+            
+            string characterConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
+            string weaponConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\WeaponDB.mdf;Integrated Security=True";
+
+            //Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename = "D:\Ryan\Study\University\2023 Spring\31927 DotNet\Assignment 3\Cyberpunk-RED-GM-Assistant\Cyberpunk RED GM Assistant\WeaponDB.mdf"; Integrated Security = True
+
+            //string weaponConnectionString = "Data Source=|DataDirectory|\\WeaponDB.mdf";
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string path = (System.IO.Path.GetDirectoryName(executable));
+            //Console.WriteLine(path);
+            //AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            //Console.WriteLine(weaponConnectionString);
+            
+
+            MessageBox.Show(path);
+            MessageBox.Show(weaponConnectionString);
 
             //$"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename={dbFilePath};Integrated Security=True"
 
 
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
+            //weaponDatabase = new WeaponDatabase(path);
 
             //weaponDatabase.InsertWeapon(new RangedWeapon(101, "FN P90", 10, 900, 50, 1, 1, 10, 10));
             //LoadCharacterData(characterID);
@@ -64,7 +85,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Add to Queue
         private void button1_Click(object sender, EventArgs e)
-        {            
+        {
             // Below code is for one-time adding these weapon data into the weaponDatabase. 
             // I will put this as comment, and try not to run them again as they just put replicate data into database. 
 
@@ -73,8 +94,10 @@ namespace Cyberpunk_RED_GM_Assistant
             // I just comment them out here so it won't execure.
             // feel free to change if u want.
 
+
+
             // weaponID, name, range, ROF, ammoCount, type, handsRequired, cost, damage
-            /*weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 5, 900, 50, 0, 1, 10, 8));
+            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 5, 900, 50, 0, 1, 10, 8));
             weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 10, 900, 50, 1, 1, 10, 10));
             weaponDatabase.InsertWeapon(new RangedWeapon(103, "M870", 3, 900, 50, 2, 2, 10, 50));
             weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 20, 900, 50, 3, 2, 10, 20));
@@ -87,7 +110,7 @@ namespace Cyberpunk_RED_GM_Assistant
             weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 1, 100, 0, 1, 10, true, 10));
             weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 1, 100, 1, 1, 10, true, 10));
             weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 100, 2, 2, 10, false, 10));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));*/
+            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));
         }
 
         /*public enum RangedWeaponType
