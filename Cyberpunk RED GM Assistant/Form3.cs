@@ -63,34 +63,35 @@ namespace Cyberpunk_RED_GM_Assistant
             if (character != null)
             {
                 // Populate the text boxes with the retrieved data
-                textBox15.Text = character.Name;
-                textBox29.Text = character.Intelligence.ToString();
-                textBox28.Text = character.Reflexes.ToString();
-                textBox27.Text = character.Dexterity.ToString();
-                textBox26.Text = character.Technique.ToString();
-                textBox25.Text = character.Cool.ToString();
-                textBox24.Text = character.Will.ToString();
-                textBox23.Text = character.Luck.ToString();
-                textBox22.Text = character.Move.ToString();
-                textBox21.Text = character.Body.ToString();
-                textBox20.Text = character.Empathy.ToString();
-                textBox1.Text = character.Concentration.ToString();
-                textBox2.Text = character.Perception.ToString();
-                textBox4.Text = character.Athletics.ToString();
-                textBox3.Text = character.Brawling.ToString();
-                textBox8.Text = character.Evasion.ToString();
-                textBox7.Text = character.MeleeWeapon.ToString();
-                textBox6.Text = character.Archery.ToString();
-                textBox5.Text = character.Autofire.ToString();
-                textBox17.Text = character.Handgun.ToString();
-                textBox16.Text = character.HeavyWeapons.ToString();
-                textBox28.Text = character.ShoulderArms.ToString();
-                textBox9.Text = character.CurrentHp.ToString();
-                textBox10.Text = character.MaxHp.ToString();
-                textBox11.Text = character.Weapon1;
-                textBox12.Text = character.Weapon2;
-                textBox13.Text = character.Armor1;
-                textBox14.Text = character.Armor2;
+                textBox15.Text = character.name;
+                textBox29.Text = character.intelligence.ToString();
+                textBox28.Text = character.reflexes.ToString();
+                textBox27.Text = character.dexterity.ToString();
+                textBox26.Text = character.technique.ToString();
+                textBox25.Text = character.cool.ToString();
+                textBox24.Text = character.will.ToString();
+                textBox23.Text = character.luck.ToString();
+                textBox22.Text = character.move.ToString();
+                textBox21.Text = character.body.ToString();
+                textBox20.Text = character.empathy.ToString();
+                textBox1.Text = character.concentration.ToString();
+                textBox2.Text = character.perception.ToString();
+                textBox4.Text = character.athletics.ToString();
+                textBox3.Text = character.brawling.ToString();
+                textBox8.Text = character.evasion.ToString();
+                textBox7.Text = character.meleeWeapon.ToString();
+                textBox6.Text = character.archery.ToString();
+                textBox5.Text = character.autofire.ToString();
+                textBox17.Text = character.handgun.ToString();
+                textBox16.Text = character.heavyWeapons.ToString();
+                textBox28.Text = character.shoulderArms.ToString();
+                textBox9.Text = character.currentHp.ToString();
+                textBox10.Text = character.maxHp.ToString();
+                textBox11.Text = character.weapons;
+                textBox13.Text = character.helmetArmor.ToString();
+                textBox14.Text = character.bodyArmor.ToString();
+
+                // textBox12 was weapon2
             }
             else
             {
@@ -128,40 +129,41 @@ namespace Cyberpunk_RED_GM_Assistant
                 int.TryParse(textBox16.Text, out int heavyWeapons) &&
                 int.TryParse(textBox28.Text, out int shoulderArms) &&
                 int.TryParse(textBox9.Text, out int currentHp) &&
-                int.TryParse(textBox10.Text, out int maxHp))
+                int.TryParse(textBox10.Text, out int maxHp) &&
+                int.TryParse(textBox13.Text, out int helmetArmor) &&
+                int.TryParse(textBox14.Text, out int bodyArmor))
             {
                 // Create a Character object with the updated data
                 Character character = new Character
                 {
-                    ID = characterID, // Set the ID to the existing character's ID
-                    Name = textBox15.Text,
-                    Intelligence = intelligence,
-                    Reflexes = reflexes,
-                    Dexterity = dexterity,
-                    Technique = technique,
-                    Cool = cool,
-                    Will = will,
-                    Luck = luck,
-                    Move = move,
-                    Body = body,
-                    Empathy = empathy,
-                    Concentration = concentration,
-                    Perception = perception,
-                    Athletics = athletics,
-                    Brawling = brawling,
-                    Evasion = evasion,
-                    MeleeWeapon = meleeWeapon,
-                    Archery = archery,
-                    Autofire = autofire,
-                    Handgun = handgun,
-                    HeavyWeapons = heavyWeapons,
-                    ShoulderArms = shoulderArms,
-                    CurrentHp = currentHp,
-                    MaxHp = maxHp,
-                    Weapon1 = textBox11.Text,
-                    Weapon2 = textBox12.Text,
-                    Armor1 = textBox13.Text,
-                    Armor2 = textBox14.Text
+                    characterID = characterID, // Set the ID to the existing character's ID
+                    name = textBox15.Text,
+                    intelligence = intelligence,
+                    reflexes = reflexes,
+                    dexterity = dexterity,
+                    technique = technique,
+                    cool = cool,
+                    will = will,
+                    luck = luck,
+                    move = move,
+                    body = body,
+                    empathy = empathy,
+                    concentration = concentration,
+                    perception = perception,
+                    athletics = athletics,
+                    brawling = brawling,
+                    evasion = evasion,
+                    meleeWeapon = meleeWeapon,
+                    archery = archery,
+                    autofire = autofire,
+                    handgun = handgun,
+                    heavyWeapons = heavyWeapons,
+                    shoulderArms = shoulderArms,
+                    currentHp = currentHp,
+                    maxHp = maxHp,
+                    weapons = textBox11.Text,
+                    helmetArmor = helmetArmor,
+                    bodyArmor = bodyArmor
                 };
 
                 // Update the character in the database using the CharacterDatabase class

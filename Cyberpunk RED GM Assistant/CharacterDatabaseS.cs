@@ -35,35 +35,34 @@ namespace Cyberpunk_RED_GM_Assistant
                             // Create a new Character object and populate it with data from the database
                             Character character = new Character
                             {
-                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
-                                Intelligence = reader.GetInt32(reader.GetOrdinal("Intelligence")),
-                                Reflexes = reader.GetInt32(reader.GetOrdinal("Reflexes")),
-                                Dexterity = reader.GetInt32(reader.GetOrdinal("Dexterity")),
-                                Technique = reader.GetInt32(reader.GetOrdinal("Technique")),
-                                Cool = reader.GetInt32(reader.GetOrdinal("Cool")),
-                                Will = reader.GetInt32(reader.GetOrdinal("Will")),
-                                Luck = reader.GetInt32(reader.GetOrdinal("Luck")),
-                                Move = reader.GetInt32(reader.GetOrdinal("Move")),
-                                Body = reader.GetInt32(reader.GetOrdinal("Body")),
-                                Empathy = reader.GetInt32(reader.GetOrdinal("Empathy")),
-                                Concentration = reader.GetInt32(reader.GetOrdinal("Concentration")),
-                                Perception = reader.GetInt32(reader.GetOrdinal("Perception")),
-                                Athletics = reader.GetInt32(reader.GetOrdinal("Athletics")),
-                                Brawling = reader.GetInt32(reader.GetOrdinal("Brawling")),
-                                Evasion = reader.GetInt32(reader.GetOrdinal("Evasion")),
-                                MeleeWeapon = reader.GetInt32(reader.GetOrdinal("MeleeWeapon")),
-                                Archery = reader.GetInt32(reader.GetOrdinal("Archery")),
-                                Autofire = reader.GetInt32(reader.GetOrdinal("Autofire")),
-                                Handgun = reader.GetInt32(reader.GetOrdinal("Handgun")),
-                                HeavyWeapons = reader.GetInt32(reader.GetOrdinal("HeavyWeapons")),
-                                ShoulderArms = reader.GetInt32(reader.GetOrdinal("ShoulderArms")),
-                                CurrentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
-                                MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
-                                Weapon1 = reader.GetString(reader.GetOrdinal("Weapon1")),
-                                Weapon2 = reader.GetString(reader.GetOrdinal("Weapon2")),
-                                Armor1 = reader.GetString(reader.GetOrdinal("Armor1")),
-                                Armor2 = reader.GetString(reader.GetOrdinal("Armor2"))
+                                characterID = reader.GetInt32(reader.GetOrdinal("ID")),
+                                name = reader.GetString(reader.GetOrdinal("Name")),
+                                intelligence = reader.GetInt32(reader.GetOrdinal("Intelligence")),
+                                reflexes = reader.GetInt32(reader.GetOrdinal("Reflexes")),
+                                dexterity = reader.GetInt32(reader.GetOrdinal("Dexterity")),
+                                technique = reader.GetInt32(reader.GetOrdinal("Technique")),
+                                cool = reader.GetInt32(reader.GetOrdinal("Cool")),
+                                will = reader.GetInt32(reader.GetOrdinal("Will")),
+                                luck = reader.GetInt32(reader.GetOrdinal("Luck")),
+                                move = reader.GetInt32(reader.GetOrdinal("Move")),
+                                body = reader.GetInt32(reader.GetOrdinal("Body")),
+                                empathy = reader.GetInt32(reader.GetOrdinal("Empathy")),
+                                concentration = reader.GetInt32(reader.GetOrdinal("Concentration")),
+                                perception = reader.GetInt32(reader.GetOrdinal("Perception")),
+                                athletics = reader.GetInt32(reader.GetOrdinal("Athletics")),
+                                brawling = reader.GetInt32(reader.GetOrdinal("Brawling")),
+                                evasion = reader.GetInt32(reader.GetOrdinal("Evasion")),
+                                meleeWeapon = reader.GetInt32(reader.GetOrdinal("MeleeWeapon")),
+                                archery = reader.GetInt32(reader.GetOrdinal("Archery")),
+                                autofire = reader.GetInt32(reader.GetOrdinal("Autofire")),
+                                handgun = reader.GetInt32(reader.GetOrdinal("Handgun")),
+                                heavyWeapons = reader.GetInt32(reader.GetOrdinal("HeavyWeapons")),
+                                shoulderArms = reader.GetInt32(reader.GetOrdinal("ShoulderArms")),
+                                currentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
+                                maxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
+                                weapons = reader.GetString(reader.GetOrdinal("Weapons")),
+                                helmetArmor = reader.GetInt32(reader.GetOrdinal("HelmetArmor")),
+                                bodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor"))
                             };
 
                             return character;
@@ -82,41 +81,40 @@ namespace Cyberpunk_RED_GM_Assistant
 
                 string insertQuery = "INSERT INTO Character (Name, Intelligence, Reflexes, Dexterity, Technique, Cool, " +
                     "Will, Luck, Move, Body, Empathy, Concentration, Perception, Athletics, Brawling, Evasion, " +
-                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapon1, Weapon2, Armor1, Armor2) " +
+                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapons, HelmetArmor, BodyArmor) " +
                     "VALUES (@Name, @Intelligence, @Reflexes, @Dexterity, @Technique, @Cool, @Will, @Luck, @Move, @Body, " +
                     "@Empathy, @Concentration, @Perception, @Athletics, @Brawling, @Evasion, @MeleeWeapon, @Archery, " +
-                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapon1, @Weapon2, @Armor1, @Armor2)";
+                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapons, @HelmetArmor, @BodyArmor)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@Name", character.Name);
-                    command.Parameters.AddWithValue("@Intelligence", character.Intelligence);
-                    command.Parameters.AddWithValue("@Reflexes", character.Reflexes);
-                    command.Parameters.AddWithValue("@Dexterity", character.Dexterity);
-                    command.Parameters.AddWithValue("@Technique", character.Technique);
-                    command.Parameters.AddWithValue("@Cool", character.Cool);
-                    command.Parameters.AddWithValue("@Will", character.Will);
-                    command.Parameters.AddWithValue("@Luck", character.Luck);
-                    command.Parameters.AddWithValue("@Move", character.Move);
-                    command.Parameters.AddWithValue("@Body", character.Body);
-                    command.Parameters.AddWithValue("@Empathy", character.Empathy);
-                    command.Parameters.AddWithValue("@Concentration", character.Concentration);
-                    command.Parameters.AddWithValue("@Perception", character.Perception);
-                    command.Parameters.AddWithValue("@Athletics", character.Athletics);
-                    command.Parameters.AddWithValue("@Brawling", character.Brawling);
-                    command.Parameters.AddWithValue("@Evasion", character.Evasion);
-                    command.Parameters.AddWithValue("@MeleeWeapon", character.MeleeWeapon);
-                    command.Parameters.AddWithValue("@Archery", character.Archery);
-                    command.Parameters.AddWithValue("@Autofire", character.Autofire);
-                    command.Parameters.AddWithValue("@Handgun", character.Handgun);
-                    command.Parameters.AddWithValue("@HeavyWeapons", character.HeavyWeapons);
-                    command.Parameters.AddWithValue("@ShoulderArms", character.ShoulderArms);
-                    command.Parameters.AddWithValue("@CurrentHp", character.CurrentHp);
-                    command.Parameters.AddWithValue("@MaxHp", character.MaxHp);
-                    command.Parameters.AddWithValue("@Weapon1", character.Weapon1);
-                    command.Parameters.AddWithValue("@Weapon2", character.Weapon2);
-                    command.Parameters.AddWithValue("@Armor1", character.Armor1);
-                    command.Parameters.AddWithValue("@Armor2", character.Armor2);
+                    command.Parameters.AddWithValue("@Name", character.name);
+                    command.Parameters.AddWithValue("@Intelligence", character.intelligence);
+                    command.Parameters.AddWithValue("@Reflexes", character.reflexes);
+                    command.Parameters.AddWithValue("@Dexterity", character.dexterity);
+                    command.Parameters.AddWithValue("@Technique", character.technique);
+                    command.Parameters.AddWithValue("@Cool", character.cool);
+                    command.Parameters.AddWithValue("@Will", character.will);
+                    command.Parameters.AddWithValue("@Luck", character.luck);
+                    command.Parameters.AddWithValue("@Move", character.move);
+                    command.Parameters.AddWithValue("@Body", character.body);
+                    command.Parameters.AddWithValue("@Empathy", character.empathy);
+                    command.Parameters.AddWithValue("@Concentration", character.concentration);
+                    command.Parameters.AddWithValue("@Perception", character.perception);
+                    command.Parameters.AddWithValue("@Athletics", character.athletics);
+                    command.Parameters.AddWithValue("@Brawling", character.brawling);
+                    command.Parameters.AddWithValue("@Evasion", character.evasion);
+                    command.Parameters.AddWithValue("@MeleeWeapon", character.meleeWeapon);
+                    command.Parameters.AddWithValue("@Archery", character.archery);
+                    command.Parameters.AddWithValue("@Autofire", character.autofire);
+                    command.Parameters.AddWithValue("@Handgun", character.handgun);
+                    command.Parameters.AddWithValue("@HeavyWeapons", character.heavyWeapons);
+                    command.Parameters.AddWithValue("@ShoulderArms", character.shoulderArms);
+                    command.Parameters.AddWithValue("@CurrentHp", character.currentHp);
+                    command.Parameters.AddWithValue("@MaxHp", character.maxHp);
+                    command.Parameters.AddWithValue("@Weapons", character.weapons);
+                    command.Parameters.AddWithValue("@HelmetArmor", character.helmetArmor);
+                    command.Parameters.AddWithValue("@BodyArmor", character.bodyArmor);
 
 
                     command.ExecuteNonQuery();
@@ -154,43 +152,41 @@ namespace Cyberpunk_RED_GM_Assistant
                     "ShoulderArms = @ShoulderArms, " +
                     "CurrentHp = @CurrentHp, " +
                     "MaxHp = @MaxHp, " +
-                    "Weapon1 = @Weapon1, " +
-                    "Weapon2 = @Weapon2, " +
-                    "Armor1 = @Armor1, " +
-                    "Armor2 = @Armor2 " +
+                    "Weapons = @Weapons, " +
+                    "HelmetArmor = @HelmetArmor, " +
+                    "BodyArmor = @BodyArmor " +
                     "WHERE ID = @CharacterID";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, connection))
                 {
-                    cmd.Parameters.AddWithValue("@CharacterID", character.ID);
-                    cmd.Parameters.AddWithValue("@Name", character.Name);
-                    cmd.Parameters.AddWithValue("@Intelligence", character.Intelligence);
-                    cmd.Parameters.AddWithValue("@Reflexes", character.Reflexes);
-                    cmd.Parameters.AddWithValue("@Dexterity", character.Dexterity);
-                    cmd.Parameters.AddWithValue("@Technique", character.Technique);
-                    cmd.Parameters.AddWithValue("@Cool", character.Cool);
-                    cmd.Parameters.AddWithValue("@Will", character.Will);
-                    cmd.Parameters.AddWithValue("@Luck", character.Luck);
-                    cmd.Parameters.AddWithValue("@Move", character.Move);
-                    cmd.Parameters.AddWithValue("@Body", character.Body);
-                    cmd.Parameters.AddWithValue("@Empathy", character.Empathy);
-                    cmd.Parameters.AddWithValue("@Concentration", character.Concentration);
-                    cmd.Parameters.AddWithValue("@Perception", character.Perception);
-                    cmd.Parameters.AddWithValue("@Athletics", character.Athletics);
-                    cmd.Parameters.AddWithValue("@Brawling", character.Brawling);
-                    cmd.Parameters.AddWithValue("@Evasion", character.Evasion);
-                    cmd.Parameters.AddWithValue("@MeleeWeapon", character.MeleeWeapon);
-                    cmd.Parameters.AddWithValue("@Archery", character.Archery);
-                    cmd.Parameters.AddWithValue("@Autofire", character.Autofire);
-                    cmd.Parameters.AddWithValue("@Handgun", character.Handgun);
-                    cmd.Parameters.AddWithValue("@HeavyWeapons", character.HeavyWeapons);
-                    cmd.Parameters.AddWithValue("@ShoulderArms", character.ShoulderArms);
-                    cmd.Parameters.AddWithValue("@CurrentHp", character.CurrentHp);
-                    cmd.Parameters.AddWithValue("@MaxHp", character.MaxHp);
-                    cmd.Parameters.AddWithValue("@Weapon1", character.Weapon1);
-                    cmd.Parameters.AddWithValue("@Weapon2", character.Weapon2);
-                    cmd.Parameters.AddWithValue("@Armor1", character.Armor1);
-                    cmd.Parameters.AddWithValue("@Armor2", character.Armor2);
+                    cmd.Parameters.AddWithValue("@CharacterID", character.characterID);
+                    cmd.Parameters.AddWithValue("@Name", character.name);
+                    cmd.Parameters.AddWithValue("@Intelligence", character.intelligence);
+                    cmd.Parameters.AddWithValue("@Reflexes", character.reflexes);
+                    cmd.Parameters.AddWithValue("@Dexterity", character.dexterity);
+                    cmd.Parameters.AddWithValue("@Technique", character.technique);
+                    cmd.Parameters.AddWithValue("@Cool", character.cool);
+                    cmd.Parameters.AddWithValue("@Will", character.will);
+                    cmd.Parameters.AddWithValue("@Luck", character.luck);
+                    cmd.Parameters.AddWithValue("@Move", character.move);
+                    cmd.Parameters.AddWithValue("@Body", character.body);
+                    cmd.Parameters.AddWithValue("@Empathy", character.empathy);
+                    cmd.Parameters.AddWithValue("@Concentration", character.concentration);
+                    cmd.Parameters.AddWithValue("@Perception", character.perception);
+                    cmd.Parameters.AddWithValue("@Athletics", character.athletics);
+                    cmd.Parameters.AddWithValue("@Brawling", character.brawling);
+                    cmd.Parameters.AddWithValue("@Evasion", character.evasion);
+                    cmd.Parameters.AddWithValue("@MeleeWeapon", character.meleeWeapon);
+                    cmd.Parameters.AddWithValue("@Archery", character.archery);
+                    cmd.Parameters.AddWithValue("@Autofire", character.autofire);
+                    cmd.Parameters.AddWithValue("@Handgun", character.handgun);
+                    cmd.Parameters.AddWithValue("@HeavyWeapons", character.heavyWeapons);
+                    cmd.Parameters.AddWithValue("@ShoulderArms", character.shoulderArms);
+                    cmd.Parameters.AddWithValue("@CurrentHp", character.currentHp);
+                    cmd.Parameters.AddWithValue("@MaxHp", character.maxHp);
+                    cmd.Parameters.AddWithValue("@Weapons", character.weapons);
+                    cmd.Parameters.AddWithValue("@HelmetArmor", character.helmetArmor);
+                    cmd.Parameters.AddWithValue("@BodyArmor", character.bodyArmor);
 
                     cmd.ExecuteNonQuery();
                 }

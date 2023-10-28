@@ -8,51 +8,48 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     internal class Character
     {
-        public int ID { get; set; } // set randomly on character creation
-        public string Name { get; set; }
+        public int characterID { get; set; } // set randomly on character creation
+        public string name { get; set; }
         //** Status **
-        public int Intelligence { get; set; }
-        public int Reflexes { get; set; }
-        public int Dexterity { get; set; }
-        public int Technique { get; set; }
-        public int Cool { get; set; }
-        public int Will { get; set; }
-        public int Luck { get; set; }
-        public int Move { get; set; }
-        public int Body { get; set; }
-        public int Empathy { get; set; } // last stat
-                //** Skills **
-        public int Concentration { get; set; }
-        public int Perception { get; set; }
-        public int Athletics { get; set; }
-        public int Brawling { get; set; }
-        public int Evasion { get; set; }
-        public int MeleeWeapon { get; set; }
-        public int Archery { get; set; }
-        public int Autofire { get; set; }
-        public int Handgun { get; set; }
-        public int HeavyWeapons { get; set; }
-        public int ShoulderArms { get; set; }
-        public int CurrentHp { get; set; }
-        public int MaxHp { get; set; }
-        public string Weapon1 { get; set; }
-        public string Weapon2 { get; set; }
-        public string Armor1 { get; set; }
-        public string Armor2 { get; set; }
+        public int intelligence { get; set; }
+        public int reflexes { get; set; }
+        public int dexterity { get; set; }
+        public int technique { get; set; }
+        public int cool { get; set; }
+        public int will { get; set; }
+        public int luck { get; set; }
+        public int move { get; set; }
+        public int body { get; set; }
+        public int empathy { get; set; } // last stat
+        //** Skills **
+        public int concentration { get; set; }
+        public int perception { get; set; }
+        public int athletics { get; set; }
+        public int brawling { get; set; }
+        public int evasion { get; set; }
+        public int meleeWeapon { get; set; }
+        public int archery { get; set; }
+        public int autofire { get; set; }
+        public int handgun { get; set; }
+        public int heavyWeapons { get; set; }
+        public int shoulderArms { get; set; }
+        public int currentHp { get; set; }
+        public int maxHp { get; set; }
+        public string weapons { get; set; }
+        public int helmetArmor { get; set; }
+        public int bodyArmor { get; set; }
         public Character()
         {
 
         }
         public override string ToString()
         {
-            return $"{Name}: Intelligence={Intelligence}, Reflexes={Reflexes}, Dexterity={Dexterity}, " +
-                   $"Technique={Technique}, Cool={Cool}, Will={Will}, Luck={Luck}, Move={Move}, " +
-                   $"Body={Body}, Empathy={Empathy}, Concentration={Concentration}, Perception={Perception}, " +
-                   $"Athletics={Athletics}, Brawling={Brawling}, Evasion={Evasion}, " +
-                   $"MeleeWeapon={MeleeWeapon}, Archery={Archery}, Autofire={Autofire}, " +
-                   $"Handgun={Handgun}, HeavyWeapons={HeavyWeapons}, ShoulderArms={ShoulderArms}, CurrentHp={CurrentHp}, MaxHp={MaxHp}, Weapon1={Weapon1}, Weapon2={Weapon2}, Armor1={Armor1}, Armor2={Armor2} ";
+            return $"{name}: Intelligence={intelligence}, Reflexes={reflexes}, Dexterity={dexterity}, " +
+                   $"Technique={technique}, Cool={cool}, Will={will}, Luck={luck}, Move={move}, " +
+                   $"Body={body}, Empathy={empathy}, Concentration={concentration}, Perception={perception}, " +
+                   $"Athletics={athletics}, Brawling={brawling}, Evasion={evasion}, " +
+                   $"MeleeWeapon={meleeWeapon}, Archery={archery}, Autofire={autofire}, " +
+                   $"Handgun={handgun}, HeavyWeapons={heavyWeapons}, ShoulderArms={shoulderArms}, CurrentHp={currentHp}, MaxHp={maxHp}, Weapons={weapons}, HelmetArmor={helmetArmor}, BodyArmor={bodyArmor} ";
         }
-
-
     }
 }

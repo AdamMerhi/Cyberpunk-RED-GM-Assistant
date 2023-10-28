@@ -88,7 +88,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox15 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -550,7 +549,6 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.flowLayoutPanel1);
             this.groupBox3.Controls.Add(this.textBox14);
             this.groupBox3.Controls.Add(this.textBox13);
             this.groupBox3.Controls.Add(this.label5);
@@ -695,14 +693,6 @@
             this.textBox15.TabIndex = 22;
             this.textBox15.Text = "NAME";
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(51, 88);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
-            this.flowLayoutPanel1.TabIndex = 29;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
-            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -795,6 +785,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
