@@ -166,24 +166,46 @@ namespace Cyberpunk_RED_GM_Assistant
             // so I am just setting up the data in my freestyle,
             // I just comment them out here so it won't execure.
             // feel free to change if u want.
-
-            // weaponID, name, range, ROF, ammoCount, type, handsRequired, cost, damage
-            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 5, 900, 50, 0, 1, 10, 8));
-            weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 10, 900, 50, 1, 1, 10, 10));
-            weaponDatabase.InsertWeapon(new RangedWeapon(103, "M870", 3, 900, 50, 2, 2, 10, 50));
-            weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 20, 900, 50, 3, 2, 10, 20));
-            weaponDatabase.InsertWeapon(new RangedWeapon(105, "M82A1", 30, 900, 50, 4, 2, 10, 50));
-            weaponDatabase.InsertWeapon(new RangedWeapon(106, "Crossbow", 20, 900, 50, 5, 2, 10, 30));
-            weaponDatabase.InsertWeapon(new RangedWeapon(107, "M320 GL", 15, 900, 50, 6, 2, 10, 40));
-            weaponDatabase.InsertWeapon(new RangedWeapon(108, "RPG", 15, 100, 50, 7, 2, 10, 60));
+                        
+            // weaponID, name, ROF, type, damage, maxAmmoCount, magazineAmmoCount 
+            weaponDatabase.InsertWeapon(new RangedWeapon(101, "GLOCK-18", 2, 0, 10, 30, 10));
+            weaponDatabase.InsertWeapon(new RangedWeapon(102, "FN P90", 2, 1, 10, 100, 50));
+            weaponDatabase.InsertWeapon(new RangedWeapon(103, "SPAS-12", 1, 2, 20, 16, 8));
+            weaponDatabase.InsertWeapon(new RangedWeapon(104, "HK416", 1, 3, 30, 90, 30));
+            weaponDatabase.InsertWeapon(new RangedWeapon(105, "M82A1", 1, 4, 40, 10, 5));
+            weaponDatabase.InsertWeapon(new RangedWeapon(106, "Crossbow", 1, 5, 20, 10, 1));
+            weaponDatabase.InsertWeapon(new RangedWeapon(107, "M320 GL", 1, 6, 50, 2, 1));
+            weaponDatabase.InsertWeapon(new RangedWeapon(108, "RPG", 1, 7, 80, 2, 1));
 
             // weaponID, name, range, ROF, type, handsRequired, cost, damage, canConceal
-            weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 1, 100, 0, 1, 10, true, 10));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 1, 100, 1, 1, 10, true, 10));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 100, 2, 2, 10, false, 10));
-            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));
+            // weaponID, name, ROF, type, damage)
+            weaponDatabase.InsertWeapon(new MeleeWeapon(201, "Dagger", 2, 0, 20));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(202, "Axe", 2, 1, 30));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(203, "Katana", 1, 2, 40));
+            weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 3, 50));
+
+            /*public enum RangedWeaponType
+            {
+                Pistol,
+                SMG,
+                ShotgunSlug,
+                AR,
+                Sniper,
+                Bows,
+                GL,
+                RPG
+            }*/
+
+            /*public enum MeleeWeaponType
+            {
+                Light,
+                Medium,
+                Heavy,
+                VeryHeavy
+            }*/
         }
 
+        // See All Weapons
         private void button7_Click(object sender, EventArgs e)
         {
 
@@ -211,25 +233,7 @@ namespace Cyberpunk_RED_GM_Assistant
             };
         }
 
-        /*public enum RangedWeaponType
-        {
-            Pistol,
-            SMG,
-            ShotgunSlug,
-            AR,
-            Sniper,
-            Bows,
-            GL,
-            RPG
-        }*/
-
-        /*public enum MeleeWeaponType
-        {
-            Light,
-            Medium,
-            Heavy,
-            VeryHeavy
-        }*/
+        
 
         /*// needs character id in parameters to generate panel with correct text
         private void AddToQueue()
