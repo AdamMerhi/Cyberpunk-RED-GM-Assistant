@@ -17,7 +17,5 @@ namespace Cyberpunk_RED_GM_Assistant
         public int handsRequired { get; set; }
         public int range { get; set; }
         public int cost { get; set; }
-
-        public abstract bool isRangedWeapon();
     }
 }

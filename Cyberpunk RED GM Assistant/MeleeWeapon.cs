@@ -56,13 +56,5 @@ namespace Cyberpunk_RED_GM_Assistant
             }
             isConcealed = !isConcealed;
         }
-
-        // Use this function to check if a weapon is ranged or melee
-        // True = Ranged, False = Melee
-        override public bool isRangedWeapon()
-        {
-            return false;
-        }
-
     }// end of: MeleeWeapon() class
 }

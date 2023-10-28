@@ -61,7 +61,7 @@ namespace Cyberpunk_RED_GM_Assistant
                                 CurrentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
                                 MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
                                 Weapon1 = reader.GetString(reader.GetOrdinal("Weapon1")),
-                               // Weapon2 = reader.GetString(reader.GetOrdinal("Weapon2")),
+                                Weapon2 = reader.GetString(reader.GetOrdinal("Weapon2")),
                                 Armor1 = reader.GetString(reader.GetOrdinal("Armor1")),
                                 Armor2 = reader.GetString(reader.GetOrdinal("Armor2"))
                             };
@@ -82,10 +82,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
                 string insertQuery = "INSERT INTO Character (Name, Intelligence, Reflexes, Dexterity, Technique, Cool, " +
                     "Will, Luck, Move, Body, Empathy, Concentration, Perception, Athletics, Brawling, Evasion, " +
-                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapon1, Armor1, Armor2) " +
+                    "MeleeWeapon, Archery, Autofire, Handgun, HeavyWeapons, ShoulderArms, CurrentHp, MaxHp, Weapon1, Weapon2, Armor1, Armor2) " +
                     "VALUES (@Name, @Intelligence, @Reflexes, @Dexterity, @Technique, @Cool, @Will, @Luck, @Move, @Body, " +
                     "@Empathy, @Concentration, @Perception, @Athletics, @Brawling, @Evasion, @MeleeWeapon, @Archery, " +
-                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapon1, @Armor1, @Armor2)";
+                    "@Autofire, @Handgun, @HeavyWeapons, @ShoulderArms, @CurrentHp, @MaxHp, @Weapon1, @Weapon2, @Armor1, @Armor2)";
 
                 using (SqlCommand command = new SqlCommand(insertQuery, connection))
                 {
@@ -114,7 +114,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     command.Parameters.AddWithValue("@CurrentHp", character.CurrentHp);
                     command.Parameters.AddWithValue("@MaxHp", character.MaxHp);
                     command.Parameters.AddWithValue("@Weapon1", character.Weapon1);
-                    //command.Parameters.AddWithValue("@Weapon2", character.Weapon2);
+                    command.Parameters.AddWithValue("@Weapon2", character.Weapon2);
                     command.Parameters.AddWithValue("@Armor1", character.Armor1);
                     command.Parameters.AddWithValue("@Armor2", character.Armor2);
 
@@ -155,7 +155,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     "CurrentHp = @CurrentHp, " +
                     "MaxHp = @MaxHp, " +
                     "Weapon1 = @Weapon1, " +
-                   /* "Weapon2 = @Weapon2, " +*/
+                    "Weapon2 = @Weapon2, " +
                     "Armor1 = @Armor1, " +
                     "Armor2 = @Armor2 " +
                     "WHERE ID = @CharacterID";
@@ -188,72 +188,11 @@ namespace Cyberpunk_RED_GM_Assistant
                     cmd.Parameters.AddWithValue("@CurrentHp", character.CurrentHp);
                     cmd.Parameters.AddWithValue("@MaxHp", character.MaxHp);
                     cmd.Parameters.AddWithValue("@Weapon1", character.Weapon1);
-                    //cmd.Parameters.AddWithValue("@Weapon2", character.Weapon2);
+                    cmd.Parameters.AddWithValue("@Weapon2", character.Weapon2);
                     cmd.Parameters.AddWithValue("@Armor1", character.Armor1);
                     cmd.Parameters.AddWithValue("@Armor2", character.Armor2);
 
                     cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        // Remove this character by passing in the character ID
-        // WIP, Untested, and IDK if it works or not
-        public void RemoveCharacterByID(int characterID)
-        {
-            // Just similar implementation with GetCharacterByID
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                string query = "DELECT FROM Character WHERE ID = @CharacterID";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@CharacterID", characterID);
-
-                    command.ExecuteNonQuery();
-
-                    /*using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            // Create a new Character object and populate it with data from the database
-                            Character character = new Character
-                            {
-                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
-                                Intelligence = reader.GetInt32(reader.GetOrdinal("Intelligence")),
-                                Reflexes = reader.GetInt32(reader.GetOrdinal("Reflexes")),
-                                Dexterity = reader.GetInt32(reader.GetOrdinal("Dexterity")),
-                                Technique = reader.GetInt32(reader.GetOrdinal("Technique")),
-                                Cool = reader.GetInt32(reader.GetOrdinal("Cool")),
-                                Will = reader.GetInt32(reader.GetOrdinal("Will")),
-                                Luck = reader.GetInt32(reader.GetOrdinal("Luck")),
-                                Move = reader.GetInt32(reader.GetOrdinal("Move")),
-                                Body = reader.GetInt32(reader.GetOrdinal("Body")),
-                                Empathy = reader.GetInt32(reader.GetOrdinal("Empathy")),
-                                Concentration = reader.GetInt32(reader.GetOrdinal("Concentration")),
-                                Perception = reader.GetInt32(reader.GetOrdinal("Perception")),
-                                Athletics = reader.GetInt32(reader.GetOrdinal("Athletics")),
-                                Brawling = reader.GetInt32(reader.GetOrdinal("Brawling")),
-                                Evasion = reader.GetInt32(reader.GetOrdinal("Evasion")),
-                                MeleeWeapon = reader.GetInt32(reader.GetOrdinal("MeleeWeapon")),
-                                Archery = reader.GetInt32(reader.GetOrdinal("Archery")),
-                                Autofire = reader.GetInt32(reader.GetOrdinal("Autofire")),
-                                Handgun = reader.GetInt32(reader.GetOrdinal("Handgun")),
-                                HeavyWeapons = reader.GetInt32(reader.GetOrdinal("HeavyWeapons")),
-                                ShoulderArms = reader.GetInt32(reader.GetOrdinal("ShoulderArms")),
-                                CurrentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
-                                MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
-                                Weapon1 = reader.GetString(reader.GetOrdinal("Weapon1")),
-                                Weapon2 = reader.GetString(reader.GetOrdinal("Weapon2")),
-                                Armor1 = reader.GetString(reader.GetOrdinal("Armor1")),
-                                Armor2 = reader.GetString(reader.GetOrdinal("Armor2"))
-                            };
-
-                            return character;
-                        }
-                    }*/
                 }
             }
         }
