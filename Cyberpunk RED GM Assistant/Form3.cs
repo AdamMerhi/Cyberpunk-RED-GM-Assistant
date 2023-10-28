@@ -12,7 +12,7 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form3 : Form
     {
-        //public const string dbFilePath = "characterDb.mdf";
+        public const string dbFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
         public Form3(int characterID)
         {
@@ -43,7 +43,7 @@ namespace Cyberpunk_RED_GM_Assistant
             form2.IntOnlyText(textBox28);
             form2.IntOnlyText(textBox29);
 
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\School\\uni\\Year Two\\SEM TWO\\Development .NET\\Assignment 2\\Cyberpunk-RED-GM-Assistant\\Cyberpunk RED GM Assistant\\characterDb.mdf\";Integrated Security=True";
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
             characterDatabase = new CharacterDatabase(connectionString);
             LoadCharacterData(characterID);
         }
@@ -85,8 +85,8 @@ namespace Cyberpunk_RED_GM_Assistant
                 textBox28.Text = character.ShoulderArms.ToString();
                 textBox9.Text = character.CurrentHp.ToString();
                 textBox10.Text = character.MaxHp.ToString();
-                listBox1.Text = character.Weapon1;
-                //listBox1.Text = character.Weapon2;
+                textBox11.Text = character.Weapon1;
+                textBox12.Text = character.Weapon2;
                 textBox13.Text = character.Armor1;
                 textBox14.Text = character.Armor2;
             }
@@ -96,7 +96,7 @@ namespace Cyberpunk_RED_GM_Assistant
             }
 
         }
-        private void SaveCharacterData(int characterID) 
+        private void SaveCharacterData(int characterID)
         {
             if (characterID <= 0)
             {
@@ -156,7 +156,8 @@ namespace Cyberpunk_RED_GM_Assistant
                     ShoulderArms = shoulderArms,
                     CurrentHp = currentHp,
                     MaxHp = maxHp,
-                    Weapon1 = string.Join(", ", listBox1.SelectedItems.Cast<string>()),
+                    Weapon1 = textBox11.Text,
+                    Weapon2 = textBox12.Text,
                     Armor1 = textBox13.Text,
                     Armor2 = textBox14.Text
                 };
@@ -172,12 +173,23 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
-        
+        /*private void textBox19_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox19.Text, out int characterID))
+            {
+                // The text in textBox19 is a valid integer, so we can use it as the Character ID
+                LoadCharacterData(characterID);
+            }
+            else
+            {
+                // Handle the case where the entered text is not a valid integer
+                MessageBox.Show("Please enter a valid Character ID.");
+            }
+        }*/
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveCharacterData(9); // needs to be chanegd depending on which code is selected by pam
-            
+            SaveCharacterData(9);
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -185,6 +197,18 @@ namespace Cyberpunk_RED_GM_Assistant
 
         }
 
-   
+        /* private void button2_Click(object sender, EventArgs e)
+         {
+             if (int.TryParse(textBox19.Text, out int characterID))
+             {
+                 // The text in textBox19 is a valid integer, so we can use it as the Character ID
+                 LoadCharacterData(characterID);
+             }
+             else
+             {
+                 // Handle the case where the entered text is not a valid integer
+                 MessageBox.Show("Please enter a valid Character ID.");
+             }
+         }*/
     }
 }

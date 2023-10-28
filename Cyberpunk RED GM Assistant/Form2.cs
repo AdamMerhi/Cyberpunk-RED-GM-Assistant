@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Cyberpunk_RED_GM_Tool;
 using MySql.Data.MySqlClient;
 
 
@@ -17,15 +16,13 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form2 : Form
     {
-        //public const string dbFilePath = "characterDb.mdf";
+        public const string dbFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
         private List<Character> characterList = new List<Character>();
-       // private List<Weapon> weaponList = new List<Weapon>();
+
         public Form2()
         {
             InitializeComponent();
-
-            //weaponList = new ListBox();
 
             IntOnlyText(textBox1);
             IntOnlyText(textBox2);
@@ -51,8 +48,7 @@ namespace Cyberpunk_RED_GM_Assistant
             IntOnlyText(textBox28);
             IntOnlyText(textBox29);
 
-            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\School\\uni\\Year Two\\SEM TWO\\Development .NET\\Assignment 2\\Cyberpunk-RED-GM-Assistant\\Cyberpunk RED GM Assistant\\characterDb.mdf\";Integrated Security=True";
-
+            string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
             characterDatabase  = new CharacterDatabase(connectionString);
 
         }
@@ -62,8 +58,6 @@ namespace Cyberpunk_RED_GM_Assistant
             // Capture user input into a Character object
             Character character = new Character
             {
-
-                    
                 Name = textBox15.Text,
                 Intelligence = int.Parse(textBox29.Text),
                 Reflexes = int.Parse(textBox28.Text),
@@ -88,12 +82,11 @@ namespace Cyberpunk_RED_GM_Assistant
                 ShoulderArms = int.Parse(textBox28.Text),
                 CurrentHp = int.Parse(textBox9.Text),
                 MaxHp = int.Parse(textBox10.Text),
-                Weapon1 = string.Join(", ", listBox1.SelectedItems.Cast<string>()),
-                //Weapon2 = textBox12.Text,
+                Weapon1 = textBox11.Text,
+                Weapon2 = textBox12.Text,
                 Armor1 = textBox13.Text,
                 Armor2 = textBox14.Text,
             };
-
 
             // Insert the character into the database using the CharacterDatabase class
             characterDatabase.InsertCharacter(character);
@@ -120,10 +113,5 @@ namespace Cyberpunk_RED_GM_Assistant
             };
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
