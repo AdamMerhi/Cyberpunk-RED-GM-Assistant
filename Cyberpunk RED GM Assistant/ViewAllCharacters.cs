@@ -180,6 +180,11 @@ namespace Cyberpunk_RED_GM_Assistant
             weaponDatabase.InsertWeapon(new MeleeWeapon(204, "Sledgehammer", 1, 100, 3, 2, 10, false, 10));
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /*public enum RangedWeaponType
         {
             Pistol,
