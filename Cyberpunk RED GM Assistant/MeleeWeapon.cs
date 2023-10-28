@@ -63,5 +63,10 @@ namespace Cyberpunk_RED_GM_Assistant
             return false;
         }
 
+        public override string ToString()
+        {
+            return $"Weapon Name: {name}, Weapon Type: {type}, ROF: {ROF},  Damage: {damageDiceAmount}d{damageDiceType}";
+        }
+
     }// end of: MeleeWeapon() class
 }

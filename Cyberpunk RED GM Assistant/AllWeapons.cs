@@ -12,9 +12,21 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class AllWeapons : Form
     {
-        public AllWeapons()
+        public List<Weapon> weapons = new List<Weapon>();
+        /*public AllWeapons()
         {
             InitializeComponent();
+        }*/
+
+        public AllWeapons(List<Weapon> weapons)
+        {
+            InitializeComponent();
+            this.weapons = weapons;
+
+            foreach(Weapon weapon in weapons)
+            {
+                MessageBox.Show(weapon.ToString());
+            }
         }
     }
 }

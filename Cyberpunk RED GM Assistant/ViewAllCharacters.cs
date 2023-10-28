@@ -92,30 +92,35 @@ namespace Cyberpunk_RED_GM_Assistant
         // All character views
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
+            List<Character> allCharacters = characterDatabase.GetAllCharacters();
             if (!isPrinted)
             {
-                FlowLayoutPanel characterPanel = new FlowLayoutPanel();
-                characterPanel.Size = new Size(255, 60);
-                characterPanel.FlowDirection = FlowDirection.TopDown;
+                foreach (Character character in allCharacters)
+                {
+                    //Character c = characterDatabase.GetCharacterByID(12);
 
-                Label nameLabel = new Label();
-                nameLabel.AutoSize = true;
-                nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
-                nameLabel.Text = $"1. Joe Mama"; // find character from charsInQueue
-                characterPanel.Controls.Add(nameLabel);
+                    FlowLayoutPanel characterPanel = new FlowLayoutPanel();
+                    characterPanel.Size = new Size(255, 60);
+                    characterPanel.FlowDirection = FlowDirection.TopDown;
+                    //characterPanel.ContextMenuStrip = contextMenuStrip1;
 
-                Label statsLabel = new Label();
-                statsLabel.AutoSize = true;
-                statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
-                string statsText = $"HP 60 | SP 7 | SP 7"; // get character stats and chuck them in here
-                statsLabel.Text = statsText;
-                characterPanel.Controls.Add(statsLabel);
+                    Label nameLabel = new Label();
+                    nameLabel.AutoSize = true;
+                    nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
+                    nameLabel.Text = $"1. {character.Name}"; // find character from charsInQueue
+                    characterPanel.Controls.Add(nameLabel);
 
-                flowLayoutPanel1.Controls.Add(characterPanel);
+                    Label statsLabel = new Label();
+                    statsLabel.AutoSize = true;
+                    statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
+                    string statsText = $"HP {character.CurrentHp} | SP {character.Helmet} | SP {character.BodyArmor}"; // get character stats and chuck them in here
+                    statsLabel.Text = statsText;
+                    characterPanel.Controls.Add(statsLabel);
 
-                isPrinted = true;   
+                    flowLayoutPanel1.Controls.Add(characterPanel);
+                }
+                isPrinted = true;
             }
-            
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -207,7 +212,9 @@ namespace Cyberpunk_RED_GM_Assistant
         // See All Weapons
         private void button7_Click(object sender, EventArgs e)
         {
-
+            List<Weapon> weapons = weaponDatabase.GetAllWeapons();
+            AllWeapons allWeapons = new AllWeapons(weapons);
+            allWeapons.Show();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
