@@ -234,6 +234,25 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
+        private void ProcessDamageRoll()
+        {
+            List<TextBox> tBoxes = new List<TextBox>()
+            {
+                rollDmgTBox1, rollDmgTBox2, rollDmgTBox3, rollDmgTBox4, rollDmgTBox5, 
+                rollDmgTBox6, rollDmgTBox7, rollDmgTBox8, rollDmgTBox9
+            };
+            int roll = 0;
+
+            foreach(TextBox tBox in tBoxes)
+            {
+                roll += Convert.ToInt32(tBox.Text);
+            }
+
+            // subtract damage here
+
+            PrintCombatLog($"{roll} damage dealt!");
+        }
+
         // Returns a list of random integers
         private List<int> RollDice(int diceAmount, int diceType)
         {
@@ -657,6 +676,102 @@ namespace Cyberpunk_RED_GM_Assistant
         private void executeAttackBtn_Click(object sender, EventArgs e)
         {
             ProcessAttackAction();
+        }
+
+        private void executeDmgRollBtn_Click(object sender, EventArgs e)
+        {
+            ProcessDamageRoll();
+        }
+
+        private void rollDmgTBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rollDmgTBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgTBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void rollDmgBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

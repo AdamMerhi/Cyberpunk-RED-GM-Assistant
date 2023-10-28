@@ -164,6 +164,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangedWeapon.cs" />
+    <Compile Include="System\KeyEventHandler.cs" />
     <Compile Include="ViewAllCharacters.cs">
       <SubType>Form</SubType>
     </Compile>
