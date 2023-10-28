@@ -84,7 +84,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 currentHp = int.Parse(textBox9.Text),
                 maxHp = int.Parse(textBox10.Text),
                 weapons = textBox11.Text,
-                helmetArmor = int.Parse(textBox13.Text),
+                helmet = int.Parse(textBox13.Text),
                 bodyArmor = int.Parse(textBox14.Text),
             };
 

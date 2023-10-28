@@ -88,7 +88,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 textBox9.Text = character.currentHp.ToString();
                 textBox10.Text = character.maxHp.ToString();
                 textBox11.Text = character.weapons;
-                textBox13.Text = character.helmetArmor.ToString();
+                textBox13.Text = character.helmet.ToString();
                 textBox14.Text = character.bodyArmor.ToString();
 
                 // textBox12 was weapon2
@@ -130,7 +130,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 int.TryParse(textBox28.Text, out int shoulderArms) &&
                 int.TryParse(textBox9.Text, out int currentHp) &&
                 int.TryParse(textBox10.Text, out int maxHp) &&
-                int.TryParse(textBox13.Text, out int helmetArmor) &&
+                int.TryParse(textBox13.Text, out int helmet) &&
                 int.TryParse(textBox14.Text, out int bodyArmor))
             {
                 // Create a Character object with the updated data
@@ -162,7 +162,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     currentHp = currentHp,
                     maxHp = maxHp,
                     weapons = textBox11.Text,
-                    helmetArmor = helmetArmor,
+                    helmet = helmet,
                     bodyArmor = bodyArmor
                 };
 
@@ -197,6 +197,11 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
         {
 
         }
