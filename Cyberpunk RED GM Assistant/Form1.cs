@@ -24,15 +24,18 @@ namespace Cyberpunk_RED_GM_Assistant
 
         public Form1()
         {
+            InitializeComponent();
+
             charsInQueue = new List<int>(); // placeholder for list of character IDs
             charsInQueue.Add(1);
             charsInQueue.Add(2);
             charsInQueue.Add(3);
 
-            actionPanels = new List<Panel>();
-            actionPanels.Add(attackPnl);
-
-            InitializeComponent();
+            actionPanels = new List<Panel>
+            {
+                attackPnl,
+                attackRollPnl
+            };
 
             // testing starts
             for(int i = 0; i < 20; i++)
@@ -51,8 +54,23 @@ namespace Cyberpunk_RED_GM_Assistant
                 AddWeapon();
             }
 
-            ShowAttackPanel(); // only called on Attack action
+            InitialiseAttackPanel(); // only called on Attack action
             // testing ends
+        }
+
+        private void ShowPanel(Panel p)
+        {
+            foreach(Panel panel in actionPanels) 
+            {
+                if(panel != p)
+                {
+                    panel.Hide();
+                }
+                else
+                {
+                    panel.Show();
+                }
+            }
         }
 
         // needs character id in parameters to generate panel with correct text
@@ -167,7 +185,7 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // needs character id as input to get all weapons that the character has
-        private void ShowAttackPanel()
+        private void InitialiseAttackPanel()
         {
             // Hide all action panels and show attack action panel
 
@@ -205,13 +223,14 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 // attack hits
                 // show roll damage panel
-                Console.WriteLine("Attack hits");
+                PrintCombatLog("Attack hit!");
+                ShowPanel(attackRollPnl);
             }
             else
             {
                 // attack misses
                 // show attack result panel
-                Console.WriteLine("Attack misses");
+                PrintCombatLog("Attack missed!");
             }
         }
 
@@ -628,6 +647,16 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ViewAllCharacters viewAllForm = new ViewAllCharacters();
             viewAllForm.Show();
+        }
+
+        private void attackRollPnl_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void executeAttackBtn_Click(object sender, EventArgs e)
+        {
+            ProcessAttackAction();
         }
     }
 }
