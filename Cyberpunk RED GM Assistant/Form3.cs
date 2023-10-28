@@ -87,10 +87,10 @@ namespace Cyberpunk_RED_GM_Assistant
                 textBox28.Text = character.ShoulderArms.ToString();
                 textBox9.Text = character.CurrentHp.ToString();
                 textBox10.Text = character.MaxHp.ToString();
-                textBox11.Text = character.Weapon1;
-                textBox12.Text = character.Weapon2;
-                textBox13.Text = character.Armor1;
-                textBox14.Text = character.Armor2;
+                textBox11.Text = character.Weapons;
+                //textBox12.Text = character.Weapon2;
+                textBox13.Text = character.BodyArmor.ToString();
+                textBox14.Text = character.BodyArmor.ToString();
             }
             else
             {
@@ -158,10 +158,10 @@ namespace Cyberpunk_RED_GM_Assistant
                     ShoulderArms = shoulderArms,
                     CurrentHp = currentHp,
                     MaxHp = maxHp,
-                    Weapon1 = textBox11.Text,
-                    Weapon2 = textBox12.Text,
-                    Armor1 = textBox13.Text,
-                    Armor2 = textBox14.Text
+                    Weapons = textBox11.Text,
+                    //Weapon2 = textBox12.Text,
+                    Helmet = int.Parse(textBox13.Text),
+                    BodyArmor = int.Parse(textBox14.Text)
                 };
 
                 // Update the character in the database using the CharacterDatabase class
@@ -195,6 +195,11 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox28_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -83,10 +83,10 @@ namespace Cyberpunk_RED_GM_Assistant
                 ShoulderArms = int.Parse(textBox28.Text),
                 CurrentHp = int.Parse(textBox9.Text),
                 MaxHp = int.Parse(textBox10.Text),
-                Weapon1 = textBox11.Text,
-                Weapon2 = textBox12.Text,
-                Armor1 = textBox13.Text,
-                Armor2 = textBox14.Text,
+                Weapons = textBox11.Text,
+                //Weapon2 = textBox12.Text,
+                Helmet = int.Parse(textBox13.Text),
+                BodyArmor = int.Parse(textBox14.Text),
             };
 
             // Insert the character into the database using the CharacterDatabase class
