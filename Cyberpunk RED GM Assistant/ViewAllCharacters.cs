@@ -115,6 +115,11 @@ namespace Cyberpunk_RED_GM_Assistant
             flowLayoutPanel1.Controls.Add(characterPanel);
         }
 
+        private void ViewAllCharacters_Load(object sender, EventArgs e)
+        {
+
+        }
+
         /*// needs character id in parameters to generate panel with correct text
         private void AddToQueue()
         {

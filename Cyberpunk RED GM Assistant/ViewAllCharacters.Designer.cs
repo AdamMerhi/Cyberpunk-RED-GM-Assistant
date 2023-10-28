@@ -205,6 +205,7 @@
             this.Controls.Add(this.button1);
             this.Name = "ViewAllCharacters";
             this.Text = "ViewAllCharacters";
+            this.Load += new System.EventHandler(this.ViewAllCharacters_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

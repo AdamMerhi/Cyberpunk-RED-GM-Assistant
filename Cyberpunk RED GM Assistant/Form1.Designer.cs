@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.queueLabel = new System.Windows.Forms.Label();
             this.currentTurnPnl = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
@@ -70,10 +71,16 @@
             this.label5 = new System.Windows.Forms.Label();
             this.queueFPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.combatLogFPnl = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.focusCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startTurnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeFromQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewAllCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentTurnPnl.SuspendLayout();
             this.actionPnl.SuspendLayout();
             this.attackPnl.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -547,22 +554,55 @@
             this.combatLogFPnl.TabIndex = 8;
             this.combatLogFPnl.WrapContents = false;
             // 
-            // button1
+            // contextMenuStrip1
             // 
-            this.button1.Location = new System.Drawing.Point(559, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "View All";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.focusCharacterToolStripMenuItem,
+            this.startTurnToolStripMenuItem,
+            this.removeFromQueueToolStripMenuItem,
+            this.viewDetailsToolStripMenuItem,
+            this.viewAllCharactersToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 156);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // focusCharacterToolStripMenuItem
+            // 
+            this.focusCharacterToolStripMenuItem.Name = "focusCharacterToolStripMenuItem";
+            this.focusCharacterToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.focusCharacterToolStripMenuItem.Text = "Focus Character";
+            // 
+            // startTurnToolStripMenuItem
+            // 
+            this.startTurnToolStripMenuItem.Name = "startTurnToolStripMenuItem";
+            this.startTurnToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.startTurnToolStripMenuItem.Text = "Start Turn";
+            // 
+            // removeFromQueueToolStripMenuItem
+            // 
+            this.removeFromQueueToolStripMenuItem.Name = "removeFromQueueToolStripMenuItem";
+            this.removeFromQueueToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.removeFromQueueToolStripMenuItem.Text = "Remove From Queue";
+            // 
+            // viewDetailsToolStripMenuItem
+            // 
+            this.viewDetailsToolStripMenuItem.Name = "viewDetailsToolStripMenuItem";
+            this.viewDetailsToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.viewDetailsToolStripMenuItem.Text = "View Details";
+            // 
+            // viewAllCharactersToolStripMenuItem
+            // 
+            this.viewAllCharactersToolStripMenuItem.Name = "viewAllCharactersToolStripMenuItem";
+            this.viewAllCharactersToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.viewAllCharactersToolStripMenuItem.Text = "View All Characters";
+            this.viewAllCharactersToolStripMenuItem.Click += new System.EventHandler(this.viewAllCharactersToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.combatLogFPnl);
             this.Controls.Add(this.queueFPnl);
             this.Controls.Add(this.label5);
@@ -581,6 +621,7 @@
             this.actionPnl.ResumeLayout(false);
             this.attackPnl.ResumeLayout(false);
             this.attackPnl.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -629,7 +670,12 @@
         private System.Windows.Forms.ComboBox targetCBox;
         private System.Windows.Forms.TextBox attackRollTBox;
         private System.Windows.Forms.Button attackRollBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem focusCharacterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startTurnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeFromQueueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewAllCharactersToolStripMenuItem;
     }
 }
 

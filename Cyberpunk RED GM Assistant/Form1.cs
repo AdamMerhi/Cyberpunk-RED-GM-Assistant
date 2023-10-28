@@ -41,7 +41,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 AddConditions();
             }
 
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 2; i++)
             {
                 PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
             }
@@ -61,6 +61,7 @@ namespace Cyberpunk_RED_GM_Assistant
             FlowLayoutPanel characterPanel = new FlowLayoutPanel();
             characterPanel.Size = new Size(255, 60);
             characterPanel.FlowDirection = FlowDirection.TopDown;
+            characterPanel.ContextMenuStrip = contextMenuStrip1;
 
             Label nameLabel = new Label();
             nameLabel.AutoSize = true;
@@ -614,6 +615,16 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void viewAllCharactersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ViewAllCharacters viewAllForm = new ViewAllCharacters();
             viewAllForm.Show();
