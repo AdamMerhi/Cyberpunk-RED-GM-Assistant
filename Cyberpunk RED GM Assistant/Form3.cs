@@ -12,7 +12,7 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form3 : Form
     {
-        public const string dbFilePath = "characterDb.mdf";
+        //public const string dbFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
         public Form3(int characterID)
         {

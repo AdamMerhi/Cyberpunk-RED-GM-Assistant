@@ -580,10 +580,12 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(363, 145);
+            this.textBox1.Location = new System.Drawing.Point(330, 155);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(127, 20);
+            this.textBox1.Size = new System.Drawing.Size(200, 20);
             this.textBox1.TabIndex = 8;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox1.UseWaitCursor = true;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // ViewAllCharacters
