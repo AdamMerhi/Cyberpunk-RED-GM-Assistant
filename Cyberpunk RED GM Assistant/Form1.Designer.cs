@@ -84,6 +84,8 @@
             this.attackBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.queueFPnl = new System.Windows.Forms.FlowLayoutPanel();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewAllCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.combatLogFPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.focusCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,14 +93,12 @@
             this.removeFromQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewAllCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.viewAllCharactersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.currentTurnPnl.SuspendLayout();
             this.actionPnl.SuspendLayout();
             this.attackRollPnl.SuspendLayout();
             this.attackPnl.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -369,6 +369,7 @@
             this.attackRollPnl.Name = "attackRollPnl";
             this.attackRollPnl.Size = new System.Drawing.Size(402, 349);
             this.attackRollPnl.TabIndex = 4;
+            this.attackRollPnl.Visible = false;
             this.attackRollPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.attackRollPnl_Paint);
             // 
             // rollDmgTBox9
@@ -517,6 +518,7 @@
             this.attackPnl.Name = "attackPnl";
             this.attackPnl.Size = new System.Drawing.Size(402, 349);
             this.attackPnl.TabIndex = 3;
+            this.attackPnl.Visible = false;
             // 
             // attackRollBtn
             // 
@@ -688,6 +690,7 @@
             this.attackBtn.TabIndex = 0;
             this.attackBtn.Text = "Attack";
             this.attackBtn.UseVisualStyleBackColor = true;
+            this.attackBtn.Click += new System.EventHandler(this.attackBtn_Click);
             // 
             // label5
             // 
@@ -711,6 +714,21 @@
             this.queueFPnl.TabIndex = 7;
             this.queueFPnl.WrapContents = false;
             this.queueFPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.queueFlowPanel_Paint);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewAllCharactersToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(212, 30);
+            // 
+            // viewAllCharactersToolStripMenuItem1
+            // 
+            this.viewAllCharactersToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.viewAllCharactersToolStripMenuItem1.Name = "viewAllCharactersToolStripMenuItem1";
+            this.viewAllCharactersToolStripMenuItem1.Size = new System.Drawing.Size(211, 26);
+            this.viewAllCharactersToolStripMenuItem1.Text = "View All Characters";
+            this.viewAllCharactersToolStripMenuItem1.Click += new System.EventHandler(this.viewAllCharactersToolStripMenuItem1_Click);
             // 
             // combatLogFPnl
             // 
@@ -767,21 +785,6 @@
             this.viewAllCharactersToolStripMenuItem.Text = "View All Characters";
             this.viewAllCharactersToolStripMenuItem.Click += new System.EventHandler(this.viewAllCharactersToolStripMenuItem_Click);
             // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.viewAllCharactersToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(212, 52);
-            // 
-            // viewAllCharactersToolStripMenuItem1
-            // 
-            this.viewAllCharactersToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.viewAllCharactersToolStripMenuItem1.Name = "viewAllCharactersToolStripMenuItem1";
-            this.viewAllCharactersToolStripMenuItem1.Size = new System.Drawing.Size(211, 26);
-            this.viewAllCharactersToolStripMenuItem1.Text = "View All Characters";
-            this.viewAllCharactersToolStripMenuItem1.Click += new System.EventHandler(this.viewAllCharactersToolStripMenuItem1_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -807,8 +810,8 @@
             this.attackRollPnl.PerformLayout();
             this.attackPnl.ResumeLayout(false);
             this.attackPnl.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

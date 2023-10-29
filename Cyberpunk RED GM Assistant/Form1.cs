@@ -15,10 +15,10 @@ namespace Cyberpunk_RED_GM_Assistant
     {
         public const string dbFilePath = "characterDb.mdf";
         private CharacterDatabase characterDatabase;
-
+        public List<Character> characters;
         public List<int> charsInQueue; // List of character IDs of characters in Initiative Queue
         public Character activeCharacter;
-        // public Character focusedCharacter
+        public Character focusedCharacter;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -31,6 +31,9 @@ namespace Cyberpunk_RED_GM_Assistant
 
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
             characterDatabase = new CharacterDatabase(connectionString);
+
+            // Load all characters and store into a list
+            characters = characterDatabase.GetAllCharacters();
 
             activeCharacter = characterDatabase.GetCharacterByID(12);
 
@@ -46,9 +49,11 @@ namespace Cyberpunk_RED_GM_Assistant
             };
 
             // testing starts
-            
+            foreach(Character c in characters)
+            {
+                AddToQueue(c.ID);
+            }
 
-            AddToQueue(activeCharacter.ID);
             AddConditions();
 
             for(int i = 0; i < 1; i++)
@@ -63,6 +68,11 @@ namespace Cyberpunk_RED_GM_Assistant
 
             InitialiseAttackPanel(); // only called on Attack action
             // testing ends
+        }
+
+        private void LoadCharacters()
+        {
+
         }
 
         private void ShowPanel(Panel p)
@@ -790,6 +800,12 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ViewAllCharacters viewAllForm = new ViewAllCharacters();
             viewAllForm.Show();
+        }
+
+        private void attackBtn_Click(object sender, EventArgs e)
+        {
+            ShowPanel(attackPnl);
+            InitialiseAttackPanel();
         }
     }
 }

@@ -17,6 +17,62 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ConnectionString = connectionString;
         }
+
+        public List<Character> GetAllCharacters()
+        {
+            List<Character> characters = new List<Character>();
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Character";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Character character = new Character
+                            {
+                                ID = reader.GetInt32(reader.GetOrdinal("ID")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                Intelligence = reader.GetInt32(reader.GetOrdinal("Intelligence")),
+                                Reflexes = reader.GetInt32(reader.GetOrdinal("Reflexes")),
+                                Dexterity = reader.GetInt32(reader.GetOrdinal("Dexterity")),
+                                Technique = reader.GetInt32(reader.GetOrdinal("Technique")),
+                                Cool = reader.GetInt32(reader.GetOrdinal("Cool")),
+                                Will = reader.GetInt32(reader.GetOrdinal("Will")),
+                                Luck = reader.GetInt32(reader.GetOrdinal("Luck")),
+                                Move = reader.GetInt32(reader.GetOrdinal("Move")),
+                                Body = reader.GetInt32(reader.GetOrdinal("Body")),
+                                Empathy = reader.GetInt32(reader.GetOrdinal("Empathy")),
+                                Concentration = reader.GetInt32(reader.GetOrdinal("Concentration")),
+                                Perception = reader.GetInt32(reader.GetOrdinal("Perception")),
+                                Athletics = reader.GetInt32(reader.GetOrdinal("Athletics")),
+                                Brawling = reader.GetInt32(reader.GetOrdinal("Brawling")),
+                                Evasion = reader.GetInt32(reader.GetOrdinal("Evasion")),
+                                MeleeWeapon = reader.GetInt32(reader.GetOrdinal("MeleeWeapon")),
+                                Archery = reader.GetInt32(reader.GetOrdinal("Archery")),
+                                Autofire = reader.GetInt32(reader.GetOrdinal("Autofire")),
+                                Handgun = reader.GetInt32(reader.GetOrdinal("Handgun")),
+                                HeavyWeapons = reader.GetInt32(reader.GetOrdinal("HeavyWeapons")),
+                                ShoulderArms = reader.GetInt32(reader.GetOrdinal("ShoulderArms")),
+                                CurrentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
+                                MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
+                                Weapons = reader.GetString(reader.GetOrdinal("Weapons")),
+                                Helmet = reader.GetInt32(reader.GetOrdinal("Helmet")),
+                                BodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor"))
+                            };
+
+                            characters.Add(character);
+                        }
+                    }
+                }
+                connection.Close();
+            }
+            return characters;
+        }
+
         public Character GetCharacterByID(int characterID)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
