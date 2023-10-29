@@ -639,6 +639,13 @@ namespace Cyberpunk_RED_GM_Assistant
             }
 
             RangedWeapon r = (RangedWeapon)activeCharacter.selectedWeapon;
+
+            if(r.magazineAmmoCount >= r.magazineSize)
+            {
+                MessageBox.Show("Cannot reload!\nSelected weapon already has full ammo.");
+                return;
+            }
+
             r.ReloadWeapon();
 
             activeCharacter.turnUsed = true;
