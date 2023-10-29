@@ -58,9 +58,19 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Use this function to check if a weapon is ranged or melee
         // True = Ranged, False = Melee
-        override public bool isRangedWeapon()
+        public override bool isRangedWeapon()
         {
             return false;
+        }
+
+        public override string GetWeaponType()
+        {
+            return $"{type}";
+        }
+
+        public override string GetWeaponDamage()
+        {
+            return $"{damageDiceAmount}d{damageDiceType}";
         }
 
         public override string ToString()

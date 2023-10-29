@@ -28,5 +28,9 @@ namespace Cyberpunk_RED_GM_Assistant
         public abstract bool isRangedWeapon();
 
         public abstract string ToString();
+
+        public abstract string GetWeaponType();
+
+        public abstract string GetWeaponDamage();
     }
 }
