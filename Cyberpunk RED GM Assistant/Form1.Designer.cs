@@ -233,7 +233,6 @@
             this.label12.TabIndex = 19;
             this.label12.Text = "SP";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label12.Click += new System.EventHandler(this.label12_Click_1);
             // 
             // maxHpLbl
             // 
@@ -275,7 +274,6 @@
             this.currentHpLbl.TabIndex = 15;
             this.currentHpLbl.Text = "60";
             this.currentHpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.currentHpLbl.Click += new System.EventHandler(this.label18_Click);
             // 
             // label10
             // 
@@ -286,7 +284,6 @@
             this.label10.TabIndex = 5;
             this.label10.Text = "/";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label7
             // 
@@ -298,7 +295,6 @@
             this.label7.TabIndex = 1;
             this.label7.Text = "HP";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // currentNameLbl
             // 
@@ -319,7 +315,6 @@
             this.label3.Size = new System.Drawing.Size(381, 31);
             this.label3.TabIndex = 4;
             this.label3.Text = "Select an Action for Joe Mama";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // label2
             // 
@@ -330,7 +325,6 @@
             this.label2.Size = new System.Drawing.Size(233, 31);
             this.label2.TabIndex = 2;
             this.label2.Text = "CURRENT TURN";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label4
             // 
@@ -341,14 +335,13 @@
             this.label4.Size = new System.Drawing.Size(326, 31);
             this.label4.TabIndex = 5;
             this.label4.Text = "FOCUSED CHARACTER";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // actionPnl
             // 
             this.actionPnl.AutoScroll = true;
             this.actionPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.actionPnl.Controls.Add(this.attackRollPnl);
             this.actionPnl.Controls.Add(this.attackPnl);
+            this.actionPnl.Controls.Add(this.attackRollPnl);
             this.actionPnl.Controls.Add(this.endTurnBtn);
             this.actionPnl.Controls.Add(this.reloadBtn);
             this.actionPnl.Controls.Add(this.attackBtn);
@@ -378,7 +371,6 @@
             this.attackRollPnl.Size = new System.Drawing.Size(402, 349);
             this.attackRollPnl.TabIndex = 4;
             this.attackRollPnl.Visible = false;
-            this.attackRollPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.attackRollPnl_Paint);
             // 
             // rollDmgTBox9
             // 
@@ -388,6 +380,7 @@
             this.rollDmgTBox9.Name = "rollDmgTBox9";
             this.rollDmgTBox9.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox9.TabIndex = 46;
+            this.rollDmgTBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox8
             // 
@@ -397,6 +390,7 @@
             this.rollDmgTBox8.Name = "rollDmgTBox8";
             this.rollDmgTBox8.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox8.TabIndex = 45;
+            this.rollDmgTBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox7
             // 
@@ -406,6 +400,7 @@
             this.rollDmgTBox7.Name = "rollDmgTBox7";
             this.rollDmgTBox7.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox7.TabIndex = 44;
+            this.rollDmgTBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox6
             // 
@@ -415,6 +410,7 @@
             this.rollDmgTBox6.Name = "rollDmgTBox6";
             this.rollDmgTBox6.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox6.TabIndex = 43;
+            this.rollDmgTBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox5
             // 
@@ -424,6 +420,7 @@
             this.rollDmgTBox5.Name = "rollDmgTBox5";
             this.rollDmgTBox5.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox5.TabIndex = 42;
+            this.rollDmgTBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox4
             // 
@@ -433,6 +430,7 @@
             this.rollDmgTBox4.Name = "rollDmgTBox4";
             this.rollDmgTBox4.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox4.TabIndex = 41;
+            this.rollDmgTBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox3
             // 
@@ -442,6 +440,7 @@
             this.rollDmgTBox3.Name = "rollDmgTBox3";
             this.rollDmgTBox3.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox3.TabIndex = 40;
+            this.rollDmgTBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgTBox2
             // 
@@ -451,6 +450,7 @@
             this.rollDmgTBox2.Name = "rollDmgTBox2";
             this.rollDmgTBox2.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox2.TabIndex = 39;
+            this.rollDmgTBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // rollDmgBtn
             // 
@@ -471,7 +471,7 @@
             this.rollDmgTBox1.Name = "rollDmgTBox1";
             this.rollDmgTBox1.Size = new System.Drawing.Size(73, 27);
             this.rollDmgTBox1.TabIndex = 37;
-            this.rollDmgTBox1.TextChanged += new System.EventHandler(this.rollDmgTBox1_TextChanged);
+            this.rollDmgTBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // executeDmgRollBtn
             // 
@@ -546,6 +546,7 @@
             this.attackRollTBox.Name = "attackRollTBox";
             this.attackRollTBox.Size = new System.Drawing.Size(73, 27);
             this.attackRollTBox.TabIndex = 37;
+            this.attackRollTBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // label23
             // 
@@ -565,6 +566,7 @@
             this.distanceTBox.Name = "distanceTBox";
             this.distanceTBox.Size = new System.Drawing.Size(73, 27);
             this.distanceTBox.TabIndex = 35;
+            this.distanceTBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
             // 
             // aimCBox
             // 
@@ -600,7 +602,6 @@
             this.weaponCBox.Name = "weaponCBox";
             this.weaponCBox.Size = new System.Drawing.Size(150, 28);
             this.weaponCBox.TabIndex = 32;
-            this.weaponCBox.SelectedIndexChanged += new System.EventHandler(this.weaponCBox_SelectedIndexChanged);
             // 
             // executeAttackBtn
             // 
@@ -656,7 +657,6 @@
             this.label19.TabIndex = 28;
             this.label19.Text = "Target";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label19.Click += new System.EventHandler(this.label19_Click);
             // 
             // label17
             // 
@@ -709,7 +709,6 @@
             this.label5.Size = new System.Drawing.Size(194, 31);
             this.label5.TabIndex = 6;
             this.label5.Text = "COMBAT LOG";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // queueFPnl
             // 
@@ -759,7 +758,7 @@
             this.viewDetailsToolStripMenuItem,
             this.viewAllCharactersToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 156);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 134);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // focusCharacterToolStripMenuItem

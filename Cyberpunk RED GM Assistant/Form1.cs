@@ -219,7 +219,7 @@ namespace Cyberpunk_RED_GM_Assistant
             focusCurrentBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
             focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
 
-            AddWeapons(activeCharacter, focusWeaponsFPnl);
+            AddWeapons(focusedCharacter, focusWeaponsFPnl);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -330,7 +330,7 @@ namespace Cyberpunk_RED_GM_Assistant
             combatLogFPnl.Controls.Add(logPanel);
         }
 
-        // needs character id as input to get all weapons that the character has
+        // Sets up the attack panel
         private void InitialiseAttackPanel()
         {
             // Weapon select
@@ -350,6 +350,17 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void ProcessAttackAction()
         {
+            Weapon useWeapon;
+
+            foreach(Weapon w in activeCharacter.weaponList)
+            {
+                if(w.name == weaponCBox.Text)
+                {
+                    useWeapon = w;
+                    break;
+                }
+            }
+
             int roll = Convert.ToInt32(attackRollTBox.Text);
             int dv = RangedDV("Shotgun", Convert.ToInt32(distanceTBox.Text));
             
@@ -695,67 +706,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label18_Click(object sender, EventArgs e)
         {
 
         }
@@ -775,21 +726,6 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void conditionsFlowPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label12_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void weaponCBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -816,11 +752,6 @@ namespace Cyberpunk_RED_GM_Assistant
             viewAllForm.Show();
         }
 
-        private void attackRollPnl_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void executeAttackBtn_Click(object sender, EventArgs e)
         {
             ProcessAttackAction();
@@ -829,92 +760,6 @@ namespace Cyberpunk_RED_GM_Assistant
         private void executeDmgRollBtn_Click(object sender, EventArgs e)
         {
             ProcessDamageRoll();
-        }
-
-        private void rollDmgTBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rollDmgTBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox3_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox4_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox6_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox7_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox8_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox9_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
         }
 
         private void rollDmgBtn_Click(object sender, EventArgs e)
@@ -933,11 +778,6 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ShowPanel(attackPnl);
             InitialiseAttackPanel();
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -983,5 +823,16 @@ namespace Cyberpunk_RED_GM_Assistant
             focusedCharacter = selectedCharacter;
             UpdateFocusChar();
         }
+
+        private void IntOnlyKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+
     }
 }
