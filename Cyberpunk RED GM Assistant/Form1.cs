@@ -126,8 +126,36 @@ namespace Cyberpunk_RED_GM_Assistant
                 statsLabel.Text = statsText;
                 characterPanel.Controls.Add(statsLabel);
 
+                characterPanel.Click += new EventHandler(QueuePanelClickHandler);
+
                 queueFPnl.Controls.Add(characterPanel);
             }
+        }
+
+        private void QueuePanelClickHandler(object sender, EventArgs e)
+        { 
+            Panel panel = (Panel)sender;
+            Character character;
+            if (panel.Controls[1] != null)
+            {
+                string str = panel.Controls[0].Text;
+                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
+                character = GetCharacterByName(split[1]);
+                MessageBox.Show($"{character.Name}");
+            }
+            
+        }
+
+        private Character GetCharacterByName(string name)
+        {
+            foreach (Character character in characters)
+            {
+                if (character.Name == name)
+                {
+                    return character;
+                }
+            }
+            return null;
         }
 
         // Updates the current turn panel with the active character's attributes
