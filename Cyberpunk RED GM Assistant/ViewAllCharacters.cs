@@ -25,7 +25,8 @@ namespace Cyberpunk_RED_GM_Assistant
         private CharacterDatabase characterDatabase;
         private WeaponDatabase weaponDatabase;
 
-        private bool isPrinted = false;
+        //private bool isPrinted = false;
+        private List<Character> characterList;
 
         public ViewAllCharacters()
         {
@@ -35,6 +36,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
+
+            displayAllCharacters();
+
+            RetrieveCharacterDataToLocal();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -92,30 +97,95 @@ namespace Cyberpunk_RED_GM_Assistant
         // All character views
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            if (!isPrinted)
+            
+        }
+
+        private void RetrieveCharacterDataToLocal()
+        {
+            characterList = characterDatabase.GetAllCharacters();
+        }
+
+        // Only useful inside this class.
+        // Gets a weapon object stored in the List<Weapons> stored in this class. 
+        private Character GetCharacterByName(string name)
+        {
+            foreach (Character character in characterList)
             {
+                if (character.Name == name)
+                {
+                    return character;
+                }
+            }
+            return null;
+        }
+
+        // Setting up all character display in the flow layout. 
+        // Can be reused when character database gets updated. 
+        private void displayAllCharacters()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            //List<Character> allCharacters = characterDatabase.GetAllCharacters();
+            /*if (!isPrinted)
+            {*/
+            //foreach (Character character in allCharacters)
+            foreach (Character character in characterList) 
+            {
+                //Character c = characterDatabase.GetCharacterByID(12);
+
                 FlowLayoutPanel characterPanel = new FlowLayoutPanel();
                 characterPanel.Size = new Size(255, 60);
                 characterPanel.FlowDirection = FlowDirection.TopDown;
+                //characterPanel.ContextMenuStrip = contextMenuStrip1;
 
                 Label nameLabel = new Label();
                 nameLabel.AutoSize = true;
                 nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
-                nameLabel.Text = $"1. Joe Mama"; // find character from charsInQueue
+                //nameLabel.Text = $"1. {character.Name}"; // find character from charsInQueue
+                nameLabel.Text = $"{character.Name}"; // find character from charsInQueue
+
+                nameLabel.Click += new EventHandler(NameLabelClickHandler);
+
                 characterPanel.Controls.Add(nameLabel);
 
-                Label statsLabel = new Label();
+                /*Label statsLabel = new Label();
                 statsLabel.AutoSize = true;
                 statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
-                string statsText = $"HP 60 | SP 7 | SP 7"; // get character stats and chuck them in here
+                string statsText = $"HP {character.CurrentHp} | SP {character.Helmet} | SP {character.BodyArmor}"; // get character stats and chuck them in here
                 statsLabel.Text = statsText;
-                characterPanel.Controls.Add(statsLabel);
+                characterPanel.Controls.Add(statsLabel);*/
 
                 flowLayoutPanel1.Controls.Add(characterPanel);
-
-                isPrinted = true;   
             }
-            
+            //isPrinted = true;
+            //}
+        }
+
+        private void NameLabelClickHandler(object sender, EventArgs e)
+        {
+            Label nameLabel = (Label)sender;
+            Character character;
+            if (nameLabel != null)
+            {
+                character = GetCharacterByName(nameLabel.Text);
+            }
+
+            /*Label nameLabel = new Label();
+            nameLabel.AutoSize = true;
+            nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
+            //nameLabel.Text = $"1. {character.Name}"; // find character from charsInQueue
+            nameLabel.Text = $"{character.Name}"; // find character from charsInQueue*/
+        }
+
+        private void SetUpAttributeDisplay(Character character)
+        {
+            /*SkillsFlowLayout;
+            ConditionsFlowLayout;*/
+        }
+
+        private void ClearAttributeDisplay()
+        {
+            SkillsFlowLayout.Controls.Clear();
+            ConditionsFlowLayout.Controls.Clear();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -207,7 +277,9 @@ namespace Cyberpunk_RED_GM_Assistant
         // See All Weapons
         private void button7_Click(object sender, EventArgs e)
         {
-
+            List<Weapon> weapons = weaponDatabase.GetAllWeapons();
+            AllWeapons allWeapons = new AllWeapons(weapons);
+            allWeapons.Show();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -232,7 +304,19 @@ namespace Cyberpunk_RED_GM_Assistant
             };
         }
 
-        
+        private void SkillsFlowLayout_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ConditionsFlowLayout_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+
+
 
         /*// needs character id in parameters to generate panel with correct text
         private void AddToQueue()

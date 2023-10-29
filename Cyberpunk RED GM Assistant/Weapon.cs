@@ -26,5 +26,11 @@ namespace Cyberpunk_RED_GM_Assistant
         // Implementation is located inside the RangedWeapon and MeleeWeapon subclass. 
         // True = Ranged, False = Melee
         public abstract bool isRangedWeapon();
+
+        public abstract string ToString();
+
+        public abstract string GetWeaponType();
+
+        public abstract string GetWeaponDamage();
     }
 }
