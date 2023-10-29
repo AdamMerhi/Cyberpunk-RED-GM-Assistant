@@ -340,8 +340,8 @@
             // 
             this.actionPnl.AutoScroll = true;
             this.actionPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.actionPnl.Controls.Add(this.attackRollPnl);
             this.actionPnl.Controls.Add(this.attackPnl);
+            this.actionPnl.Controls.Add(this.attackRollPnl);
             this.actionPnl.Controls.Add(this.endTurnBtn);
             this.actionPnl.Controls.Add(this.reloadBtn);
             this.actionPnl.Controls.Add(this.attackBtn);
@@ -419,9 +419,7 @@
             this.aimCBox.FormattingEnabled = true;
             this.aimCBox.Items.AddRange(new object[] {
             "Hipfire",
-            "Head",
-            "Held Item",
-            "Leg"});
+            "Head"});
             this.aimCBox.Location = new System.Drawing.Point(96, 75);
             this.aimCBox.Name = "aimCBox";
             this.aimCBox.Size = new System.Drawing.Size(150, 28);

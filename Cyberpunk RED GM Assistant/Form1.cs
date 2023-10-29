@@ -24,6 +24,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public Character selectedCharacter;
         public Character targetedCharacter;
         private List<TextBox> rollDmgTBoxes;
+        private bool hipfire = true;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -367,10 +368,12 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             // Weapon select
             // for each weapon in character's weapons
+            weaponCBox.Items.Clear();
             weaponCBox.Items.Add(weaponDatabase.GetWeaponByID(activeCharacter.Weapons).name);
 
             // Add all characters in the initiative queue to selectable targets
             // excluding the active character
+            targetCBox.Items.Clear();
             foreach(Character c in charsInQueue)
             {
                 if(activeCharacter != c)
@@ -378,6 +381,10 @@ namespace Cyberpunk_RED_GM_Assistant
                     targetCBox.Items.Add(c.Name);
                 }
             }
+
+            aimCBox.SelectedItem = null;
+            distanceTBox.Text = null;
+            attackRollTBox.Text = null;
         }
 
         private void ProcessAttackAction()
@@ -403,6 +410,8 @@ namespace Cyberpunk_RED_GM_Assistant
                 }
             }
 
+            int roll = Convert.ToInt32(attackRollTBox.Text);
+
             // Determine the difficulty value
             int dv = 99;
             RangedWeapon r = new RangedWeapon();
@@ -416,21 +425,47 @@ namespace Cyberpunk_RED_GM_Assistant
                     return;
                 }
                 r.ShotsFired(); // Subtracts ammo from magazine
+
+                // Add modifiers from character's skills and stats
+                switch((int)r.type)
+                {
+                    case 0: case 1:
+                        roll += activeCharacter.Handgun;
+                        break;
+                    case 2: case 3: case 4:
+                        roll += activeCharacter.ShoulderArms;
+                        break;
+                    case 5:
+                        roll += activeCharacter.Archery;
+                        break;
+                    case 6: case 7:
+                        roll += activeCharacter.HeavyWeapons;
+                        break;
+                    default:
+                        break;
+                }
+                roll += activeCharacter.Reflexes;
+
                 dv = RangedDV((int)r.type, Convert.ToInt32(distanceTBox.Text));
             }
             else
             {
                 m = (MeleeWeapon)activeCharacter.selectedWeapon;
+                // Add modifiers from character's skills and stats
+                roll = roll + activeCharacter.Dexterity + activeCharacter.MeleeWeapon;
                 dv = focusedCharacter.Evasion + focusedCharacter.Dexterity + RollDice(1, 10)[0];
             }
-
-            int roll = Convert.ToInt32(attackRollTBox.Text);
             
             // Aimed shots rulebook page 171
             // If not hipfiring then subtract 8 from roll
             if(aimCBox.SelectedItem != aimCBox.Items[0])
             {
+                hipfire = false;
                 roll -= 8;
+            }
+            else
+            {
+                hipfire = true;
             }
 
             // Check if attack hits
@@ -440,16 +475,16 @@ namespace Cyberpunk_RED_GM_Assistant
                 // Show roll damage panel
                 ShowPanel(attackRollPnl);
                 InitialiseDamageRollPanel();
+                UpdateCombatScreen();
             }
             else
             {
                 // Attack misses
                 activeCharacter.turnUsed = true;
                 PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but missed.");
+                UpdateCombatScreen();
                 HideActionPanels();
             }
-
-            UpdateCombatScreen();
         }
 
         private void InitialiseDamageRollPanel()
@@ -468,19 +503,64 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void ProcessDamageRoll()
         {
-            int roll = 0;
+            int damage = 0;
 
             foreach(TextBox tBox in rollDmgTBoxes)
             {
                 if (int.TryParse(tBox.Text, out int i))
                 {
-                    roll += i;
+                    damage += i;
                 }
             }
 
-            // subtract damage here
+            // Process dealing damage
+            if(hipfire)
+            {
+                if(damage <= targetedCharacter.BodyArmor)
+                {
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+                else
+                {
+                    damage -= targetedCharacter.BodyArmor; // Damage is absorbed by armor
+                    targetedCharacter.BodyArmor--; // Deplete body armor because attack penetrates it
+                    targetedCharacter.CurrentHp -= damage; // Deplete target health points
 
-            PrintCombatLog($"{roll} damage dealt!");
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+            }
+            else
+            {
+                if(damage <= targetedCharacter.Helmet)
+                {
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+                else
+                {
+                    damage -= targetedCharacter.Helmet; // Damage is absorbed by armor
+                    targetedCharacter.Helmet--; // Deplete helmet armor because attack penetrates it
+                    damage = damage * 2; // Damage not absorbed by armor is doubled due to headshot
+                    targetedCharacter.CurrentHp -= damage; // Deplete target health points
+
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+            }
         }
 
         // Returns a list of random integers
@@ -888,12 +968,14 @@ namespace Cyberpunk_RED_GM_Assistant
 
             activeCharacter = selectedCharacter;
             UpdateCurrentTurn();
+            HideActionPanels();
         }
 
         private void focusCharacterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(selectedCharacter == null || activeCharacter == selectedCharacter)
             {
+                MessageBox.Show("Cannot focus on a character whose turn is active!");
                 return;
             }
 
