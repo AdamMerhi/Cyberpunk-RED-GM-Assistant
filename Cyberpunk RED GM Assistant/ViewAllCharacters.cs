@@ -37,9 +37,9 @@ namespace Cyberpunk_RED_GM_Assistant
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
 
-            displayAllCharacters();
-
             RetrieveCharacterDataToLocal();
+            DisplayAllCharacters();
+                        
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Setting up all character display in the flow layout. 
         // Can be reused when character database gets updated. 
-        private void displayAllCharacters()
+        private void DisplayAllCharacters()
         {
             flowLayoutPanel1.Controls.Clear();
             //List<Character> allCharacters = characterDatabase.GetAllCharacters();
