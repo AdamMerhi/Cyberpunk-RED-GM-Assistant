@@ -21,6 +21,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public List<Character> charsInQueue; // List of characters in Initiative Queue
         public Character activeCharacter;
         public Character focusedCharacter;
+        public Character selectedCharacter;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -126,12 +127,39 @@ namespace Cyberpunk_RED_GM_Assistant
                 statsLabel.Text = statsText;
                 characterPanel.Controls.Add(statsLabel);
 
-                characterPanel.Click += new EventHandler(QueuePanelClickHandler);
+                // characterPanel.Click += new EventHandler(QueuePanelClickHandler);
+                nameLabel.MouseDown += new MouseEventHandler(QueueLabelClick);
+                characterPanel.MouseDown += new MouseEventHandler(QueuePanelClick);
 
                 queueFPnl.Controls.Add(characterPanel);
             }
         }
 
+        private void QueueLabelClick(object sender, MouseEventArgs e)
+        {
+            Label label = (Label)sender;
+            Character character;
+            if (label != null)
+            {
+                character = GetCharacterByName(label.Text);
+                selectedCharacter = character;
+            }
+        }
+
+        private void QueuePanelClick(object sender, MouseEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Character character;
+            if (panel.Controls[1] != null)
+            {
+                string str = panel.Controls[0].Text;
+                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
+                character = GetCharacterByName(split[1]);
+                selectedCharacter = character;
+            }
+        }
+
+        /*
         private void QueuePanelClickHandler(object sender, EventArgs e)
         { 
             Panel panel = (Panel)sender;
@@ -141,10 +169,11 @@ namespace Cyberpunk_RED_GM_Assistant
                 string str = panel.Controls[0].Text;
                 string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
                 character = GetCharacterByName(split[1]);
-                MessageBox.Show($"{character.Name}");
+                //MessageBox.Show($"{character.Name}");
             }
             
         }
+        */
 
         private Character GetCharacterByName(string name)
         {
@@ -168,6 +197,7 @@ namespace Cyberpunk_RED_GM_Assistant
             maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
             currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+            label3.Text = $"Select an Action for {activeCharacter.Name}";
 
             AddWeapon(activeCharacter);
         }
@@ -879,6 +909,22 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ShowPanel(attackPnl);
             InitialiseAttackPanel();
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            Form3 viewDetails = new Form3(selectedCharacter.ID);
+            viewDetails.Show();
         }
     }
 }

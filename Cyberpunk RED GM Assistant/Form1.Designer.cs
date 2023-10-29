@@ -303,6 +303,7 @@
             this.label3.Size = new System.Drawing.Size(381, 31);
             this.label3.TabIndex = 4;
             this.label3.Text = "Select an Action for Joe Mama";
+            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // label2
             // 
@@ -751,7 +752,7 @@
             this.viewDetailsToolStripMenuItem,
             this.viewAllCharactersToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 134);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 156);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // focusCharacterToolStripMenuItem
@@ -777,6 +778,7 @@
             this.viewDetailsToolStripMenuItem.Name = "viewDetailsToolStripMenuItem";
             this.viewDetailsToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.viewDetailsToolStripMenuItem.Text = "View Details";
+            this.viewDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewDetailsToolStripMenuItem_Click);
             // 
             // viewAllCharactersToolStripMenuItem
             // 
