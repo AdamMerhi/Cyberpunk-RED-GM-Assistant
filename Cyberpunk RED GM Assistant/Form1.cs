@@ -456,7 +456,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 m = (MeleeWeapon)activeCharacter.selectedWeapon;
                 // Add modifiers from character's skills and stats
                 roll = roll + activeCharacter.Dexterity + activeCharacter.MeleeWeapon;
-                dv = focusedCharacter.Evasion + focusedCharacter.Dexterity + RollDice(1, 10)[0];
+                dv = targetedCharacter.Evasion + targetedCharacter.Dexterity + RollDice(1, 10)[0];
             }
             
             // Aimed shots rulebook page 171
@@ -663,7 +663,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
             foreach(Character c in charsInQueue)
             {
-                if(!c.turnUsed)
+                if(!c.turnUsed && c.CurrentHp > 0)
                 {
                     activeCharacter = c;
                     return;

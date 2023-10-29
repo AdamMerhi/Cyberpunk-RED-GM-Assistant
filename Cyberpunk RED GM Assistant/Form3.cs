@@ -199,6 +199,20 @@ namespace Cyberpunk_RED_GM_Assistant
 
         }
 
+        private void IntOnlyKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         /* private void button2_Click(object sender, EventArgs e)
          {
              if (int.TryParse(textBox19.Text, out int characterID))
