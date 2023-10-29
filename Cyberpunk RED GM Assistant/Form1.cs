@@ -212,6 +212,7 @@ namespace Cyberpunk_RED_GM_Assistant
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             label3.Text = $"Select an Action for {activeCharacter.Name}";
 
+            AddConditions(activeCharacter, conditionsFPnl);
             AddWeapons(activeCharacter, weaponsFPnl);
 
             // Ensures active character and focused character panels never display the same character's information
@@ -246,6 +247,7 @@ namespace Cyberpunk_RED_GM_Assistant
             focusCurrentBodyArmorLbl.Text = focusedCharacter.CurrentBodyArmor.ToString();
             focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
 
+            AddConditions(focusedCharacter, focusConditionsFPnl);
             AddWeapons(focusedCharacter, focusWeaponsFPnl);
         }
 
@@ -259,16 +261,39 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // needs character id in parameters to generate label with correct conditions
-        private void AddConditions()
+        private void AddConditions(Character c, FlowLayoutPanel panel)
         {
+            panel.Controls.Clear();
             // for each condition create a new panel with text and add to the conditions flow panel
             Panel conditionPanel = new Panel();
-            conditionPanel.Size = new Size(110, 25);
+            conditionPanel.Size = new Size(140, 25);
 
             Label conditionLabel = new Label();
             conditionLabel.AutoSize = true;
             conditionLabel.Font = new Font(conditionLabel.Font.Name, 13f);
-            conditionLabel.Text = $"Condition"; // find condition here
+
+            string healthCondition = "";
+            if(c.CurrentHp >= c.MaxHp)
+            {
+                healthCondition = "Healthy";
+            }
+            else if(c.CurrentHp < c.MaxHp && c.CurrentHp >= Math.Ceiling(c.MaxHp / 2f))
+            {
+                healthCondition = "Lightly Wounded";
+            }
+            else if(c.CurrentHp > 0 && c.CurrentHp <= Math.Ceiling(c.MaxHp / 2f))
+            {
+                healthCondition = "Seriously Wounded";
+            }
+            else if(c.CurrentHp <= 0)
+            {
+                healthCondition = "Dead";
+            }
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(conditionLabel, $"{healthCondition}");
+
+            conditionLabel.Text = $"{healthCondition}"; // find condition here
             conditionPanel.Controls.Add(conditionLabel);
 
             conditionsFPnl.Controls.Add(conditionPanel);
