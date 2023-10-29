@@ -249,7 +249,7 @@ namespace Cyberpunk_RED_GM_Assistant
             AddWeapons(focusedCharacter, focusWeaponsFPnl);
         }
 
-        private void UpdateCombatScreen()
+        public void UpdateCombatScreen()
         {
             UpdateInitiativeQueue();
             if(activeCharacter != null)

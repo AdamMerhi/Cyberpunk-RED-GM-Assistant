@@ -110,6 +110,22 @@ namespace Cyberpunk_RED_GM_Assistant
 
             if (result == DialogResult.OK)
             {
+                foreach(Character c in combatView.characters)
+                {
+                    if(c == currentlySelectedCharacter)
+                    {
+                        combatView.characters.Remove(c);
+                    }
+                }
+                foreach (Character c in combatView.charsInQueue)
+                {
+                    if (c == currentlySelectedCharacter)
+                    {
+                        combatView.charsInQueue.Remove(c);
+                    }
+                }
+                combatView.UpdateCombatScreen();
+
                 characterDatabase.RemoveCharacterByID(currentlySelectedCharacter.ID);
                 currentlySelectedCharacter = null;
                 DisplayAllCharacters();
