@@ -28,7 +28,7 @@ namespace Cyberpunk_RED_GM_Assistant
         //private bool isPrinted = false;
         private List<Character> characterList;
 
-        public Character currentlySelectedCharacter;
+        private Character currentlySelectedCharacter;
 
         public Form1 combatView; // Line 730 and 840 ish in Form1.cs
 
@@ -41,7 +41,7 @@ namespace Cyberpunk_RED_GM_Assistant
             characterDatabase = new CharacterDatabase(characterConnectionString);
             weaponDatabase = new WeaponDatabase(weaponConnectionString);
 
-            RetrieveCharacterDataToLocal();
+            //RetrieveCharacterDataToLocal();
             DisplayAllCharacters();
 
             this.combatView = combatView;
@@ -68,32 +68,60 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             if (currentlySelectedCharacter == null)
             {
+                MessageBox.Show("Please select a character first. ", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             combatView.charsInQueue.Add(currentlySelectedCharacter);
+            combatView.characters.Add(currentlySelectedCharacter);
             combatView.UpdateInitiativeQueue();
 
         }
 
-        // View Character Button
+        // View/Edit Character Button
         private void button2_Click(object sender, EventArgs e)
         {
+            if (currentlySelectedCharacter == null)
+            {
+                MessageBox.Show("Please select a character first. ", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             //int characterID = int.Parse(textBox1.Text);
             //Form3 CheckCharacterView = new Form3(characterID);
             Form3 CheckCharacterView = new Form3(currentlySelectedCharacter.ID);
             CheckCharacterView.Show();
         }
 
+
+        // Delete Character
         private void button3_Click(object sender, EventArgs e)
         {
+            if (currentlySelectedCharacter == null)
+            {
+                MessageBox.Show("Please select a character first. ", "Warning Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
 
+            DialogResult result = MessageBox.Show("ARE YOU SURE YOU WANT TO DELETE THIS CHARACTER?\nTHIS ACTION CAN NOT BE UNDONE.", 
+                "Confirm Message Box",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Stop);
+
+            if (result == DialogResult.OK)
+            {
+                characterDatabase.RemoveCharacterByID(currentlySelectedCharacter.ID);
+                currentlySelectedCharacter = null;
+                DisplayAllCharacters();
+                ClearAttributeDisplay();
+            }
+                        
         }
 
         // Create Character Button
         private void button4_Click(object sender, EventArgs e)
         {
-            Form2 CreateCharacterView = new Form2();
+            //Form2 CreateCharacterView = new Form2();
+            Form2 CreateCharacterView = new Form2(this);
             CreateCharacterView.Show();
         }
 
@@ -141,13 +169,14 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Setting up all character display in the flow layout. 
         // Can be reused when character database gets updated. 
-        private void DisplayAllCharacters()
+        public void DisplayAllCharacters()
         {
             flowLayoutPanel1.Controls.Clear();
             //List<Character> allCharacters = characterDatabase.GetAllCharacters();
             /*if (!isPrinted)
             {*/
             //foreach (Character character in allCharacters)
+            RetrieveCharacterDataToLocal();
             foreach (Character character in characterList) 
             {
                 //Character c = characterDatabase.GetCharacterByID(12);

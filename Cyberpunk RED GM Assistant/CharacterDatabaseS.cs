@@ -273,7 +273,7 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 connection.Open();
 
-                string query = "DELECT FROM Character WHERE ID = @CharacterID";
+                string query = "DELETE FROM Character WHERE ID = @CharacterID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@CharacterID", characterID);

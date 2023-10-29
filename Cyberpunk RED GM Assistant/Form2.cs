@@ -20,9 +20,49 @@ namespace Cyberpunk_RED_GM_Assistant
         private CharacterDatabase characterDatabase;
         private List<Character> characterList = new List<Character>();
 
+        private ViewAllCharacters higherView;
+
         public Form2()
         {
             InitializeComponent();
+
+            //this.higherView = higherView;
+
+            IntOnlyText(textBox1);
+            IntOnlyText(textBox2);
+            IntOnlyText(textBox3);
+            IntOnlyText(textBox4);
+            IntOnlyText(textBox5);
+            IntOnlyText(textBox6);
+            IntOnlyText(textBox7);
+            IntOnlyText(textBox8);
+            IntOnlyText(textBox9);
+            IntOnlyText(textBox10);
+            IntOnlyText(textBox16);
+            IntOnlyText(textBox17);
+            IntOnlyText(textBox18);
+            IntOnlyText(textBox20);
+            IntOnlyText(textBox21);
+            IntOnlyText(textBox22);
+            IntOnlyText(textBox23);
+            IntOnlyText(textBox24);
+            IntOnlyText(textBox25);
+            IntOnlyText(textBox26);
+            IntOnlyText(textBox27);
+            IntOnlyText(textBox28);
+            IntOnlyText(textBox29);
+
+            //string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"dbFilePath\";Integrated Security=True";
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
+            characterDatabase = new CharacterDatabase(connectionString);
+
+        }
+
+        public Form2(ViewAllCharacters higherView)
+        {
+            InitializeComponent();
+
+            this.higherView = higherView;
 
             IntOnlyText(textBox1);
             IntOnlyText(textBox2);
@@ -92,7 +132,13 @@ namespace Cyberpunk_RED_GM_Assistant
             // Insert the character into the database using the CharacterDatabase class
             characterDatabase.InsertCharacter(character);
             characterList.Add(character);
-            MessageBox.Show(character.ToString());
+
+            higherView.DisplayAllCharacters();
+
+            MessageBox.Show($"Character {textBox15.Text} created successfully!\nPress OK to return to all characters view.");
+            this.Hide();
+            //higherView.
+            //MessageBox.Show(character.ToString());
             //listBox1.Items.Add(character.ToString());
         }
 
