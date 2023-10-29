@@ -772,6 +772,7 @@
             this.removeFromQueueToolStripMenuItem.Name = "removeFromQueueToolStripMenuItem";
             this.removeFromQueueToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.removeFromQueueToolStripMenuItem.Text = "Remove From Queue";
+            this.removeFromQueueToolStripMenuItem.Click += new System.EventHandler(this.removeFromQueueToolStripMenuItem_Click);
             // 
             // viewDetailsToolStripMenuItem
             // 

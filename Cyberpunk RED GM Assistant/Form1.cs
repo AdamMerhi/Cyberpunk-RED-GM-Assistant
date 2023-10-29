@@ -127,7 +127,6 @@ namespace Cyberpunk_RED_GM_Assistant
                 statsLabel.Text = statsText;
                 characterPanel.Controls.Add(statsLabel);
 
-                // characterPanel.Click += new EventHandler(QueuePanelClickHandler);
                 nameLabel.MouseDown += new MouseEventHandler(QueueLabelClick);
                 characterPanel.MouseDown += new MouseEventHandler(QueuePanelClick);
 
@@ -160,22 +159,6 @@ namespace Cyberpunk_RED_GM_Assistant
                 selectedCharacter = character;
             }
         }
-
-        /*
-        private void QueuePanelClickHandler(object sender, EventArgs e)
-        { 
-            Panel panel = (Panel)sender;
-            Character character;
-            if (panel.Controls[1] != null)
-            {
-                string str = panel.Controls[0].Text;
-                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
-                character = GetCharacterByName(split[1]);
-                //MessageBox.Show($"{character.Name}");
-            }
-            
-        }
-        */
 
         private Character GetCharacterByName(string name)
         {
@@ -927,6 +910,17 @@ namespace Cyberpunk_RED_GM_Assistant
 
             Form3 viewDetails = new Form3(selectedCharacter.ID);
             viewDetails.Show();
+        }
+
+        private void removeFromQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            charsInQueue.Remove(selectedCharacter);
+            UpdateInitiativeQueue();
         }
     }
 }
