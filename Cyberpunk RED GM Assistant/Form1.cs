@@ -23,6 +23,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public Character focusedCharacter;
         public Character selectedCharacter;
         public Character targetedCharacter;
+        private List<TextBox> rollDmgTBoxes;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -39,6 +40,13 @@ namespace Cyberpunk_RED_GM_Assistant
             // Load all characters and store into a list
             characters = characterDatabase.GetAllCharacters();
             charsInQueue = new List<Character>(); // placeholder for list of character IDs
+
+            // Text boxes for rolling damage on successful attack
+            rollDmgTBoxes = new List<TextBox>()
+            {
+                rollDmgTBox1, rollDmgTBox2, rollDmgTBox3, rollDmgTBox4, rollDmgTBox5,
+                rollDmgTBox6, rollDmgTBox7, rollDmgTBox8, rollDmgTBox9
+            };
 
             AddToQueue(characters[0]);
             AddToQueue(characters[1]);
@@ -207,8 +215,6 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 UpdateFocusChar();
             }
-
-            HideActionPanels();
         }
 
         // Updates the focused character panel with the focused character's attributes
@@ -245,10 +251,6 @@ namespace Cyberpunk_RED_GM_Assistant
             if(activeCharacter != null)
             {
                 UpdateCurrentTurn();
-            }
-            if(focusedCharacter != null)
-            {
-                UpdateFocusChar();
             }
         }
 
@@ -390,13 +392,13 @@ namespace Cyberpunk_RED_GM_Assistant
             }
 
             // Assign the weapon being used
-            Weapon useWeapon = activeCharacter.weaponList[0];
+            activeCharacter.selectedWeapon = activeCharacter.weaponList[0];
 
             foreach(Weapon w in activeCharacter.weaponList)
             {
                 if(w.name == weaponCBox.SelectedItem.ToString())
                 {
-                    useWeapon = w;
+                    activeCharacter.selectedWeapon = w;
                     break;
                 }
             }
@@ -405,15 +407,20 @@ namespace Cyberpunk_RED_GM_Assistant
             int dv = 99;
             RangedWeapon r = new RangedWeapon();
             MeleeWeapon m = new MeleeWeapon();
-            if(useWeapon.isRangedWeapon())
+            if(activeCharacter.selectedWeapon.isRangedWeapon())
             {
-                r = (RangedWeapon)useWeapon;
+                r = (RangedWeapon)activeCharacter.selectedWeapon;
+                if(r.magazineAmmoCount <= 0)
+                {
+                    MessageBox.Show("Out of ammo. Cannot fire weapon.\nUse the Reload Action to reload the weapon.");
+                    return;
+                }
                 r.ShotsFired(); // Subtracts ammo from magazine
                 dv = RangedDV((int)r.type, Convert.ToInt32(distanceTBox.Text));
             }
             else
             {
-                m = (MeleeWeapon)useWeapon;
+                m = (MeleeWeapon)activeCharacter.selectedWeapon;
                 dv = focusedCharacter.Evasion + focusedCharacter.Dexterity + RollDice(1, 10)[0];
             }
 
@@ -429,10 +436,10 @@ namespace Cyberpunk_RED_GM_Assistant
             // Check if attack hits
             if(roll > dv)
             {
-                // attack hits
-                // show roll damage panel
-                PrintCombatLog("Attack hit!");
+                // Attack hits
+                // Show roll damage panel
                 ShowPanel(attackRollPnl);
+                InitialiseDamageRollPanel();
             }
             else
             {
@@ -445,16 +452,25 @@ namespace Cyberpunk_RED_GM_Assistant
             UpdateCombatScreen();
         }
 
+        private void InitialiseDamageRollPanel()
+        {
+            rollDmgBtn.Text = $"Roll {activeCharacter.selectedWeapon.damageDiceAmount}d{activeCharacter.selectedWeapon.damageDiceType}";
+            foreach(TextBox tBox in rollDmgTBoxes)
+            {
+                tBox.Text = null;
+                tBox.Hide();
+            }
+            for(int i = 0; i < activeCharacter.selectedWeapon.damageDiceAmount; i++) 
+            {
+                rollDmgTBoxes[i].Show();
+            }
+        }
+
         private void ProcessDamageRoll()
         {
-            List<TextBox> tBoxes = new List<TextBox>()
-            {
-                rollDmgTBox1, rollDmgTBox2, rollDmgTBox3, rollDmgTBox4, rollDmgTBox5, 
-                rollDmgTBox6, rollDmgTBox7, rollDmgTBox8, rollDmgTBox9
-            };
             int roll = 0;
 
-            foreach(TextBox tBox in tBoxes)
+            foreach(TextBox tBox in rollDmgTBoxes)
             {
                 if (int.TryParse(tBox.Text, out int i))
                 {
@@ -820,7 +836,12 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void rollDmgBtn_Click(object sender, EventArgs e)
         {
+            List<int> rolls = RollDice(activeCharacter.selectedWeapon.damageDiceAmount, activeCharacter.selectedWeapon.damageDiceType);
 
+            for(int i = 0; i < activeCharacter.selectedWeapon.damageDiceAmount; i++)
+            {
+                rollDmgTBoxes[i].Text = rolls[i].ToString();
+            }
         }
 
         private void viewAllCharactersToolStripMenuItem1_Click(object sender, EventArgs e)

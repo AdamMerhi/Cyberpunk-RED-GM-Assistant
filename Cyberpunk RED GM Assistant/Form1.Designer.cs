@@ -50,20 +50,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.actionPnl = new System.Windows.Forms.Panel();
-            this.attackRollPnl = new System.Windows.Forms.Panel();
-            this.rollDmgTBox9 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox8 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox7 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox6 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox5 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox4 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox3 = new System.Windows.Forms.TextBox();
-            this.rollDmgTBox2 = new System.Windows.Forms.TextBox();
-            this.rollDmgBtn = new System.Windows.Forms.Button();
-            this.rollDmgTBox1 = new System.Windows.Forms.TextBox();
-            this.executeDmgRollBtn = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             this.attackPnl = new System.Windows.Forms.Panel();
             this.attackRollBtn = new System.Windows.Forms.Button();
             this.attackRollTBox = new System.Windows.Forms.TextBox();
@@ -78,6 +64,20 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.attackRollPnl = new System.Windows.Forms.Panel();
+            this.rollDmgTBox9 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox8 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox7 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox6 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox5 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox4 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox3 = new System.Windows.Forms.TextBox();
+            this.rollDmgTBox2 = new System.Windows.Forms.TextBox();
+            this.rollDmgBtn = new System.Windows.Forms.Button();
+            this.rollDmgTBox1 = new System.Windows.Forms.TextBox();
+            this.executeDmgRollBtn = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.endTurnBtn = new System.Windows.Forms.Button();
             this.reloadBtn = new System.Windows.Forms.Button();
             this.attackBtn = new System.Windows.Forms.Button();
@@ -110,8 +110,8 @@
             this.focusNameLbl = new System.Windows.Forms.Label();
             this.currentTurnPnl.SuspendLayout();
             this.actionPnl.SuspendLayout();
-            this.attackRollPnl.SuspendLayout();
             this.attackPnl.SuspendLayout();
+            this.attackRollPnl.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.focusCharPnl.SuspendLayout();
@@ -340,8 +340,8 @@
             // 
             this.actionPnl.AutoScroll = true;
             this.actionPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.actionPnl.Controls.Add(this.attackPnl);
             this.actionPnl.Controls.Add(this.attackRollPnl);
+            this.actionPnl.Controls.Add(this.attackPnl);
             this.actionPnl.Controls.Add(this.endTurnBtn);
             this.actionPnl.Controls.Add(this.reloadBtn);
             this.actionPnl.Controls.Add(this.attackBtn);
@@ -349,162 +349,6 @@
             this.actionPnl.Name = "actionPnl";
             this.actionPnl.Size = new System.Drawing.Size(630, 380);
             this.actionPnl.TabIndex = 2;
-            // 
-            // attackRollPnl
-            // 
-            this.attackRollPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox9);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox8);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox7);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox6);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox5);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox4);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox3);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox2);
-            this.attackRollPnl.Controls.Add(this.rollDmgBtn);
-            this.attackRollPnl.Controls.Add(this.rollDmgTBox1);
-            this.attackRollPnl.Controls.Add(this.executeDmgRollBtn);
-            this.attackRollPnl.Controls.Add(this.label25);
-            this.attackRollPnl.Controls.Add(this.label27);
-            this.attackRollPnl.Location = new System.Drawing.Point(209, 12);
-            this.attackRollPnl.Name = "attackRollPnl";
-            this.attackRollPnl.Size = new System.Drawing.Size(402, 349);
-            this.attackRollPnl.TabIndex = 4;
-            this.attackRollPnl.Visible = false;
-            // 
-            // rollDmgTBox9
-            // 
-            this.rollDmgTBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox9.Location = new System.Drawing.Point(219, 95);
-            this.rollDmgTBox9.MaxLength = 2;
-            this.rollDmgTBox9.Name = "rollDmgTBox9";
-            this.rollDmgTBox9.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox9.TabIndex = 46;
-            this.rollDmgTBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox8
-            // 
-            this.rollDmgTBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox8.Location = new System.Drawing.Point(140, 95);
-            this.rollDmgTBox8.MaxLength = 2;
-            this.rollDmgTBox8.Name = "rollDmgTBox8";
-            this.rollDmgTBox8.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox8.TabIndex = 45;
-            this.rollDmgTBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox7
-            // 
-            this.rollDmgTBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox7.Location = new System.Drawing.Point(61, 95);
-            this.rollDmgTBox7.MaxLength = 2;
-            this.rollDmgTBox7.Name = "rollDmgTBox7";
-            this.rollDmgTBox7.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox7.TabIndex = 44;
-            this.rollDmgTBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox6
-            // 
-            this.rollDmgTBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox6.Location = new System.Drawing.Point(219, 62);
-            this.rollDmgTBox6.MaxLength = 2;
-            this.rollDmgTBox6.Name = "rollDmgTBox6";
-            this.rollDmgTBox6.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox6.TabIndex = 43;
-            this.rollDmgTBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox5
-            // 
-            this.rollDmgTBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox5.Location = new System.Drawing.Point(140, 62);
-            this.rollDmgTBox5.MaxLength = 2;
-            this.rollDmgTBox5.Name = "rollDmgTBox5";
-            this.rollDmgTBox5.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox5.TabIndex = 42;
-            this.rollDmgTBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox4
-            // 
-            this.rollDmgTBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox4.Location = new System.Drawing.Point(61, 62);
-            this.rollDmgTBox4.MaxLength = 2;
-            this.rollDmgTBox4.Name = "rollDmgTBox4";
-            this.rollDmgTBox4.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox4.TabIndex = 41;
-            this.rollDmgTBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox3
-            // 
-            this.rollDmgTBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox3.Location = new System.Drawing.Point(219, 30);
-            this.rollDmgTBox3.MaxLength = 2;
-            this.rollDmgTBox3.Name = "rollDmgTBox3";
-            this.rollDmgTBox3.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox3.TabIndex = 40;
-            this.rollDmgTBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgTBox2
-            // 
-            this.rollDmgTBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox2.Location = new System.Drawing.Point(140, 30);
-            this.rollDmgTBox2.MaxLength = 2;
-            this.rollDmgTBox2.Name = "rollDmgTBox2";
-            this.rollDmgTBox2.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox2.TabIndex = 39;
-            this.rollDmgTBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // rollDmgBtn
-            // 
-            this.rollDmgBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgBtn.Location = new System.Drawing.Point(125, 128);
-            this.rollDmgBtn.Name = "rollDmgBtn";
-            this.rollDmgBtn.Size = new System.Drawing.Size(106, 28);
-            this.rollDmgBtn.TabIndex = 38;
-            this.rollDmgBtn.Text = "Roll 1d6";
-            this.rollDmgBtn.UseVisualStyleBackColor = true;
-            this.rollDmgBtn.Click += new System.EventHandler(this.rollDmgBtn_Click);
-            // 
-            // rollDmgTBox1
-            // 
-            this.rollDmgTBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rollDmgTBox1.Location = new System.Drawing.Point(61, 30);
-            this.rollDmgTBox1.MaxLength = 2;
-            this.rollDmgTBox1.Name = "rollDmgTBox1";
-            this.rollDmgTBox1.Size = new System.Drawing.Size(73, 27);
-            this.rollDmgTBox1.TabIndex = 37;
-            this.rollDmgTBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
-            // 
-            // executeDmgRollBtn
-            // 
-            this.executeDmgRollBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.executeDmgRollBtn.Location = new System.Drawing.Point(101, 181);
-            this.executeDmgRollBtn.Name = "executeDmgRollBtn";
-            this.executeDmgRollBtn.Size = new System.Drawing.Size(150, 30);
-            this.executeDmgRollBtn.TabIndex = 4;
-            this.executeDmgRollBtn.Text = "Execute";
-            this.executeDmgRollBtn.UseVisualStyleBackColor = true;
-            this.executeDmgRollBtn.Click += new System.EventHandler(this.executeDmgRollBtn_Click);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(5, 64);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(44, 25);
-            this.label25.TabIndex = 31;
-            this.label25.Text = "Roll";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(3, 2);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(248, 25);
-            this.label27.TabIndex = 29;
-            this.label27.Text = "Attack hits! Roll for damage";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // attackPnl
             // 
@@ -668,6 +512,162 @@
             this.label17.TabIndex = 27;
             this.label17.Text = "Weapon";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // attackRollPnl
+            // 
+            this.attackRollPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox9);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox8);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox7);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox6);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox5);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox4);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox3);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox2);
+            this.attackRollPnl.Controls.Add(this.rollDmgBtn);
+            this.attackRollPnl.Controls.Add(this.rollDmgTBox1);
+            this.attackRollPnl.Controls.Add(this.executeDmgRollBtn);
+            this.attackRollPnl.Controls.Add(this.label25);
+            this.attackRollPnl.Controls.Add(this.label27);
+            this.attackRollPnl.Location = new System.Drawing.Point(209, 12);
+            this.attackRollPnl.Name = "attackRollPnl";
+            this.attackRollPnl.Size = new System.Drawing.Size(402, 349);
+            this.attackRollPnl.TabIndex = 4;
+            this.attackRollPnl.Visible = false;
+            // 
+            // rollDmgTBox9
+            // 
+            this.rollDmgTBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox9.Location = new System.Drawing.Point(219, 95);
+            this.rollDmgTBox9.MaxLength = 2;
+            this.rollDmgTBox9.Name = "rollDmgTBox9";
+            this.rollDmgTBox9.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox9.TabIndex = 46;
+            this.rollDmgTBox9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox8
+            // 
+            this.rollDmgTBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox8.Location = new System.Drawing.Point(140, 95);
+            this.rollDmgTBox8.MaxLength = 2;
+            this.rollDmgTBox8.Name = "rollDmgTBox8";
+            this.rollDmgTBox8.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox8.TabIndex = 45;
+            this.rollDmgTBox8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox7
+            // 
+            this.rollDmgTBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox7.Location = new System.Drawing.Point(61, 95);
+            this.rollDmgTBox7.MaxLength = 2;
+            this.rollDmgTBox7.Name = "rollDmgTBox7";
+            this.rollDmgTBox7.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox7.TabIndex = 44;
+            this.rollDmgTBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox6
+            // 
+            this.rollDmgTBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox6.Location = new System.Drawing.Point(219, 62);
+            this.rollDmgTBox6.MaxLength = 2;
+            this.rollDmgTBox6.Name = "rollDmgTBox6";
+            this.rollDmgTBox6.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox6.TabIndex = 43;
+            this.rollDmgTBox6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox5
+            // 
+            this.rollDmgTBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox5.Location = new System.Drawing.Point(140, 62);
+            this.rollDmgTBox5.MaxLength = 2;
+            this.rollDmgTBox5.Name = "rollDmgTBox5";
+            this.rollDmgTBox5.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox5.TabIndex = 42;
+            this.rollDmgTBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox4
+            // 
+            this.rollDmgTBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox4.Location = new System.Drawing.Point(61, 62);
+            this.rollDmgTBox4.MaxLength = 2;
+            this.rollDmgTBox4.Name = "rollDmgTBox4";
+            this.rollDmgTBox4.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox4.TabIndex = 41;
+            this.rollDmgTBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox3
+            // 
+            this.rollDmgTBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox3.Location = new System.Drawing.Point(219, 30);
+            this.rollDmgTBox3.MaxLength = 2;
+            this.rollDmgTBox3.Name = "rollDmgTBox3";
+            this.rollDmgTBox3.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox3.TabIndex = 40;
+            this.rollDmgTBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgTBox2
+            // 
+            this.rollDmgTBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox2.Location = new System.Drawing.Point(140, 30);
+            this.rollDmgTBox2.MaxLength = 2;
+            this.rollDmgTBox2.Name = "rollDmgTBox2";
+            this.rollDmgTBox2.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox2.TabIndex = 39;
+            this.rollDmgTBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // rollDmgBtn
+            // 
+            this.rollDmgBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgBtn.Location = new System.Drawing.Point(125, 128);
+            this.rollDmgBtn.Name = "rollDmgBtn";
+            this.rollDmgBtn.Size = new System.Drawing.Size(106, 28);
+            this.rollDmgBtn.TabIndex = 38;
+            this.rollDmgBtn.Text = "Roll 1d6";
+            this.rollDmgBtn.UseVisualStyleBackColor = true;
+            this.rollDmgBtn.Click += new System.EventHandler(this.rollDmgBtn_Click);
+            // 
+            // rollDmgTBox1
+            // 
+            this.rollDmgTBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rollDmgTBox1.Location = new System.Drawing.Point(61, 30);
+            this.rollDmgTBox1.MaxLength = 2;
+            this.rollDmgTBox1.Name = "rollDmgTBox1";
+            this.rollDmgTBox1.Size = new System.Drawing.Size(73, 27);
+            this.rollDmgTBox1.TabIndex = 37;
+            this.rollDmgTBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IntOnlyKeyPress);
+            // 
+            // executeDmgRollBtn
+            // 
+            this.executeDmgRollBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.executeDmgRollBtn.Location = new System.Drawing.Point(101, 181);
+            this.executeDmgRollBtn.Name = "executeDmgRollBtn";
+            this.executeDmgRollBtn.Size = new System.Drawing.Size(150, 30);
+            this.executeDmgRollBtn.TabIndex = 4;
+            this.executeDmgRollBtn.Text = "Execute";
+            this.executeDmgRollBtn.UseVisualStyleBackColor = true;
+            this.executeDmgRollBtn.Click += new System.EventHandler(this.executeDmgRollBtn_Click);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(5, 64);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(44, 25);
+            this.label25.TabIndex = 31;
+            this.label25.Text = "Roll";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(3, 2);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(248, 25);
+            this.label27.TabIndex = 29;
+            this.label27.Text = "Attack hits! Roll for damage";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // endTurnBtn
             // 
@@ -993,10 +993,10 @@
             this.currentTurnPnl.ResumeLayout(false);
             this.currentTurnPnl.PerformLayout();
             this.actionPnl.ResumeLayout(false);
-            this.attackRollPnl.ResumeLayout(false);
-            this.attackRollPnl.PerformLayout();
             this.attackPnl.ResumeLayout(false);
             this.attackPnl.PerformLayout();
+            this.attackRollPnl.ResumeLayout(false);
+            this.attackRollPnl.PerformLayout();
             this.contextMenuStrip2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.focusCharPnl.ResumeLayout(false);
