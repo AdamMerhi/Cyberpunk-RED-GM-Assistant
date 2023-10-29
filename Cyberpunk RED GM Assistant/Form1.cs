@@ -141,7 +141,9 @@ namespace Cyberpunk_RED_GM_Assistant
             Character character;
             if (label != null)
             {
-                character = GetCharacterByName(label.Text);
+                string str = label.Text;
+                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
+                character = GetCharacterByName(split[1]);
                 selectedCharacter = character;
             }
         }
