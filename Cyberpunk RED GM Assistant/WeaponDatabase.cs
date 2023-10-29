@@ -129,7 +129,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             // ID Starts with 1: RangedWeapon
                             // ID Starts with 2: MeleeWeapon
                             int ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            if (ID < 200)
+                            if (ID <= 8)
                             {
                                 RangedWeapon weapon = new RangedWeapon
                                 {

@@ -31,21 +31,21 @@
             this.components = new System.ComponentModel.Container();
             this.queueLabel = new System.Windows.Forms.Label();
             this.currentTurnPnl = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.maxBodyArmorLbl = new System.Windows.Forms.Label();
+            this.currentBodyArmorLbl = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.maxHelmetLbl = new System.Windows.Forms.Label();
+            this.currentHelmetLbl = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.maxHpLbl = new System.Windows.Forms.Label();
             this.weaponsFPnl = new System.Windows.Forms.FlowLayoutPanel();
             this.conditionsFPnl = new System.Windows.Forms.FlowLayoutPanel();
-            this.label18 = new System.Windows.Forms.Label();
+            this.currentHpLbl = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.currentNameLbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.focusPnl = new System.Windows.Forms.Panel();
@@ -116,45 +116,45 @@
             // 
             this.currentTurnPnl.AutoScroll = true;
             this.currentTurnPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.currentTurnPnl.Controls.Add(this.label13);
-            this.currentTurnPnl.Controls.Add(this.label14);
+            this.currentTurnPnl.Controls.Add(this.maxBodyArmorLbl);
+            this.currentTurnPnl.Controls.Add(this.currentBodyArmorLbl);
             this.currentTurnPnl.Controls.Add(this.label15);
             this.currentTurnPnl.Controls.Add(this.label16);
-            this.currentTurnPnl.Controls.Add(this.label8);
-            this.currentTurnPnl.Controls.Add(this.label9);
+            this.currentTurnPnl.Controls.Add(this.maxHelmetLbl);
+            this.currentTurnPnl.Controls.Add(this.currentHelmetLbl);
             this.currentTurnPnl.Controls.Add(this.label11);
             this.currentTurnPnl.Controls.Add(this.label12);
-            this.currentTurnPnl.Controls.Add(this.label1);
+            this.currentTurnPnl.Controls.Add(this.maxHpLbl);
             this.currentTurnPnl.Controls.Add(this.weaponsFPnl);
             this.currentTurnPnl.Controls.Add(this.conditionsFPnl);
-            this.currentTurnPnl.Controls.Add(this.label18);
+            this.currentTurnPnl.Controls.Add(this.currentHpLbl);
             this.currentTurnPnl.Controls.Add(this.label10);
             this.currentTurnPnl.Controls.Add(this.label7);
-            this.currentTurnPnl.Controls.Add(this.label6);
+            this.currentTurnPnl.Controls.Add(this.currentNameLbl);
             this.currentTurnPnl.Location = new System.Drawing.Point(303, 43);
             this.currentTurnPnl.Name = "currentTurnPnl";
             this.currentTurnPnl.Size = new System.Drawing.Size(630, 380);
             this.currentTurnPnl.TabIndex = 1;
             // 
-            // label13
+            // maxBodyArmorLbl
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(122, 99);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 20);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "7";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.maxBodyArmorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxBodyArmorLbl.Location = new System.Drawing.Point(122, 99);
+            this.maxBodyArmorLbl.Name = "maxBodyArmorLbl";
+            this.maxBodyArmorLbl.Size = new System.Drawing.Size(39, 20);
+            this.maxBodyArmorLbl.TabIndex = 26;
+            this.maxBodyArmorLbl.Text = "7";
+            this.maxBodyArmorLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // currentBodyArmorLbl
             // 
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(58, 99);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(39, 20);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "7";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentBodyArmorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentBodyArmorLbl.Location = new System.Drawing.Point(58, 99);
+            this.currentBodyArmorLbl.Name = "currentBodyArmorLbl";
+            this.currentBodyArmorLbl.Size = new System.Drawing.Size(39, 20);
+            this.currentBodyArmorLbl.TabIndex = 25;
+            this.currentBodyArmorLbl.Text = "7";
+            this.currentBodyArmorLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label15
             // 
@@ -177,25 +177,25 @@
             this.label16.Text = "SP";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // maxHelmetLbl
             // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(122, 74);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 20);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "7";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.maxHelmetLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxHelmetLbl.Location = new System.Drawing.Point(122, 74);
+            this.maxHelmetLbl.Name = "maxHelmetLbl";
+            this.maxHelmetLbl.Size = new System.Drawing.Size(39, 20);
+            this.maxHelmetLbl.TabIndex = 22;
+            this.maxHelmetLbl.Text = "7";
+            this.maxHelmetLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
+            // currentHelmetLbl
             // 
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(58, 74);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 20);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "7";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentHelmetLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentHelmetLbl.Location = new System.Drawing.Point(58, 74);
+            this.currentHelmetLbl.Name = "currentHelmetLbl";
+            this.currentHelmetLbl.Size = new System.Drawing.Size(39, 20);
+            this.currentHelmetLbl.TabIndex = 21;
+            this.currentHelmetLbl.Text = "7";
+            this.currentHelmetLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
             // 
@@ -219,15 +219,15 @@
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label12.Click += new System.EventHandler(this.label12_Click_1);
             // 
-            // label1
+            // maxHpLbl
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(122, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 20);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "60";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.maxHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxHpLbl.Location = new System.Drawing.Point(122, 49);
+            this.maxHpLbl.Name = "maxHpLbl";
+            this.maxHpLbl.Size = new System.Drawing.Size(39, 20);
+            this.maxHpLbl.TabIndex = 18;
+            this.maxHpLbl.Text = "60";
+            this.maxHpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // weaponsFPnl
             // 
@@ -250,16 +250,16 @@
             this.conditionsFPnl.TabIndex = 16;
             this.conditionsFPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.conditionsFlowPanel_Paint);
             // 
-            // label18
+            // currentHpLbl
             // 
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(58, 49);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(39, 20);
-            this.label18.TabIndex = 15;
-            this.label18.Text = "60";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label18.Click += new System.EventHandler(this.label18_Click);
+            this.currentHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentHpLbl.Location = new System.Drawing.Point(58, 49);
+            this.currentHpLbl.Name = "currentHpLbl";
+            this.currentHpLbl.Size = new System.Drawing.Size(39, 20);
+            this.currentHpLbl.TabIndex = 15;
+            this.currentHpLbl.Text = "60";
+            this.currentHpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentHpLbl.Click += new System.EventHandler(this.label18_Click);
             // 
             // label10
             // 
@@ -284,15 +284,15 @@
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
-            // label6
+            // currentNameLbl
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(13, 12);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(125, 29);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Joe Mama";
+            this.currentNameLbl.AutoSize = true;
+            this.currentNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentNameLbl.Location = new System.Drawing.Point(13, 12);
+            this.currentNameLbl.Name = "currentNameLbl";
+            this.currentNameLbl.Size = new System.Drawing.Size(125, 29);
+            this.currentNameLbl.TabIndex = 0;
+            this.currentNameLbl.Text = "Joe Mama";
             // 
             // label3
             // 
@@ -826,23 +826,23 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel actionPnl;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label currentNameLbl;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label currentHpLbl;
         private System.Windows.Forms.FlowLayoutPanel queueFPnl;
         private System.Windows.Forms.FlowLayoutPanel conditionsFPnl;
         private System.Windows.Forms.FlowLayoutPanel weaponsFPnl;
         private System.Windows.Forms.FlowLayoutPanel combatLogFPnl;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label maxBodyArmorLbl;
+        private System.Windows.Forms.Label currentBodyArmorLbl;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label maxHelmetLbl;
+        private System.Windows.Forms.Label currentHelmetLbl;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label maxHpLbl;
         private System.Windows.Forms.Button attackBtn;
         private System.Windows.Forms.Button endTurnBtn;
         private System.Windows.Forms.Button reloadBtn;

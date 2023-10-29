@@ -13,10 +13,12 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     public partial class Form1 : Form
     {
-        public const string dbFilePath = "characterDb.mdf";
+        public const string characterConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
+        public const string weaponConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\WeaponDB.mdf;Integrated Security=True";
         private CharacterDatabase characterDatabase;
+        private WeaponDatabase weaponDatabase;
         public List<Character> characters;
-        public List<int> charsInQueue; // List of character IDs of characters in Initiative Queue
+        public List<Character> charsInQueue; // List of characters in Initiative Queue
         public Character activeCharacter;
         public Character focusedCharacter;
 
@@ -29,18 +31,16 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             InitializeComponent();
 
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\characterDb.mdf;Integrated Security=True";
-            characterDatabase = new CharacterDatabase(connectionString);
+            characterDatabase = new CharacterDatabase(characterConnectionString);
+            weaponDatabase = new WeaponDatabase(weaponConnectionString);
 
             // Load all characters and store into a list
             characters = characterDatabase.GetAllCharacters();
+            charsInQueue = new List<Character>(); // placeholder for list of character IDs
 
-            activeCharacter = characterDatabase.GetCharacterByID(12);
-
-            charsInQueue = new List<int>(); // placeholder for list of character IDs
-            charsInQueue.Add(1);
-            charsInQueue.Add(2);
-            charsInQueue.Add(3);
+            AddToQueue(characters[0]);
+            AddToQueue(characters[1]);
+            activeCharacter = charsInQueue[0];
 
             actionPanels = new List<Panel>
             {
@@ -48,31 +48,14 @@ namespace Cyberpunk_RED_GM_Assistant
                 attackRollPnl
             };
 
+            UpdateCurrentTurn();
+
             // testing starts
-            foreach(Character c in characters)
-            {
-                AddToQueue(c.ID);
-            }
-
-            AddConditions();
-
-            for(int i = 0; i < 1; i++)
-            {
-                PrintCombatLog("Lorem ipsum dolor sit amet. Vel quaerat molestias id fugit ratione eum molestiae rerum et similique suscipit ut laboriosam officiis.");
-            }
-
             for(int i = 0; i < 5; i++)
             {
                 AddWeapon();
             }
-
-            InitialiseAttackPanel(); // only called on Attack action
             // testing ends
-        }
-
-        private void LoadCharacters()
-        {
-
         }
 
         private void ShowPanel(Panel p)
@@ -91,29 +74,73 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // needs character id in parameters to generate panel with correct text
-        private void AddToQueue(int characterID)
+        public void AddToQueue(Character c)
+        {
+            foreach(Character character in charsInQueue)
+            {
+                if(character == c)
+                {
+                    return;
+                }
+            }
+            charsInQueue.Add(c);
+            UpdateInitiativeQueue();
+        }
+
+        // overload with int instead of character
+        public void AddToQueue(int characterID)
         {
             Character c = characterDatabase.GetCharacterByID(characterID);
 
-            FlowLayoutPanel characterPanel = new FlowLayoutPanel();
-            characterPanel.Size = new Size(255, 60);
-            characterPanel.FlowDirection = FlowDirection.TopDown;
-            characterPanel.ContextMenuStrip = contextMenuStrip1;
+            foreach (Character character in charsInQueue)
+            {
+                if (character == c)
+                {
+                    return;
+                }
+            }
+            charsInQueue.Add(c);
+            UpdateInitiativeQueue();
+        }
 
-            Label nameLabel = new Label();
-            nameLabel.AutoSize = true;
-            nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
-            nameLabel.Text = $"1. {c.Name}"; // find character from charsInQueue
-            characterPanel.Controls.Add(nameLabel);
+        private void UpdateInitiativeQueue()
+        {
+            queueFPnl.Controls.Clear();
 
-            Label statsLabel = new Label();
-            statsLabel.AutoSize = true;
-            statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
-            string statsText = $"HP {c.CurrentHp} | SP {c.Helmet} | SP {c.BodyArmor}"; // get character stats and chuck them in here
-            statsLabel.Text = statsText;
-            characterPanel.Controls.Add(statsLabel);
+            for(int i = 0; i < charsInQueue.Count; i++)
+            {
+                FlowLayoutPanel characterPanel = new FlowLayoutPanel();
+                characterPanel.Size = new Size(255, 60);
+                characterPanel.FlowDirection = FlowDirection.TopDown;
+                characterPanel.ContextMenuStrip = contextMenuStrip1;
 
-            queueFPnl.Controls.Add(characterPanel);
+                Label nameLabel = new Label();
+                nameLabel.AutoSize = true;
+                nameLabel.Font = new Font(nameLabel.Font.Name, 15f);
+                //nameLabel.Text = $"{i + 1}. {charsInQueue[i].Name}";
+                nameLabel.Text = charsInQueue[i].CurrentHp <= 0 ? $"X. {charsInQueue[i].Name}" : $"{i + 1}. {charsInQueue[i].Name}";
+                characterPanel.Controls.Add(nameLabel);
+
+                Label statsLabel = new Label();
+                statsLabel.AutoSize = true;
+                statsLabel.Font = new Font(statsLabel.Font.Name, 13f);
+                string statsText = $"HP {charsInQueue[i].CurrentHp} | SP {charsInQueue[i].Helmet} | SP {charsInQueue[i].BodyArmor}";
+                statsLabel.Text = statsText;
+                characterPanel.Controls.Add(statsLabel);
+
+                queueFPnl.Controls.Add(characterPanel);
+            }
+        }
+
+        private void UpdateCurrentTurn()
+        {
+            currentNameLbl.Text = activeCharacter.Name;
+            currentHpLbl.Text = activeCharacter.CurrentHp.ToString();
+            maxHpLbl.Text = activeCharacter.MaxHp.ToString();
+            currentHelmetLbl.Text = activeCharacter.Helmet.ToString();
+            maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
+            currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+            maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -206,21 +233,19 @@ namespace Cyberpunk_RED_GM_Assistant
         // needs character id as input to get all weapons that the character has
         private void InitialiseAttackPanel()
         {
-            // Hide all action panels and show attack action panel
-
             // Weapon select
             // for each weapon in character's weapons
-            weaponCBox.Items.Add("SPAS-12");
-            weaponCBox.Items.Add("FN P90");
+            weaponCBox.Items.Add(weaponDatabase.GetWeaponByID(activeCharacter.Weapons).name);
 
-            // Target select
-            // for each character in initiative queue
-            // make sure current character is excluded
-            targetCBox.Items.Add("Mike Hock");
-            targetCBox.Items.Add("Deez Nuts");
-            targetCBox.Items.Add("Ho-Lee Phuc");
-            targetCBox.Items.Add("Oliver Closoff");
-            targetCBox.Items.Add("Hugh Jass");
+            // Add all characters in the initiative queue to selectable targets
+            // excluding the active character
+            foreach(Character c in charsInQueue)
+            {
+                if(activeCharacter != c)
+                {
+                    targetCBox.Items.Add(c.Name);
+                }
+            }
         }
 
         private void ProcessAttackAction()
