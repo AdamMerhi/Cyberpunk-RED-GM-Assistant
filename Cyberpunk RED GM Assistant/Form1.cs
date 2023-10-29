@@ -22,6 +22,10 @@ namespace Cyberpunk_RED_GM_Assistant
         public Character activeCharacter;
         public Character focusedCharacter;
         public Character selectedCharacter;
+        public Character targetedCharacter;
+        private List<TextBox> rollDmgTBoxes;
+        private bool hipfire = true;
+        private int turnCounter = 1;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -39,6 +43,13 @@ namespace Cyberpunk_RED_GM_Assistant
             characters = characterDatabase.GetAllCharacters();
             charsInQueue = new List<Character>(); // placeholder for list of character IDs
 
+            // Text boxes for rolling damage on successful attack
+            rollDmgTBoxes = new List<TextBox>()
+            {
+                rollDmgTBox1, rollDmgTBox2, rollDmgTBox3, rollDmgTBox4, rollDmgTBox5,
+                rollDmgTBox6, rollDmgTBox7, rollDmgTBox8, rollDmgTBox9
+            };
+
             AddToQueue(characters[0]);
             AddToQueue(characters[1]);
             AddToQueue(characters[2]);
@@ -50,14 +61,22 @@ namespace Cyberpunk_RED_GM_Assistant
             actionPanels = new List<Panel>
             {
                 attackPnl,
-                attackRollPnl
+                attackRollPnl,
+                reloadPnl
             };
 
             UpdateCurrentTurn();
+            PrintCombatLog($"Turn {turnCounter}");
         }
 
         private void ShowPanel(Panel p)
         {
+            // Do not allow the active character to have multiple turns in a row
+            if(activeCharacter.turnUsed)
+            {
+                return;
+            }
+
             foreach(Panel panel in actionPanels) 
             {
                 if(panel != p)
@@ -68,6 +87,14 @@ namespace Cyberpunk_RED_GM_Assistant
                 {
                     panel.Show();
                 }
+            }
+        }
+
+        private void HideActionPanels()
+        {
+            foreach(Panel panel in actionPanels)
+            {
+                panel.Hide();
             }
         }
 
@@ -179,9 +206,9 @@ namespace Cyberpunk_RED_GM_Assistant
             currentNameLbl.Text = activeCharacter.Name;
             currentHpLbl.Text = activeCharacter.CurrentHp.ToString();
             maxHpLbl.Text = activeCharacter.MaxHp.ToString();
-            currentHelmetLbl.Text = activeCharacter.Helmet.ToString();
+            currentHelmetLbl.Text = activeCharacter.CurrentHelmet.ToString();
             maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
-            currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+            currentBodyArmorLbl.Text = activeCharacter.CurrentBodyArmor.ToString();
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             label3.Text = $"Select an Action for {activeCharacter.Name}";
 
@@ -214,12 +241,21 @@ namespace Cyberpunk_RED_GM_Assistant
             focusNameLbl.Text = focusedCharacter.Name;
             focusCurrentHpLbl.Text = focusedCharacter.CurrentHp.ToString();
             focusMaxHpLbl.Text = focusedCharacter.MaxHp.ToString();
-            focusCurrentHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusCurrentHelmetLbl.Text = focusedCharacter.CurrentHelmet.ToString();
             focusMaxHelmetLbl.Text = focusedCharacter.Helmet.ToString();
-            focusCurrentBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+            focusCurrentBodyArmorLbl.Text = focusedCharacter.CurrentBodyArmor.ToString();
             focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
 
-            AddWeapons(activeCharacter, focusWeaponsFPnl);
+            AddWeapons(focusedCharacter, focusWeaponsFPnl);
+        }
+
+        private void UpdateCombatScreen()
+        {
+            UpdateInitiativeQueue();
+            if(activeCharacter != null)
+            {
+                UpdateCurrentTurn();
+            }
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -330,15 +366,17 @@ namespace Cyberpunk_RED_GM_Assistant
             combatLogFPnl.Controls.Add(logPanel);
         }
 
-        // needs character id as input to get all weapons that the character has
+        // Sets up the attack panel
         private void InitialiseAttackPanel()
         {
             // Weapon select
             // for each weapon in character's weapons
+            weaponCBox.Items.Clear();
             weaponCBox.Items.Add(weaponDatabase.GetWeaponByID(activeCharacter.Weapons).name);
 
             // Add all characters in the initiative queue to selectable targets
             // excluding the active character
+            targetCBox.Items.Clear();
             foreach(Character c in charsInQueue)
             {
                 if(activeCharacter != c)
@@ -346,58 +384,291 @@ namespace Cyberpunk_RED_GM_Assistant
                     targetCBox.Items.Add(c.Name);
                 }
             }
+
+            aimCBox.SelectedItem = null;
+            distanceTBox.Text = null;
+            attackRollTBox.Text = null;
         }
 
         private void ProcessAttackAction()
         {
+            // Assign the targeted character
+            foreach(Character c in charsInQueue)
+            {
+                if(c == GetCharacterByName(targetCBox.SelectedItem.ToString()))
+                {
+                    targetedCharacter = c;
+                }
+            }
+
+            // Assign the weapon being used
+            activeCharacter.selectedWeapon = activeCharacter.weaponList[0];
+
+            foreach(Weapon w in activeCharacter.weaponList)
+            {
+                if(w.name == weaponCBox.SelectedItem.ToString())
+                {
+                    activeCharacter.selectedWeapon = w;
+                    break;
+                }
+            }
+
             int roll = Convert.ToInt32(attackRollTBox.Text);
-            int dv = RangedDV("Shotgun", Convert.ToInt32(distanceTBox.Text));
+
+            // Determine the difficulty value
+            int dv = 99;
+            RangedWeapon r = new RangedWeapon();
+            MeleeWeapon m = new MeleeWeapon();
+            if(activeCharacter.selectedWeapon.isRangedWeapon())
+            {
+                r = (RangedWeapon)activeCharacter.selectedWeapon;
+                if(r.magazineAmmoCount <= 0)
+                {
+                    MessageBox.Show("Out of ammo. Cannot fire weapon.\nUse the Reload Action to reload the weapon.");
+                    return;
+                }
+                r.ShotsFired(); // Subtracts ammo from magazine
+
+                // Add modifiers from character's skills and stats
+                switch((int)r.type)
+                {
+                    case 0: case 1:
+                        roll += activeCharacter.Handgun;
+                        break;
+                    case 2: case 3: case 4:
+                        roll += activeCharacter.ShoulderArms;
+                        break;
+                    case 5:
+                        roll += activeCharacter.Archery;
+                        break;
+                    case 6: case 7:
+                        roll += activeCharacter.HeavyWeapons;
+                        break;
+                    default:
+                        break;
+                }
+                roll += activeCharacter.Reflexes;
+
+                dv = RangedDV((int)r.type, Convert.ToInt32(distanceTBox.Text));
+            }
+            else
+            {
+                m = (MeleeWeapon)activeCharacter.selectedWeapon;
+                // Add modifiers from character's skills and stats
+                roll = roll + activeCharacter.Dexterity + activeCharacter.MeleeWeapon;
+                dv = focusedCharacter.Evasion + focusedCharacter.Dexterity + RollDice(1, 10)[0];
+            }
             
             // Aimed shots rulebook page 171
             // If not hipfiring then subtract 8 from roll
             if(aimCBox.SelectedItem != aimCBox.Items[0])
             {
+                hipfire = false;
                 roll -= 8;
             }
-
-            // Subtract ammo from weapon
+            else
+            {
+                hipfire = true;
+            }
 
             // Check if attack hits
             if(roll > dv)
             {
-                // attack hits
-                // show roll damage panel
-                PrintCombatLog("Attack hit!");
+                // Attack hits
+                // Show roll damage panel
                 ShowPanel(attackRollPnl);
+                InitialiseDamageRollPanel();
+                UpdateCombatScreen();
             }
             else
             {
-                // attack misses
-                // show attack result panel
-                PrintCombatLog("Attack missed!");
+                // Attack misses
+                activeCharacter.turnUsed = true;
+                PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but missed.");
+                NextTurn();
+                UpdateCombatScreen();
+                HideActionPanels();
+            }
+        }
+
+        private void InitialiseDamageRollPanel()
+        {
+            rollDmgBtn.Text = $"Roll {activeCharacter.selectedWeapon.damageDiceAmount}d{activeCharacter.selectedWeapon.damageDiceType}";
+            foreach(TextBox tBox in rollDmgTBoxes)
+            {
+                tBox.Text = null;
+                tBox.Hide();
+            }
+            for(int i = 0; i < activeCharacter.selectedWeapon.damageDiceAmount; i++) 
+            {
+                rollDmgTBoxes[i].Show();
             }
         }
 
         private void ProcessDamageRoll()
         {
-            List<TextBox> tBoxes = new List<TextBox>()
-            {
-                rollDmgTBox1, rollDmgTBox2, rollDmgTBox3, rollDmgTBox4, rollDmgTBox5, 
-                rollDmgTBox6, rollDmgTBox7, rollDmgTBox8, rollDmgTBox9
-            };
-            int roll = 0;
+            int damage = 0;
 
-            foreach(TextBox tBox in tBoxes)
+            foreach(TextBox tBox in rollDmgTBoxes)
             {
                 if (int.TryParse(tBox.Text, out int i))
                 {
-                    roll += i;
+                    damage += i;
                 }
             }
 
-            // subtract damage here
+            // Process dealing damage
+            if(hipfire)
+            {
+                if(damage <= targetedCharacter.CurrentBodyArmor)
+                {
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    NextTurn();
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+                else
+                {
+                    damage -= targetedCharacter.CurrentBodyArmor; // Damage is absorbed by armor
+                    if(targetedCharacter.CurrentBodyArmor > 0)
+                    {
+                        targetedCharacter.CurrentBodyArmor--; // Deplete body armor because attack penetrates it
+                    }
+                    targetedCharacter.CurrentHp -= damage; // Deplete target health points
 
-            PrintCombatLog($"{roll} damage dealt!");
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    NextTurn();
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+            }
+            else
+            {
+                if(damage <= targetedCharacter.CurrentHelmet)
+                {
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    NextTurn();
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+                else
+                {
+                    damage -= targetedCharacter.CurrentHelmet; // Damage is absorbed by armor
+                    if(targetedCharacter.CurrentHelmet > 0)
+                    {
+                        targetedCharacter.CurrentHelmet--; // Deplete helmet armor because attack penetrates it
+                    }
+                    damage = damage * 2; // Damage not absorbed by armor is doubled due to headshot
+                    targetedCharacter.CurrentHp -= damage; // Deplete target health points
+
+                    activeCharacter.turnUsed = true;
+                    PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    NextTurn();
+                    UpdateCombatScreen();
+                    HideActionPanels();
+                    return;
+                }
+            }
+        }
+
+        private void InitialiseReloadPanel()
+        {
+            reloadCBox.Items.Clear();
+            foreach(Weapon weapon in activeCharacter.weaponList)
+            {
+                if(weapon.isRangedWeapon())
+                {
+                    reloadCBox.Items.Add(weapon.name);
+                }
+            }
+        }
+
+        private void ProcessReload()
+        {
+            if(reloadCBox.SelectedItem == null)
+            {
+                MessageBox.Show("Cannot reload!\nPlease select a weapon.");
+                return;
+            }
+
+            activeCharacter.selectedWeapon = activeCharacter.weaponList[0];
+            foreach (Weapon w in activeCharacter.weaponList)
+            {
+                if (w.name == reloadCBox.SelectedItem.ToString())
+                {
+                    activeCharacter.selectedWeapon = w;
+                    break;
+                }
+            }
+
+            if(activeCharacter.selectedWeapon == null || !activeCharacter.selectedWeapon.isRangedWeapon())
+            {
+                MessageBox.Show("Cannot reload!\nSelected weapon is null or is a melee weapon.");
+                return;
+            }
+
+            RangedWeapon r = (RangedWeapon)activeCharacter.selectedWeapon;
+            r.ReloadWeapon();
+
+            activeCharacter.turnUsed = true;
+            PrintCombatLog($"{activeCharacter.Name} reloaded their {activeCharacter.selectedWeapon.name}.");
+            NextTurn();
+            UpdateCombatScreen();
+            HideActionPanels();
+        }
+
+        private void ProcessSkipTurn()
+        {
+            activeCharacter.turnUsed = true;
+            PrintCombatLog($"{activeCharacter.Name} skipped their turn.");
+            NextTurn();
+            UpdateCombatScreen();
+            HideActionPanels();
+        }
+
+        private void NextTurn()
+        {
+            if(charsInQueue.Count <= 0)
+            {
+                MessageBox.Show("No characters in Initiative Queue.\nAdd a character via View All Characters.");
+                return;
+            }
+
+            bool allTurnsUsed = true;
+
+            foreach(Character c in charsInQueue)
+            {
+                if(!c.turnUsed)
+                {
+                    allTurnsUsed = false;
+                    break;
+                }
+            }
+
+            if(allTurnsUsed)
+            {
+                turnCounter++;
+                PrintCombatLog($"Turn {turnCounter}");
+                foreach (Character c in charsInQueue)
+                {
+                    c.turnUsed = false;
+                }
+            }
+
+            foreach(Character c in charsInQueue)
+            {
+                if(!c.turnUsed)
+                {
+                    activeCharacter = c;
+                    return;
+                }
+            }
         }
 
         // Returns a list of random integers
@@ -415,12 +686,12 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // Returns an integer for a ranged attack difficulty value given a weapon type and distance
-        private int RangedDV(string type, int distance)
+        private int RangedDV(int type, int distance)
         {
             int dv = 99;
             switch(type)
             {
-                case "Pistol":
+                case 0:
                     switch(distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -452,7 +723,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "SMG":
+                case 1:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -484,7 +755,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Shotgun":
+                case 2:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -516,7 +787,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Assault Rifle":
+                case 3:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -548,7 +819,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Sniper Rifle":
+                case 4:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -580,7 +851,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Bow/Crossbow":
+                case 5:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -612,7 +883,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Grenade Launcher":
+                case 6:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -644,7 +915,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Rocket Launcher":
+                case 7:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -695,67 +966,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label18_Click(object sender, EventArgs e)
         {
 
         }
@@ -775,21 +986,6 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         private void conditionsFlowPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label12_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void weaponCBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -816,11 +1012,6 @@ namespace Cyberpunk_RED_GM_Assistant
             viewAllForm.Show();
         }
 
-        private void attackRollPnl_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void executeAttackBtn_Click(object sender, EventArgs e)
         {
             ProcessAttackAction();
@@ -831,95 +1022,14 @@ namespace Cyberpunk_RED_GM_Assistant
             ProcessDamageRoll();
         }
 
-        private void rollDmgTBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void rollDmgTBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox3_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox4_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox5_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox6_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox7_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox8_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rollDmgTBox9_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-                (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
         private void rollDmgBtn_Click(object sender, EventArgs e)
         {
+            List<int> rolls = RollDice(activeCharacter.selectedWeapon.damageDiceAmount, activeCharacter.selectedWeapon.damageDiceType);
 
+            for(int i = 0; i < activeCharacter.selectedWeapon.damageDiceAmount; i++)
+            {
+                rollDmgTBoxes[i].Text = rolls[i].ToString();
+            }
         }
 
         private void viewAllCharactersToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -933,11 +1043,6 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ShowPanel(attackPnl);
             InitialiseAttackPanel();
-        }
-
-        private void label3_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -969,19 +1074,52 @@ namespace Cyberpunk_RED_GM_Assistant
                 return;
             }
 
+            if(selectedCharacter.turnUsed)
+            {
+                MessageBox.Show("This character has already used their turn.");
+                return;
+            }
+
             activeCharacter = selectedCharacter;
             UpdateCurrentTurn();
+            HideActionPanels();
         }
 
         private void focusCharacterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(selectedCharacter == null || activeCharacter == selectedCharacter)
             {
+                MessageBox.Show("Cannot focus on a character whose turn is active!");
                 return;
             }
 
             focusedCharacter = selectedCharacter;
             UpdateFocusChar();
+        }
+
+        private void IntOnlyKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+                (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ProcessReload();
+        }
+
+        private void reloadBtn_Click(object sender, EventArgs e)
+        {
+            ShowPanel(reloadPnl);
+            InitialiseReloadPanel();
+        }
+
+        private void skipTurnBtn_Click(object sender, EventArgs e)
+        {
+            ProcessSkipTurn();
         }
     }
 }

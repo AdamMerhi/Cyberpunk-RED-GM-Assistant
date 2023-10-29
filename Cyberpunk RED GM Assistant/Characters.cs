@@ -40,6 +40,10 @@ namespace Cyberpunk_RED_GM_Assistant
         public int Helmet { get; set; }
         public int BodyArmor { get; set; }
         public List<Weapon> weaponList;
+        public bool turnUsed;
+        public Weapon selectedWeapon;
+        public int CurrentHelmet;
+        public int CurrentBodyArmor;
 
         public Character()
         {
