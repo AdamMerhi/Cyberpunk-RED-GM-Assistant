@@ -48,6 +48,7 @@
             this.currentNameLbl = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.focusPnl = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.actionPnl = new System.Windows.Forms.Panel();
             this.attackRollPnl = new System.Windows.Forms.Panel();
@@ -92,29 +93,12 @@
             this.removeFromQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewAllCharactersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.focusCharPnl = new System.Windows.Forms.Panel();
-            this.focusMaxBodyArmorLbl = new System.Windows.Forms.Label();
-            this.focusCurrentBodyArmorLbl = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.focusMaxHelmetLbl = new System.Windows.Forms.Label();
-            this.focusCurrentHelmetLbl = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.focusMaxHpLbl = new System.Windows.Forms.Label();
-            this.focusWeaponsFPnl = new System.Windows.Forms.FlowLayoutPanel();
-            this.focusConditionsFPnl = new System.Windows.Forms.FlowLayoutPanel();
-            this.focusCurrentHpLbl = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.focusNameLbl = new System.Windows.Forms.Label();
             this.currentTurnPnl.SuspendLayout();
             this.actionPnl.SuspendLayout();
             this.attackRollPnl.SuspendLayout();
             this.attackPnl.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.focusCharPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -319,7 +303,6 @@
             this.label3.Size = new System.Drawing.Size(381, 31);
             this.label3.TabIndex = 4;
             this.label3.Text = "Select an Action for Joe Mama";
-            this.label3.Click += new System.EventHandler(this.label3_Click_1);
             // 
             // label2
             // 
@@ -331,6 +314,15 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "CURRENT TURN";
             this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // focusPnl
+            // 
+            this.focusPnl.AutoScroll = true;
+            this.focusPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.focusPnl.Location = new System.Drawing.Point(942, 43);
+            this.focusPnl.Name = "focusPnl";
+            this.focusPnl.Size = new System.Drawing.Size(630, 380);
+            this.focusPnl.TabIndex = 2;
             // 
             // label4
             // 
@@ -759,7 +751,7 @@
             this.viewDetailsToolStripMenuItem,
             this.viewAllCharactersToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 156);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(229, 134);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // focusCharacterToolStripMenuItem
@@ -767,28 +759,24 @@
             this.focusCharacterToolStripMenuItem.Name = "focusCharacterToolStripMenuItem";
             this.focusCharacterToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.focusCharacterToolStripMenuItem.Text = "Focus Character";
-            this.focusCharacterToolStripMenuItem.Click += new System.EventHandler(this.focusCharacterToolStripMenuItem_Click);
             // 
             // startTurnToolStripMenuItem
             // 
             this.startTurnToolStripMenuItem.Name = "startTurnToolStripMenuItem";
             this.startTurnToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.startTurnToolStripMenuItem.Text = "Start Turn";
-            this.startTurnToolStripMenuItem.Click += new System.EventHandler(this.startTurnToolStripMenuItem_Click);
             // 
             // removeFromQueueToolStripMenuItem
             // 
             this.removeFromQueueToolStripMenuItem.Name = "removeFromQueueToolStripMenuItem";
             this.removeFromQueueToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.removeFromQueueToolStripMenuItem.Text = "Remove From Queue";
-            this.removeFromQueueToolStripMenuItem.Click += new System.EventHandler(this.removeFromQueueToolStripMenuItem_Click);
             // 
             // viewDetailsToolStripMenuItem
             // 
             this.viewDetailsToolStripMenuItem.Name = "viewDetailsToolStripMenuItem";
             this.viewDetailsToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.viewDetailsToolStripMenuItem.Text = "View Details";
-            this.viewDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewDetailsToolStripMenuItem_Click);
             // 
             // viewAllCharactersToolStripMenuItem
             // 
@@ -797,193 +785,17 @@
             this.viewAllCharactersToolStripMenuItem.Text = "View All Characters";
             this.viewAllCharactersToolStripMenuItem.Click += new System.EventHandler(this.viewAllCharactersToolStripMenuItem_Click);
             // 
-            // focusCharPnl
-            // 
-            this.focusCharPnl.AutoScroll = true;
-            this.focusCharPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.focusCharPnl.Controls.Add(this.focusMaxBodyArmorLbl);
-            this.focusCharPnl.Controls.Add(this.focusCurrentBodyArmorLbl);
-            this.focusCharPnl.Controls.Add(this.label8);
-            this.focusCharPnl.Controls.Add(this.label9);
-            this.focusCharPnl.Controls.Add(this.focusMaxHelmetLbl);
-            this.focusCharPnl.Controls.Add(this.focusCurrentHelmetLbl);
-            this.focusCharPnl.Controls.Add(this.label18);
-            this.focusCharPnl.Controls.Add(this.label24);
-            this.focusCharPnl.Controls.Add(this.focusMaxHpLbl);
-            this.focusCharPnl.Controls.Add(this.focusWeaponsFPnl);
-            this.focusCharPnl.Controls.Add(this.focusConditionsFPnl);
-            this.focusCharPnl.Controls.Add(this.focusCurrentHpLbl);
-            this.focusCharPnl.Controls.Add(this.label29);
-            this.focusCharPnl.Controls.Add(this.label30);
-            this.focusCharPnl.Controls.Add(this.focusNameLbl);
-            this.focusCharPnl.Location = new System.Drawing.Point(942, 43);
-            this.focusCharPnl.Name = "focusCharPnl";
-            this.focusCharPnl.Size = new System.Drawing.Size(630, 380);
-            this.focusCharPnl.TabIndex = 27;
-            // 
-            // focusMaxBodyArmorLbl
-            // 
-            this.focusMaxBodyArmorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusMaxBodyArmorLbl.Location = new System.Drawing.Point(122, 99);
-            this.focusMaxBodyArmorLbl.Name = "focusMaxBodyArmorLbl";
-            this.focusMaxBodyArmorLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusMaxBodyArmorLbl.TabIndex = 26;
-            this.focusMaxBodyArmorLbl.Text = "-";
-            this.focusMaxBodyArmorLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // focusCurrentBodyArmorLbl
-            // 
-            this.focusCurrentBodyArmorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusCurrentBodyArmorLbl.Location = new System.Drawing.Point(58, 99);
-            this.focusCurrentBodyArmorLbl.Name = "focusCurrentBodyArmorLbl";
-            this.focusCurrentBodyArmorLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusCurrentBodyArmorLbl.TabIndex = 25;
-            this.focusCurrentBodyArmorLbl.Text = "-";
-            this.focusCurrentBodyArmorLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(103, 99);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 20);
-            this.label8.TabIndex = 24;
-            this.label8.Text = "/";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(13, 99);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 25);
-            this.label9.TabIndex = 23;
-            this.label9.Text = "SP";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // focusMaxHelmetLbl
-            // 
-            this.focusMaxHelmetLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusMaxHelmetLbl.Location = new System.Drawing.Point(122, 74);
-            this.focusMaxHelmetLbl.Name = "focusMaxHelmetLbl";
-            this.focusMaxHelmetLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusMaxHelmetLbl.TabIndex = 22;
-            this.focusMaxHelmetLbl.Text = "-";
-            this.focusMaxHelmetLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // focusCurrentHelmetLbl
-            // 
-            this.focusCurrentHelmetLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusCurrentHelmetLbl.Location = new System.Drawing.Point(58, 74);
-            this.focusCurrentHelmetLbl.Name = "focusCurrentHelmetLbl";
-            this.focusCurrentHelmetLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusCurrentHelmetLbl.TabIndex = 21;
-            this.focusCurrentHelmetLbl.Text = "-";
-            this.focusCurrentHelmetLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label18
-            // 
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(103, 74);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(13, 20);
-            this.label18.TabIndex = 20;
-            this.label18.Text = "/";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(13, 74);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(39, 25);
-            this.label24.TabIndex = 19;
-            this.label24.Text = "SP";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // focusMaxHpLbl
-            // 
-            this.focusMaxHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusMaxHpLbl.Location = new System.Drawing.Point(122, 49);
-            this.focusMaxHpLbl.Name = "focusMaxHpLbl";
-            this.focusMaxHpLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusMaxHpLbl.TabIndex = 18;
-            this.focusMaxHpLbl.Text = "-";
-            this.focusMaxHpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // focusWeaponsFPnl
-            // 
-            this.focusWeaponsFPnl.AutoScroll = true;
-            this.focusWeaponsFPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.focusWeaponsFPnl.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.focusWeaponsFPnl.Location = new System.Drawing.Point(212, 49);
-            this.focusWeaponsFPnl.Name = "focusWeaponsFPnl";
-            this.focusWeaponsFPnl.Size = new System.Drawing.Size(399, 313);
-            this.focusWeaponsFPnl.TabIndex = 17;
-            this.focusWeaponsFPnl.WrapContents = false;
-            // 
-            // focusConditionsFPnl
-            // 
-            this.focusConditionsFPnl.AutoScroll = true;
-            this.focusConditionsFPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.focusConditionsFPnl.Location = new System.Drawing.Point(17, 130);
-            this.focusConditionsFPnl.Name = "focusConditionsFPnl";
-            this.focusConditionsFPnl.Size = new System.Drawing.Size(179, 233);
-            this.focusConditionsFPnl.TabIndex = 16;
-            // 
-            // focusCurrentHpLbl
-            // 
-            this.focusCurrentHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusCurrentHpLbl.Location = new System.Drawing.Point(58, 49);
-            this.focusCurrentHpLbl.Name = "focusCurrentHpLbl";
-            this.focusCurrentHpLbl.Size = new System.Drawing.Size(39, 20);
-            this.focusCurrentHpLbl.TabIndex = 15;
-            this.focusCurrentHpLbl.Text = "-";
-            this.focusCurrentHpLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label29
-            // 
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(103, 49);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(13, 20);
-            this.label29.TabIndex = 5;
-            this.label29.Text = "/";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(13, 49);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(39, 25);
-            this.label30.TabIndex = 1;
-            this.label30.Text = "HP";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // focusNameLbl
-            // 
-            this.focusNameLbl.AutoSize = true;
-            this.focusNameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.focusNameLbl.Location = new System.Drawing.Point(13, 12);
-            this.focusNameLbl.Name = "focusNameLbl";
-            this.focusNameLbl.Size = new System.Drawing.Size(0, 29);
-            this.focusNameLbl.TabIndex = 0;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
-            this.Controls.Add(this.focusCharPnl);
             this.Controls.Add(this.combatLogFPnl);
             this.Controls.Add(this.queueFPnl);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.actionPnl);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.focusPnl);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.currentTurnPnl);
             this.Controls.Add(this.label2);
@@ -1000,8 +812,6 @@
             this.attackPnl.PerformLayout();
             this.contextMenuStrip2.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.focusCharPnl.ResumeLayout(false);
-            this.focusCharPnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1012,6 +822,7 @@
         private System.Windows.Forms.Panel currentTurnPnl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel focusPnl;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel actionPnl;
         private System.Windows.Forms.Label label5;
@@ -1071,22 +882,6 @@
         private System.Windows.Forms.TextBox rollDmgTBox2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem viewAllCharactersToolStripMenuItem1;
-        private System.Windows.Forms.Panel focusCharPnl;
-        private System.Windows.Forms.Label focusMaxBodyArmorLbl;
-        private System.Windows.Forms.Label focusCurrentBodyArmorLbl;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label focusMaxHelmetLbl;
-        private System.Windows.Forms.Label focusCurrentHelmetLbl;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label focusMaxHpLbl;
-        private System.Windows.Forms.FlowLayoutPanel focusWeaponsFPnl;
-        private System.Windows.Forms.FlowLayoutPanel focusConditionsFPnl;
-        private System.Windows.Forms.Label focusCurrentHpLbl;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label focusNameLbl;
     }
 }
 
