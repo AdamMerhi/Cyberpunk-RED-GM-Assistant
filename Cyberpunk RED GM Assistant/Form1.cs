@@ -184,7 +184,41 @@ namespace Cyberpunk_RED_GM_Assistant
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             label3.Text = $"Select an Action for {activeCharacter.Name}";
 
-            AddWeapons(activeCharacter);
+            AddWeapons(activeCharacter, weaponsFPnl);
+
+            // Ensures active character and focused character panels never display the same character's information
+            if(focusedCharacter != null)
+            {
+                UpdateFocusChar();
+            }
+        }
+
+        // Updates the focused character panel with the focused character's attributes
+        private void UpdateFocusChar()
+        {
+            if(activeCharacter == focusedCharacter)
+            {
+                focusNameLbl.Text = "";
+                focusCurrentHpLbl.Text = "-";
+                focusMaxHpLbl.Text = "-";
+                focusCurrentHelmetLbl.Text = "-";
+                focusMaxHelmetLbl.Text = "-";
+                focusCurrentBodyArmorLbl.Text = "-";
+                focusMaxBodyArmorLbl.Text = "-";
+                focusWeaponsFPnl.Controls.Clear();
+                focusedCharacter = null;
+                return;
+            }
+
+            focusNameLbl.Text = focusedCharacter.Name;
+            focusCurrentHpLbl.Text = focusedCharacter.CurrentHp.ToString();
+            focusMaxHpLbl.Text = focusedCharacter.MaxHp.ToString();
+            focusCurrentHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusMaxHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusCurrentBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+            focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+
+            AddWeapons(activeCharacter, focusWeaponsFPnl);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -205,9 +239,9 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // needs character id in parameters to get weapon IDs
         // then searches for weapon IDs and formats attributes into panels
-        private void AddWeapons(Character c)
+        private void AddWeapons(Character c, FlowLayoutPanel panel)
         {
-            weaponsFPnl.Controls.Clear();
+            panel.Controls.Clear();
 
             foreach(Weapon w in c.weaponList)
             {
@@ -274,7 +308,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     weaponPanel.Controls.Add(ammoTypeLabel);
                 }
                 
-                weaponsFPnl.Controls.Add(weaponPanel);
+                panel.Controls.Add(weaponPanel);
             }
         }
 
@@ -934,6 +968,17 @@ namespace Cyberpunk_RED_GM_Assistant
 
             activeCharacter = selectedCharacter;
             UpdateCurrentTurn();
+        }
+
+        private void focusCharacterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null || activeCharacter == selectedCharacter)
+            {
+                return;
+            }
+
+            focusedCharacter = selectedCharacter;
+            UpdateFocusChar();
         }
     }
 }
