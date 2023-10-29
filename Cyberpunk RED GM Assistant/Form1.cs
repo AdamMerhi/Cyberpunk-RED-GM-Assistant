@@ -21,6 +21,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public List<Character> charsInQueue; // List of characters in Initiative Queue
         public Character activeCharacter;
         public Character focusedCharacter;
+        public Character selectedCharacter;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -127,8 +128,49 @@ namespace Cyberpunk_RED_GM_Assistant
                 statsLabel.Text = statsText;
                 characterPanel.Controls.Add(statsLabel);
 
+                nameLabel.MouseDown += new MouseEventHandler(QueueLabelClick);
+                characterPanel.MouseDown += new MouseEventHandler(QueuePanelClick);
+
                 queueFPnl.Controls.Add(characterPanel);
             }
+        }
+
+        private void QueueLabelClick(object sender, MouseEventArgs e)
+        {
+            Label label = (Label)sender;
+            Character character;
+            if (label != null)
+            {
+                string str = label.Text;
+                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
+                character = GetCharacterByName(split[1]);
+                selectedCharacter = character;
+            }
+        }
+
+        private void QueuePanelClick(object sender, MouseEventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            Character character;
+            if (panel.Controls[1] != null)
+            {
+                string str = panel.Controls[0].Text;
+                string[] split = str.Split(new string[] { ". " }, StringSplitOptions.None);
+                character = GetCharacterByName(split[1]);
+                selectedCharacter = character;
+            }
+        }
+
+        private Character GetCharacterByName(string name)
+        {
+            foreach (Character character in characters)
+            {
+                if (character.Name == name)
+                {
+                    return character;
+                }
+            }
+            return null;
         }
 
         // Updates the current turn panel with the active character's attributes
@@ -141,8 +183,43 @@ namespace Cyberpunk_RED_GM_Assistant
             maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
             currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+            label3.Text = $"Select an Action for {activeCharacter.Name}";
 
-            AddWeapon(activeCharacter);
+            AddWeapons(activeCharacter, weaponsFPnl);
+
+            // Ensures active character and focused character panels never display the same character's information
+            if(focusedCharacter != null)
+            {
+                UpdateFocusChar();
+            }
+        }
+
+        // Updates the focused character panel with the focused character's attributes
+        private void UpdateFocusChar()
+        {
+            if(activeCharacter == focusedCharacter)
+            {
+                focusNameLbl.Text = "";
+                focusCurrentHpLbl.Text = "-";
+                focusMaxHpLbl.Text = "-";
+                focusCurrentHelmetLbl.Text = "-";
+                focusMaxHelmetLbl.Text = "-";
+                focusCurrentBodyArmorLbl.Text = "-";
+                focusMaxBodyArmorLbl.Text = "-";
+                focusWeaponsFPnl.Controls.Clear();
+                focusedCharacter = null;
+                return;
+            }
+
+            focusNameLbl.Text = focusedCharacter.Name;
+            focusCurrentHpLbl.Text = focusedCharacter.CurrentHp.ToString();
+            focusMaxHpLbl.Text = focusedCharacter.MaxHp.ToString();
+            focusCurrentHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusMaxHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusCurrentBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+            focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+
+            AddWeapons(activeCharacter, focusWeaponsFPnl);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -163,8 +240,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // needs character id in parameters to get weapon IDs
         // then searches for weapon IDs and formats attributes into panels
-        private void AddWeapon(Character c)
+        private void AddWeapons(Character c, FlowLayoutPanel panel)
         {
+            panel.Controls.Clear();
+
             foreach(Weapon w in c.weaponList)
             {
                 // for each weapon create a new flow layout panel and add to the weapons flow panel
@@ -230,7 +309,7 @@ namespace Cyberpunk_RED_GM_Assistant
                     weaponPanel.Controls.Add(ammoTypeLabel);
                 }
                 
-                weaponsFPnl.Controls.Add(weaponPanel);
+                panel.Controls.Add(weaponPanel);
             }
         }
 
@@ -854,6 +933,55 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ShowPanel(attackPnl);
             InitialiseAttackPanel();
+        }
+
+        private void label3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            Form3 viewDetails = new Form3(selectedCharacter.ID);
+            viewDetails.Show();
+        }
+
+        private void removeFromQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            charsInQueue.Remove(selectedCharacter);
+            UpdateInitiativeQueue();
+        }
+
+        private void startTurnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            activeCharacter = selectedCharacter;
+            UpdateCurrentTurn();
+        }
+
+        private void focusCharacterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null || activeCharacter == selectedCharacter)
+            {
+                return;
+            }
+
+            focusedCharacter = selectedCharacter;
+            UpdateFocusChar();
         }
     }
 }
