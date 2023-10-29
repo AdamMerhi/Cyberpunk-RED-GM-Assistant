@@ -108,6 +108,11 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.focusNameLbl = new System.Windows.Forms.Label();
+            this.reloadPnl = new System.Windows.Forms.Panel();
+            this.reloadCBox = new System.Windows.Forms.ComboBox();
+            this.reloadWeaponBtn = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.currentTurnPnl.SuspendLayout();
             this.actionPnl.SuspendLayout();
             this.attackPnl.SuspendLayout();
@@ -115,6 +120,7 @@
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.focusCharPnl.SuspendLayout();
+            this.reloadPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // queueLabel
@@ -340,6 +346,7 @@
             // 
             this.actionPnl.AutoScroll = true;
             this.actionPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.actionPnl.Controls.Add(this.reloadPnl);
             this.actionPnl.Controls.Add(this.attackPnl);
             this.actionPnl.Controls.Add(this.attackRollPnl);
             this.actionPnl.Controls.Add(this.endTurnBtn);
@@ -686,6 +693,7 @@
             this.reloadBtn.TabIndex = 1;
             this.reloadBtn.Text = "Reload";
             this.reloadBtn.UseVisualStyleBackColor = true;
+            this.reloadBtn.Click += new System.EventHandler(this.reloadBtn_Click);
             // 
             // attackBtn
             // 
@@ -970,6 +978,62 @@
             this.focusNameLbl.Size = new System.Drawing.Size(0, 29);
             this.focusNameLbl.TabIndex = 0;
             // 
+            // reloadPnl
+            // 
+            this.reloadPnl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.reloadPnl.Controls.Add(this.label1);
+            this.reloadPnl.Controls.Add(this.reloadCBox);
+            this.reloadPnl.Controls.Add(this.reloadWeaponBtn);
+            this.reloadPnl.Controls.Add(this.label28);
+            this.reloadPnl.Location = new System.Drawing.Point(209, 12);
+            this.reloadPnl.Name = "reloadPnl";
+            this.reloadPnl.Size = new System.Drawing.Size(402, 349);
+            this.reloadPnl.TabIndex = 5;
+            this.reloadPnl.Visible = false;
+            // 
+            // reloadCBox
+            // 
+            this.reloadCBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.reloadCBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reloadCBox.FormattingEnabled = true;
+            this.reloadCBox.Location = new System.Drawing.Point(96, 32);
+            this.reloadCBox.Name = "reloadCBox";
+            this.reloadCBox.Size = new System.Drawing.Size(150, 28);
+            this.reloadCBox.TabIndex = 32;
+            // 
+            // reloadWeaponBtn
+            // 
+            this.reloadWeaponBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reloadWeaponBtn.Location = new System.Drawing.Point(96, 75);
+            this.reloadWeaponBtn.Name = "reloadWeaponBtn";
+            this.reloadWeaponBtn.Size = new System.Drawing.Size(150, 30);
+            this.reloadWeaponBtn.TabIndex = 4;
+            this.reloadWeaponBtn.Text = "Reload";
+            this.reloadWeaponBtn.UseVisualStyleBackColor = true;
+            this.reloadWeaponBtn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(3, 35);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(87, 25);
+            this.label28.TabIndex = 27;
+            this.label28.Text = "Weapon";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(250, 25);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Select a Weapon to Reload";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,6 +1063,8 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.focusCharPnl.ResumeLayout(false);
             this.focusCharPnl.PerformLayout();
+            this.reloadPnl.ResumeLayout(false);
+            this.reloadPnl.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1084,6 +1150,11 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label focusNameLbl;
+        private System.Windows.Forms.Panel reloadPnl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox reloadCBox;
+        private System.Windows.Forms.Button reloadWeaponBtn;
+        private System.Windows.Forms.Label label28;
     }
 }
 

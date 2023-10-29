@@ -60,7 +60,8 @@ namespace Cyberpunk_RED_GM_Assistant
             actionPanels = new List<Panel>
             {
                 attackPnl,
-                attackRollPnl
+                attackRollPnl,
+                reloadPnl
             };
 
             UpdateCurrentTurn();
@@ -569,6 +570,51 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
+        private void InitialiseReloadPanel()
+        {
+            reloadCBox.Items.Clear();
+            foreach(Weapon weapon in activeCharacter.weaponList)
+            {
+                if(weapon.isRangedWeapon())
+                {
+                    reloadCBox.Items.Add(weapon.name);
+                }
+            }
+        }
+
+        private void ProcessReload()
+        {
+            if(reloadCBox.SelectedItem == null)
+            {
+                MessageBox.Show("Cannot reload!\nPlease select a weapon.");
+                return;
+            }
+
+            activeCharacter.selectedWeapon = activeCharacter.weaponList[0];
+            foreach (Weapon w in activeCharacter.weaponList)
+            {
+                if (w.name == reloadCBox.SelectedItem.ToString())
+                {
+                    activeCharacter.selectedWeapon = w;
+                    break;
+                }
+            }
+
+            if(activeCharacter.selectedWeapon == null || !activeCharacter.selectedWeapon.isRangedWeapon())
+            {
+                MessageBox.Show("Cannot reload!\nSelected weapon is null or is a melee weapon.");
+                return;
+            }
+
+            RangedWeapon r = (RangedWeapon)activeCharacter.selectedWeapon;
+            r.ReloadWeapon();
+
+            activeCharacter.turnUsed = true;
+            PrintCombatLog($"{activeCharacter.Name} reloaded their {activeCharacter.selectedWeapon.name}.");
+            UpdateCombatScreen();
+            HideActionPanels();
+        }
+
         // Returns a list of random integers
         private List<int> RollDice(int diceAmount, int diceType)
         {
@@ -998,6 +1044,15 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ProcessReload();
+        }
 
+        private void reloadBtn_Click(object sender, EventArgs e)
+        {
+            ShowPanel(reloadPnl);
+            InitialiseReloadPanel();
+        }
     }
 }
