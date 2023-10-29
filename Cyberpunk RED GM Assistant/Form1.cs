@@ -640,6 +640,27 @@ namespace Cyberpunk_RED_GM_Assistant
                 return;
             }
 
+            bool allTurnsUsed = true;
+
+            foreach(Character c in charsInQueue)
+            {
+                if(!c.turnUsed)
+                {
+                    allTurnsUsed = false;
+                    break;
+                }
+            }
+
+            if(allTurnsUsed)
+            {
+                turnCounter++;
+                PrintCombatLog($"Turn {turnCounter}");
+                foreach (Character c in charsInQueue)
+                {
+                    c.turnUsed = false;
+                }
+            }
+
             foreach(Character c in charsInQueue)
             {
                 if(!c.turnUsed)
@@ -648,14 +669,6 @@ namespace Cyberpunk_RED_GM_Assistant
                     return;
                 }
             }
-
-            foreach(Character c in charsInQueue)
-            {
-                c.turnUsed = false;
-            }
-
-            turnCounter++;
-            PrintCombatLog($"Turn {turnCounter}");
         }
 
         // Returns a list of random integers
