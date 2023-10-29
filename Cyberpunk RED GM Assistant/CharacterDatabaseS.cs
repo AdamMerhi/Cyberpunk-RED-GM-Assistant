@@ -74,6 +74,7 @@ namespace Cyberpunk_RED_GM_Assistant
                                 weaponList = new List<Weapon>()
                             };
                             character.weaponList.Add(weaponDatabase.GetWeaponByID(character.Weapons));
+                            character.turnUsed = false;
                             allCharacters.Add(character);
                         }
                     }

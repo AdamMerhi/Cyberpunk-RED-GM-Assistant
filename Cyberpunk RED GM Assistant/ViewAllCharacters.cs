@@ -71,6 +71,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 return;
             }
 
+            combatView.characters.Add(currentlySelectedCharacter);
             combatView.charsInQueue.Add(currentlySelectedCharacter);
             combatView.UpdateInitiativeQueue();
 

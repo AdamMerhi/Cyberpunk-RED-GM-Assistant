@@ -22,6 +22,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public Character activeCharacter;
         public Character focusedCharacter;
         public Character selectedCharacter;
+        public Character targetedCharacter;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -58,6 +59,12 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void ShowPanel(Panel p)
         {
+            // Do not allow the active character to have multiple turns in a row
+            if(activeCharacter.turnUsed)
+            {
+                return;
+            }
+
             foreach(Panel panel in actionPanels) 
             {
                 if(panel != p)
@@ -68,6 +75,14 @@ namespace Cyberpunk_RED_GM_Assistant
                 {
                     panel.Show();
                 }
+            }
+        }
+
+        private void HideActionPanels()
+        {
+            foreach(Panel panel in actionPanels)
+            {
+                panel.Hide();
             }
         }
 
@@ -192,6 +207,8 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 UpdateFocusChar();
             }
+
+            HideActionPanels();
         }
 
         // Updates the focused character panel with the focused character's attributes
@@ -220,6 +237,19 @@ namespace Cyberpunk_RED_GM_Assistant
             focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
 
             AddWeapons(focusedCharacter, focusWeaponsFPnl);
+        }
+
+        private void UpdateCombatScreen()
+        {
+            UpdateInitiativeQueue();
+            if(activeCharacter != null)
+            {
+                UpdateCurrentTurn();
+            }
+            if(focusedCharacter != null)
+            {
+                UpdateFocusChar();
+            }
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -350,19 +380,44 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void ProcessAttackAction()
         {
-            Weapon useWeapon;
+            // Assign the targeted character
+            foreach(Character c in charsInQueue)
+            {
+                if(c == GetCharacterByName(targetCBox.SelectedItem.ToString()))
+                {
+                    targetedCharacter = c;
+                }
+            }
+
+            // Assign the weapon being used
+            Weapon useWeapon = activeCharacter.weaponList[0];
 
             foreach(Weapon w in activeCharacter.weaponList)
             {
-                if(w.name == weaponCBox.Text)
+                if(w.name == weaponCBox.SelectedItem.ToString())
                 {
                     useWeapon = w;
                     break;
                 }
             }
 
+            // Determine the difficulty value
+            int dv = 99;
+            RangedWeapon r = new RangedWeapon();
+            MeleeWeapon m = new MeleeWeapon();
+            if(useWeapon.isRangedWeapon())
+            {
+                r = (RangedWeapon)useWeapon;
+                r.ShotsFired(); // Subtracts ammo from magazine
+                dv = RangedDV((int)r.type, Convert.ToInt32(distanceTBox.Text));
+            }
+            else
+            {
+                m = (MeleeWeapon)useWeapon;
+                dv = focusedCharacter.Evasion + focusedCharacter.Dexterity + RollDice(1, 10)[0];
+            }
+
             int roll = Convert.ToInt32(attackRollTBox.Text);
-            int dv = RangedDV("Shotgun", Convert.ToInt32(distanceTBox.Text));
             
             // Aimed shots rulebook page 171
             // If not hipfiring then subtract 8 from roll
@@ -370,8 +425,6 @@ namespace Cyberpunk_RED_GM_Assistant
             {
                 roll -= 8;
             }
-
-            // Subtract ammo from weapon
 
             // Check if attack hits
             if(roll > dv)
@@ -383,10 +436,13 @@ namespace Cyberpunk_RED_GM_Assistant
             }
             else
             {
-                // attack misses
-                // show attack result panel
-                PrintCombatLog("Attack missed!");
+                // Attack misses
+                activeCharacter.turnUsed = true;
+                PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but missed.");
+                HideActionPanels();
             }
+
+            UpdateCombatScreen();
         }
 
         private void ProcessDamageRoll()
@@ -426,12 +482,12 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // Returns an integer for a ranged attack difficulty value given a weapon type and distance
-        private int RangedDV(string type, int distance)
+        private int RangedDV(int type, int distance)
         {
             int dv = 99;
             switch(type)
             {
-                case "Pistol":
+                case 0:
                     switch(distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -463,7 +519,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "SMG":
+                case 1:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -495,7 +551,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Shotgun":
+                case 2:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -527,7 +583,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Assault Rifle":
+                case 3:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -559,7 +615,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Sniper Rifle":
+                case 4:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -591,7 +647,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Bow/Crossbow":
+                case 5:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -623,7 +679,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Grenade Launcher":
+                case 6:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
@@ -655,7 +711,7 @@ namespace Cyberpunk_RED_GM_Assistant
                             break;
                     }
                     break;
-                case "Rocket Launcher":
+                case 7:
                     switch (distance)
                     {
                         case int i when (i >= 0 && i <= 6):
