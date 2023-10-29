@@ -11,29 +11,31 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     internal class CharacterDatabase
     {
-        private WeaponDatabase weaponDatabase;
         private string ConnectionString;
-        public const string weaponConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\WeaponDB.mdf;Integrated Security=True";
 
         public CharacterDatabase(string connectionString)
         {
             ConnectionString = connectionString;
         }
 
-        public List<Character> GetAllCharacters()
+        // Untested
+        public List<Character> GetAllCharacters() 
         {
-            List<Character> characters = new List<Character>();
-            weaponDatabase = new WeaponDatabase(weaponConnectionString);
+            List<Character> allCharacters = new List<Character>();
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
+
                 string query = "SELECT * FROM Character";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    //command.Parameters.AddWithValue("@CharacterID", characterID);
+
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            // Create a new Character object and populate it with data from the database
                             Character character = new Character
                             {
                                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
@@ -62,18 +64,19 @@ namespace Cyberpunk_RED_GM_Assistant
                                 CurrentHp = reader.GetInt32(reader.GetOrdinal("CurrentHp")),
                                 MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
                                 Weapons = reader.GetString(reader.GetOrdinal("Weapons")),
+                                //Weapon2 = reader.GetString(reader.GetOrdinal("Weapon2")),
                                 Helmet = reader.GetInt32(reader.GetOrdinal("Helmet")),
-                                BodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor")),
-                                weaponList = new List<Weapon>()
+                                BodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor"))
                             };
-                            character.weaponList.Add(weaponDatabase.GetWeaponByID(character.Weapons));
-                            characters.Add(character);
+
+                            allCharacters.Add(character);
                         }
                     }
                 }
                 connection.Close();
             }
-            return characters;
+
+            return allCharacters; // Character not found
         }
 
         public Character GetCharacterByID(int characterID)

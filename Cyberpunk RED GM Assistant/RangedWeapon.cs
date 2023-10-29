@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using System.Xml.Linq;
 
 public enum RangedWeaponType
 {
@@ -91,9 +95,25 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // Use this function to check if a weapon is ranged or melee
         // True = Ranged, False = Melee
-        override public bool isRangedWeapon()
+        public override bool isRangedWeapon()
         {
             return true;
+        }
+
+        public override string GetWeaponType()
+        {
+            return $"{type}";
+        }
+
+        public override string GetWeaponDamage()
+        {
+            return $"{damageDiceAmount}d{damageDiceType}";
+        }
+
+        public override string ToString()
+        {
+            return $"Weapon Name: {name}, Weapon Type: {type}, ROF: {ROF},  Damage: {damageDiceAmount}d{damageDiceType}, " +
+                    $"Max Ammo Count: {maxAmmoCount}, Magazine Size: {magazineAmmoCount}";
         }
 
     }// end of: RangedWeapon() class

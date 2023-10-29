@@ -54,11 +54,11 @@ namespace Cyberpunk_RED_GM_Assistant
                         while (reader.Read())// keep reading stuff from database
                         {
                             //reader.
-                            //int ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            if (reader.GetInt32(reader.GetOrdinal("RangedWeaponType")) != null)
-                            //if (ID < 200)
+                            int ID = reader.GetInt32(reader.GetOrdinal("ID"));
+                            //if (reader.GetInt32(reader.GetOrdinal("RangedWeaponType")) != null)
+                            if (ID < 9)
                             {
-                                RangedWeapon weapon = new RangedWeapon
+                                /*RangedWeapon weapon = new RangedWeapon
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
@@ -71,13 +71,24 @@ namespace Cyberpunk_RED_GM_Assistant
                                     //currentAmmoCount = reader.GetInt32(reader.GetOrdinal("MaxAmmoCount")),
                                     type = (RangedWeaponType)reader.GetInt32(reader.GetOrdinal("RangedWeaponType")),
                                     //handsRequired = reader.GetInt32(reader.GetOrdinal("HandsRequired")),
-                                };
+                                };*/
+                                // This should be the correct way to create a weapon/character object pulled from databases
+                                RangedWeapon weapon = new RangedWeapon(
+                                    reader.GetInt32(reader.GetOrdinal("ID")), 
+                                    reader.GetString(reader.GetOrdinal("Name")),
+                                    reader.GetInt32(reader.GetOrdinal("ROF")),
+                                    reader.GetInt32(reader.GetOrdinal("RangedWeaponType")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
+                                    reader.GetInt32(reader.GetOrdinal("MaxAmmoCount")),
+                                    reader.GetInt32(reader.GetOrdinal("MagazineAmmoCount"))
+                                    );
                                 //return weapon;
                                 allWeapons.Add(weapon);
                             }
                             else
                             {
-                                MeleeWeapon weapon = new MeleeWeapon
+                                /*MeleeWeapon weapon = new MeleeWeapon
                                 {
                                     weaponID = reader.GetInt32(reader.GetOrdinal("ID")),
                                     name = reader.GetString(reader.GetOrdinal("Name")),
@@ -89,7 +100,15 @@ namespace Cyberpunk_RED_GM_Assistant
                                     type = (MeleeWeaponType)reader.GetInt32(reader.GetOrdinal("MeleeWeaponType")),
                                     //handsRequired = reader.GetInt32(reader.GetOrdinal("HandsRequired")),
                                     //canConceal = reader.GetBoolean(reader.GetOrdinal("CanConceal"))
-                                };
+                                };*/
+                                MeleeWeapon weapon = new MeleeWeapon(
+                                    reader.GetInt32(reader.GetOrdinal("ID")),
+                                    reader.GetString(reader.GetOrdinal("Name")),
+                                    reader.GetInt32(reader.GetOrdinal("ROF")),
+                                    reader.GetInt32(reader.GetOrdinal("MeleeWeaponType")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceType"))
+                                    );
                                 allWeapons.Add(weapon);
                             }
                         }// end of: while(reader.read())
@@ -129,9 +148,9 @@ namespace Cyberpunk_RED_GM_Assistant
                             // ID Starts with 1: RangedWeapon
                             // ID Starts with 2: MeleeWeapon
                             int ID = reader.GetInt32(reader.GetOrdinal("ID"));
-                            if (ID <= 8)
+                            if (ID < 9)
                             {
-                                RangedWeapon weapon = new RangedWeapon
+                                /*RangedWeapon weapon = new RangedWeapon
                                 {
                                     weaponID = ID,
                                     name = reader.GetString(reader.GetOrdinal("Name")),
@@ -147,12 +166,22 @@ namespace Cyberpunk_RED_GM_Assistant
                                     //currentAmmoCount = reader.GetInt32(reader.GetOrdinal("MaxAmmoCount")),
                                     type = (RangedWeaponType)reader.GetInt32(reader.GetOrdinal("RangedWeaponType")),
                                     //handsRequired = reader.GetInt32(reader.GetOrdinal("HandsRequired")),
-                                };
+                                };*/
+                                RangedWeapon weapon = new RangedWeapon(
+                                    reader.GetInt32(reader.GetOrdinal("ID")),
+                                    reader.GetString(reader.GetOrdinal("Name")),
+                                    reader.GetInt32(reader.GetOrdinal("ROF")),
+                                    reader.GetInt32(reader.GetOrdinal("RangedWeaponType")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceType")),
+                                    reader.GetInt32(reader.GetOrdinal("MaxAmmoCount")),
+                                    reader.GetInt32(reader.GetOrdinal("MagazineAmmoCount"))
+                                    );
                                 return weapon;
                             }
                             else
                             {
-                                MeleeWeapon weapon = new MeleeWeapon
+                                /*MeleeWeapon weapon = new MeleeWeapon
                                 {
                                     weaponID = ID,
                                     name = reader.GetString(reader.GetOrdinal("Name")),
@@ -165,7 +194,15 @@ namespace Cyberpunk_RED_GM_Assistant
                                     //handsRequired = reader.GetInt32(reader.GetOrdinal("HandsRequired")),
                                     //canConceal = reader.GetBoolean(reader.GetOrdinal("CanConceal"))
 
-                                };
+                                };*/
+                                MeleeWeapon weapon = new MeleeWeapon(
+                                    reader.GetInt32(reader.GetOrdinal("ID")),
+                                    reader.GetString(reader.GetOrdinal("Name")),
+                                    reader.GetInt32(reader.GetOrdinal("ROF")),
+                                    reader.GetInt32(reader.GetOrdinal("MeleeWeaponType")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceAmount")),
+                                    reader.GetInt32(reader.GetOrdinal("DamageDiceType"))
+                                    );
                                 return weapon;
                             }
                             
