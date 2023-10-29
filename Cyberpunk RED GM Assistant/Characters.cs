@@ -42,6 +42,8 @@ namespace Cyberpunk_RED_GM_Assistant
         public List<Weapon> weaponList;
         public bool turnUsed;
         public Weapon selectedWeapon;
+        public int CurrentHelmet;
+        public int CurrentBodyArmor;
 
         public Character()
         {

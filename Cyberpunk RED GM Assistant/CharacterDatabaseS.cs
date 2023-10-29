@@ -75,6 +75,8 @@ namespace Cyberpunk_RED_GM_Assistant
                             };
                             character.weaponList.Add(weaponDatabase.GetWeaponByID(character.Weapons));
                             character.turnUsed = false;
+                            character.CurrentHelmet = character.Helmet;
+                            character.CurrentBodyArmor = character.BodyArmor;
                             allCharacters.Add(character);
                         }
                     }

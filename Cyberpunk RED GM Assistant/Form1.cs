@@ -203,9 +203,9 @@ namespace Cyberpunk_RED_GM_Assistant
             currentNameLbl.Text = activeCharacter.Name;
             currentHpLbl.Text = activeCharacter.CurrentHp.ToString();
             maxHpLbl.Text = activeCharacter.MaxHp.ToString();
-            currentHelmetLbl.Text = activeCharacter.Helmet.ToString();
+            currentHelmetLbl.Text = activeCharacter.CurrentHelmet.ToString();
             maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
-            currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+            currentBodyArmorLbl.Text = activeCharacter.CurrentBodyArmor.ToString();
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             label3.Text = $"Select an Action for {activeCharacter.Name}";
 
@@ -238,9 +238,9 @@ namespace Cyberpunk_RED_GM_Assistant
             focusNameLbl.Text = focusedCharacter.Name;
             focusCurrentHpLbl.Text = focusedCharacter.CurrentHp.ToString();
             focusMaxHpLbl.Text = focusedCharacter.MaxHp.ToString();
-            focusCurrentHelmetLbl.Text = focusedCharacter.Helmet.ToString();
+            focusCurrentHelmetLbl.Text = focusedCharacter.CurrentHelmet.ToString();
             focusMaxHelmetLbl.Text = focusedCharacter.Helmet.ToString();
-            focusCurrentBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
+            focusCurrentBodyArmorLbl.Text = focusedCharacter.CurrentBodyArmor.ToString();
             focusMaxBodyArmorLbl.Text = focusedCharacter.BodyArmor.ToString();
 
             AddWeapons(focusedCharacter, focusWeaponsFPnl);
@@ -516,7 +516,7 @@ namespace Cyberpunk_RED_GM_Assistant
             // Process dealing damage
             if(hipfire)
             {
-                if(damage <= targetedCharacter.BodyArmor)
+                if(damage <= targetedCharacter.CurrentBodyArmor)
                 {
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
@@ -526,8 +526,11 @@ namespace Cyberpunk_RED_GM_Assistant
                 }
                 else
                 {
-                    damage -= targetedCharacter.BodyArmor; // Damage is absorbed by armor
-                    targetedCharacter.BodyArmor--; // Deplete body armor because attack penetrates it
+                    damage -= targetedCharacter.CurrentBodyArmor; // Damage is absorbed by armor
+                    if(targetedCharacter.CurrentBodyArmor > 0)
+                    {
+                        targetedCharacter.CurrentBodyArmor--; // Deplete body armor because attack penetrates it
+                    }
                     targetedCharacter.CurrentHp -= damage; // Deplete target health points
 
                     activeCharacter.turnUsed = true;
@@ -539,7 +542,7 @@ namespace Cyberpunk_RED_GM_Assistant
             }
             else
             {
-                if(damage <= targetedCharacter.Helmet)
+                if(damage <= targetedCharacter.CurrentHelmet)
                 {
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
@@ -549,8 +552,11 @@ namespace Cyberpunk_RED_GM_Assistant
                 }
                 else
                 {
-                    damage -= targetedCharacter.Helmet; // Damage is absorbed by armor
-                    targetedCharacter.Helmet--; // Deplete helmet armor because attack penetrates it
+                    damage -= targetedCharacter.CurrentHelmet; // Damage is absorbed by armor
+                    if(targetedCharacter.CurrentHelmet > 0)
+                    {
+                        targetedCharacter.CurrentHelmet--; // Deplete helmet armor because attack penetrates it
+                    }
                     damage = damage * 2; // Damage not absorbed by armor is doubled due to headshot
                     targetedCharacter.CurrentHp -= damage; // Deplete target health points
 
