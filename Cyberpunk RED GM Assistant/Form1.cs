@@ -40,6 +40,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
             AddToQueue(characters[0]);
             AddToQueue(characters[1]);
+            AddToQueue(characters[2]);
+            AddToQueue(characters[3]);
+            AddToQueue(characters[4]);
+            AddToQueue(characters[5]);
             activeCharacter = charsInQueue[0];
 
             actionPanels = new List<Panel>
