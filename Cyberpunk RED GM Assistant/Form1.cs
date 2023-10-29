@@ -25,6 +25,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public Character targetedCharacter;
         private List<TextBox> rollDmgTBoxes;
         private bool hipfire = true;
+        private int turnCounter = 1;
 
         // list of different action panels, e.g. attack panel, reload panel
         // need this so that all panels can be looped over and all but one can be hidden
@@ -65,6 +66,7 @@ namespace Cyberpunk_RED_GM_Assistant
             };
 
             UpdateCurrentTurn();
+            PrintCombatLog($"Turn {turnCounter}");
         }
 
         private void ShowPanel(Panel p)
@@ -483,6 +485,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 // Attack misses
                 activeCharacter.turnUsed = true;
                 PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but missed.");
+                NextTurn();
                 UpdateCombatScreen();
                 HideActionPanels();
             }
@@ -521,6 +524,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 {
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    NextTurn();
                     UpdateCombatScreen();
                     HideActionPanels();
                     return;
@@ -536,6 +540,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    NextTurn();
                     UpdateCombatScreen();
                     HideActionPanels();
                     return;
@@ -547,6 +552,7 @@ namespace Cyberpunk_RED_GM_Assistant
                 {
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} tried to attack {targetedCharacter.Name} but did no damage.");
+                    NextTurn();
                     UpdateCombatScreen();
                     HideActionPanels();
                     return;
@@ -563,6 +569,7 @@ namespace Cyberpunk_RED_GM_Assistant
 
                     activeCharacter.turnUsed = true;
                     PrintCombatLog($"{activeCharacter.Name} dealt {damage} damage to {targetedCharacter.Name}!");
+                    NextTurn();
                     UpdateCombatScreen();
                     HideActionPanels();
                     return;
@@ -611,8 +618,44 @@ namespace Cyberpunk_RED_GM_Assistant
 
             activeCharacter.turnUsed = true;
             PrintCombatLog($"{activeCharacter.Name} reloaded their {activeCharacter.selectedWeapon.name}.");
+            NextTurn();
             UpdateCombatScreen();
             HideActionPanels();
+        }
+
+        private void ProcessSkipTurn()
+        {
+            activeCharacter.turnUsed = true;
+            PrintCombatLog($"{activeCharacter.Name} skipped their turn.");
+            NextTurn();
+            UpdateCombatScreen();
+            HideActionPanels();
+        }
+
+        private void NextTurn()
+        {
+            if(charsInQueue.Count <= 0)
+            {
+                MessageBox.Show("No characters in Initiative Queue.\nAdd a character via View All Characters.");
+                return;
+            }
+
+            foreach(Character c in charsInQueue)
+            {
+                if(!c.turnUsed)
+                {
+                    activeCharacter = c;
+                    return;
+                }
+            }
+
+            foreach(Character c in charsInQueue)
+            {
+                c.turnUsed = false;
+            }
+
+            turnCounter++;
+            PrintCombatLog($"Turn {turnCounter}");
         }
 
         // Returns a list of random integers
@@ -1018,6 +1061,12 @@ namespace Cyberpunk_RED_GM_Assistant
                 return;
             }
 
+            if(selectedCharacter.turnUsed)
+            {
+                MessageBox.Show("This character has already used their turn.");
+                return;
+            }
+
             activeCharacter = selectedCharacter;
             UpdateCurrentTurn();
             HideActionPanels();
@@ -1053,6 +1102,11 @@ namespace Cyberpunk_RED_GM_Assistant
         {
             ShowPanel(reloadPnl);
             InitialiseReloadPanel();
+        }
+
+        private void skipTurnBtn_Click(object sender, EventArgs e)
+        {
+            ProcessSkipTurn();
         }
     }
 }

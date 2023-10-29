@@ -78,7 +78,7 @@
             this.executeDmgRollBtn = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.endTurnBtn = new System.Windows.Forms.Button();
+            this.skipTurnBtn = new System.Windows.Forms.Button();
             this.reloadBtn = new System.Windows.Forms.Button();
             this.attackBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -349,7 +349,7 @@
             this.actionPnl.Controls.Add(this.reloadPnl);
             this.actionPnl.Controls.Add(this.attackPnl);
             this.actionPnl.Controls.Add(this.attackRollPnl);
-            this.actionPnl.Controls.Add(this.endTurnBtn);
+            this.actionPnl.Controls.Add(this.skipTurnBtn);
             this.actionPnl.Controls.Add(this.reloadBtn);
             this.actionPnl.Controls.Add(this.attackBtn);
             this.actionPnl.Location = new System.Drawing.Point(303, 469);
@@ -674,15 +674,16 @@
             this.label27.Text = "Attack hits! Roll for damage";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // endTurnBtn
+            // skipTurnBtn
             // 
-            this.endTurnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.endTurnBtn.Location = new System.Drawing.Point(11, 84);
-            this.endTurnBtn.Name = "endTurnBtn";
-            this.endTurnBtn.Size = new System.Drawing.Size(150, 30);
-            this.endTurnBtn.TabIndex = 2;
-            this.endTurnBtn.Text = "End Turn";
-            this.endTurnBtn.UseVisualStyleBackColor = true;
+            this.skipTurnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.skipTurnBtn.Location = new System.Drawing.Point(11, 84);
+            this.skipTurnBtn.Name = "skipTurnBtn";
+            this.skipTurnBtn.Size = new System.Drawing.Size(150, 30);
+            this.skipTurnBtn.TabIndex = 2;
+            this.skipTurnBtn.Text = "Skip Turn";
+            this.skipTurnBtn.UseVisualStyleBackColor = true;
+            this.skipTurnBtn.Click += new System.EventHandler(this.skipTurnBtn_Click);
             // 
             // reloadBtn
             // 
@@ -1096,7 +1097,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label maxHpLbl;
         private System.Windows.Forms.Button attackBtn;
-        private System.Windows.Forms.Button endTurnBtn;
+        private System.Windows.Forms.Button skipTurnBtn;
         private System.Windows.Forms.Button reloadBtn;
         private System.Windows.Forms.Panel attackPnl;
         private System.Windows.Forms.Label label19;
