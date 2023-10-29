@@ -11,7 +11,9 @@ namespace Cyberpunk_RED_GM_Assistant
 {
     internal class CharacterDatabase
     {
+        private WeaponDatabase weaponDatabase;
         private string ConnectionString;
+        public const string weaponConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\WeaponDB.mdf;Integrated Security=True";
 
         public CharacterDatabase(string connectionString)
         {
@@ -21,7 +23,7 @@ namespace Cyberpunk_RED_GM_Assistant
         public List<Character> GetAllCharacters()
         {
             List<Character> characters = new List<Character>();
-
+            weaponDatabase = new WeaponDatabase(weaponConnectionString);
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -61,9 +63,10 @@ namespace Cyberpunk_RED_GM_Assistant
                                 MaxHp = reader.GetInt32(reader.GetOrdinal("MaxHp")),
                                 Weapons = reader.GetString(reader.GetOrdinal("Weapons")),
                                 Helmet = reader.GetInt32(reader.GetOrdinal("Helmet")),
-                                BodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor"))
+                                BodyArmor = reader.GetInt32(reader.GetOrdinal("BodyArmor")),
+                                weaponList = new List<Weapon>()
                             };
-
+                            character.weaponList.Add(weaponDatabase.GetWeaponByID(character.Weapons));
                             characters.Add(character);
                         }
                     }

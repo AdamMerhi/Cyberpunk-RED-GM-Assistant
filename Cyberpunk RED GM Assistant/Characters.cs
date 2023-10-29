@@ -39,6 +39,8 @@ namespace Cyberpunk_RED_GM_Assistant
         public string Weapon2 { get; set; }*/
         public int Helmet { get; set; }
         public int BodyArmor { get; set; }
+        public List<Weapon> weaponList;
+
         public Character()
         {
 

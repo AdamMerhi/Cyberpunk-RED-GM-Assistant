@@ -49,13 +49,6 @@ namespace Cyberpunk_RED_GM_Assistant
             };
 
             UpdateCurrentTurn();
-
-            // testing starts
-            for(int i = 0; i < 5; i++)
-            {
-                AddWeapon();
-            }
-            // testing ends
         }
 
         private void ShowPanel(Panel p)
@@ -73,7 +66,7 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
-        // needs character id in parameters to generate panel with correct text
+        // Adds a character to the initiative queue
         public void AddToQueue(Character c)
         {
             foreach(Character character in charsInQueue)
@@ -87,7 +80,7 @@ namespace Cyberpunk_RED_GM_Assistant
             UpdateInitiativeQueue();
         }
 
-        // overload with int instead of character
+        // Overload with int instead of character
         public void AddToQueue(int characterID)
         {
             Character c = characterDatabase.GetCharacterByID(characterID);
@@ -103,6 +96,7 @@ namespace Cyberpunk_RED_GM_Assistant
             UpdateInitiativeQueue();
         }
 
+        // Clears the initiative queue panel and refills it with updated list
         private void UpdateInitiativeQueue()
         {
             queueFPnl.Controls.Clear();
@@ -132,6 +126,7 @@ namespace Cyberpunk_RED_GM_Assistant
             }
         }
 
+        // Updates the current turn panel with the active character's attributes
         private void UpdateCurrentTurn()
         {
             currentNameLbl.Text = activeCharacter.Name;
@@ -141,6 +136,8 @@ namespace Cyberpunk_RED_GM_Assistant
             maxHelmetLbl.Text = activeCharacter.Helmet.ToString();
             currentBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
+
+            AddWeapon(activeCharacter);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -161,56 +158,75 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // needs character id in parameters to get weapon IDs
         // then searches for weapon IDs and formats attributes into panels
-        private void AddWeapon()
+        private void AddWeapon(Character c)
         {
-            // for each weapon create a new flow layout panel and add to the weapons flow panel
-            FlowLayoutPanel weaponPanel = new FlowLayoutPanel();
-            weaponPanel.Size = new Size(372, 75);
-            weaponPanel.FlowDirection = FlowDirection.LeftToRight;
+            foreach(Weapon w in c.weaponList)
+            {
+                // for each weapon create a new flow layout panel and add to the weapons flow panel
+                FlowLayoutPanel weaponPanel = new FlowLayoutPanel();
+                weaponPanel.Size = new Size(372, 75);
+                weaponPanel.FlowDirection = FlowDirection.LeftToRight;
 
-            // Weapon name
-            Label nameLabel = new Label();
-            nameLabel.Size = new Size(180, 20);
-            nameLabel.Font = new Font(nameLabel.Font.Name, 13f);
-            nameLabel.Text = $"SPAS-12"; // find name here
-            weaponPanel.Controls.Add(nameLabel);
+                // Weapon name
+                Label nameLabel = new Label();
+                nameLabel.Size = new Size(180, 20);
+                nameLabel.Font = new Font(nameLabel.Font.Name, 13f);
+                nameLabel.Text = $"{w.name}"; // find name here
+                weaponPanel.Controls.Add(nameLabel);
 
-            // Weapon type
-            Label typeLabel = new Label();
-            typeLabel.Size = new Size(180, 20);
-            typeLabel.Font = new Font(typeLabel.Font.Name, 13f);
-            typeLabel.Text = $"Shotgun"; // find type here
-            weaponPanel.Controls.Add(typeLabel);
+                // Weapon type
+                Label typeLabel = new Label();
+                typeLabel.Size = new Size(180, 20);
+                typeLabel.Font = new Font(typeLabel.Font.Name, 13f);
+                if(w.isRangedWeapon())
+                {
+                    RangedWeapon r = (RangedWeapon)w;
+                    typeLabel.Text = $"{r.type}";
+                }
+                else
+                {
+                    MeleeWeapon m = (MeleeWeapon)w;
+                    typeLabel.Text = $"{m.type} Melee";
+                }
 
-            // Weapon damage
-            Label dmgLabel = new Label();
-            dmgLabel.Size = new Size(180, 20);
-            dmgLabel.Font = new Font(dmgLabel.Font.Name, 13f);
-            dmgLabel.Text = $"DMG 5d6"; // find damage here
-            weaponPanel.Controls.Add(dmgLabel);
+                weaponPanel.Controls.Add(typeLabel);
 
-            // Weapon rate of fire
-            Label rofLabel = new Label();
-            rofLabel.Size = new Size(180, 20);
-            rofLabel.Font = new Font(rofLabel.Font.Name, 13f);
-            rofLabel.Text = $"ROF 1"; // find rate of fire here
-            weaponPanel.Controls.Add(rofLabel);
+                // Weapon damage
+                Label dmgLabel = new Label();
+                dmgLabel.Size = new Size(180, 20);
+                dmgLabel.Font = new Font(dmgLabel.Font.Name, 13f);
+                dmgLabel.Text = $"DMG {w.damageDiceAmount}d{w.damageDiceType}";
+                weaponPanel.Controls.Add(dmgLabel);
 
-            // Current ammo / Reserve Ammo
-            Label ammoLabel = new Label();
-            ammoLabel.Size = new Size(180, 20);
-            ammoLabel.Font = new Font(ammoLabel.Font.Name, 13f);
-            ammoLabel.Text = $"3 / 16"; // find current ammo and reserve ammo here
-            weaponPanel.Controls.Add(ammoLabel);
+                // Weapon rate of fire
+                Label rofLabel = new Label();
+                rofLabel.Size = new Size(180, 20);
+                rofLabel.Font = new Font(rofLabel.Font.Name, 13f);
+                rofLabel.Text = $"ROF {w.ROF}";
+                weaponPanel.Controls.Add(rofLabel);
 
-            // Ammo type (WIP, currently has no functional use)
-            Label ammoTypeLabel = new Label();
-            ammoTypeLabel.Size = new Size(180, 20);
-            ammoTypeLabel.Font = new Font(ammoTypeLabel.Font.Name, 13f);
-            ammoTypeLabel.Text = $"Shotgun"; // find type here
-            weaponPanel.Controls.Add(ammoTypeLabel);
+                // Only run this if ranged weapon
+                if(w.isRangedWeapon())
+                {
+                    RangedWeapon r = (RangedWeapon)w;
 
-            weaponsFPnl.Controls.Add(weaponPanel);
+                    // Current Ammo / Reserve Ammo
+                    Label ammoLabel = new Label();
+                    ammoLabel.Size = new Size(180, 20);
+                    ammoLabel.Font = new Font(ammoLabel.Font.Name, 13f);
+                    ammoLabel.Text = $"{r.magazineAmmoCount} / {r.reserveAmmoCount}";
+                    weaponPanel.Controls.Add(ammoLabel);
+
+                    // Ammo type (WIP, currently has no functional use)
+                    Label ammoTypeLabel = new Label();
+                    ammoTypeLabel.Size = new Size(180, 20);
+                    ammoTypeLabel.Font = new Font(ammoTypeLabel.Font.Name, 13f);
+                    ammoTypeLabel.Text = $"{r.type} Ammo";
+                    weaponPanel.Controls.Add(ammoTypeLabel);
+                }
+                
+                weaponsFPnl.Controls.Add(weaponPanel);
+            }
         }
 
         // Prints a string to the combat log
