@@ -101,7 +101,8 @@ namespace Cyberpunk_RED_GM_Assistant
         }
 
         // Clears the initiative queue panel and refills it with updated list
-        private void UpdateInitiativeQueue()
+        //private void UpdateInitiativeQueue()
+        public void UpdateInitiativeQueue()
         {
             queueFPnl.Controls.Clear();
 
@@ -731,7 +732,8 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void viewAllCharactersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            //ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            ViewAllCharacters viewAllForm = new ViewAllCharacters(this);
             viewAllForm.Show();
         }
 
@@ -843,7 +845,8 @@ namespace Cyberpunk_RED_GM_Assistant
 
         private void viewAllCharactersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            //ViewAllCharacters viewAllForm = new ViewAllCharacters();
+            ViewAllCharacters viewAllForm = new ViewAllCharacters(this);
             viewAllForm.Show();
         }
 

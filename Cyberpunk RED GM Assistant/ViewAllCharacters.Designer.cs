@@ -34,16 +34,15 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CharacterName = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
+            this.ArmorLabel = new System.Windows.Forms.Label();
+            this.HelmetLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label28 = new System.Windows.Forms.Label();
+            this.HPLabel = new System.Windows.Forms.Label();
             this.SkillsFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -73,13 +72,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.WeaponFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SkillsFlowLayout.SuspendLayout();
             this.ConditionsFlowLayout.SuspendLayout();
@@ -103,7 +99,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 80);
             this.button2.TabIndex = 1;
-            this.button2.Text = "View Details";
+            this.button2.Text = "Edit Details";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -136,12 +132,14 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(200, 80);
             this.button5.TabIndex = 4;
-            this.button5.Text = "Close Window";
+            this.button5.Text = "See All Weapons";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CharacterName);
+            this.groupBox1.Controls.Add(this.label33);
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label1);
@@ -151,8 +149,27 @@
             this.groupBox1.Size = new System.Drawing.Size(1200, 700);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "All Characters";
+            this.groupBox1.Text = "All Characters From Database";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // CharacterName
+            // 
+            this.CharacterName.AutoSize = true;
+            this.CharacterName.Location = new System.Drawing.Point(719, 30);
+            this.CharacterName.Name = "CharacterName";
+            this.CharacterName.Size = new System.Drawing.Size(0, 26);
+            this.CharacterName.TabIndex = 5;
+            this.CharacterName.Click += new System.EventHandler(this.CharacterName_Click);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.ForeColor = System.Drawing.Color.Red;
+            this.label33.Location = new System.Drawing.Point(510, 30);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(203, 26);
+            this.label33.TabIndex = 4;
+            this.label33.Text = "Currently Selected: ";
             // 
             // flowLayoutPanel1
             // 
@@ -167,8 +184,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.WeaponFlowLayout);
             this.groupBox2.Controls.Add(this.groupBox5);
-            this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.SkillsFlowLayout);
             this.groupBox2.Controls.Add(this.ConditionsFlowLayout);
@@ -177,9 +194,9 @@
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(505, 63);
+            this.groupBox2.Location = new System.Drawing.Point(505, 70);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(644, 603);
+            this.groupBox2.Size = new System.Drawing.Size(644, 596);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Character Details";
@@ -187,88 +204,57 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.label32);
-            this.groupBox5.Controls.Add(this.label30);
+            this.groupBox5.Controls.Add(this.ArmorLabel);
+            this.groupBox5.Controls.Add(this.HelmetLabel);
             this.groupBox5.Location = new System.Drawing.Point(402, 437);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(220, 140);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             // 
-            // label32
+            // ArmorLabel
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(10, 86);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(128, 26);
-            this.label32.TabIndex = 1;
-            this.label32.Text = "Body Armor";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ArmorLabel.AutoSize = true;
+            this.ArmorLabel.Location = new System.Drawing.Point(10, 86);
+            this.ArmorLabel.Name = "ArmorLabel";
+            this.ArmorLabel.Size = new System.Drawing.Size(134, 26);
+            this.ArmorLabel.TabIndex = 1;
+            this.ArmorLabel.Text = "Body Armor:";
+            this.ArmorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label30
+            // HelmetLabel
             // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(10, 44);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(82, 26);
-            this.label30.TabIndex = 0;
-            this.label30.Text = "Helmet";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label31);
-            this.groupBox4.Controls.Add(this.label29);
-            this.groupBox4.Location = new System.Drawing.Point(406, 242);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(220, 140);
-            this.groupBox4.TabIndex = 10;
-            this.groupBox4.TabStop = false;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(6, 82);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(103, 26);
-            this.label31.TabIndex = 1;
-            this.label31.Text = "SPAS-12";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(6, 46);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(86, 26);
-            this.label29.TabIndex = 0;
-            this.label29.Text = "FN P90";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label29.Click += new System.EventHandler(this.label29_Click);
+            this.HelmetLabel.AutoSize = true;
+            this.HelmetLabel.Location = new System.Drawing.Point(10, 44);
+            this.HelmetLabel.Name = "HelmetLabel";
+            this.HelmetLabel.Size = new System.Drawing.Size(88, 26);
+            this.HelmetLabel.TabIndex = 0;
+            this.HelmetLabel.Text = "Helmet:";
+            this.HelmetLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label28);
+            this.groupBox3.Controls.Add(this.HPLabel);
             this.groupBox3.Location = new System.Drawing.Point(406, 82);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(212, 100);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             // 
-            // label28
+            // HPLabel
             // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(3, 42);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(205, 26);
-            this.label28.TabIndex = 0;
-            this.label28.Text = "CurrentHP / MaxHP";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label28.Click += new System.EventHandler(this.label28_Click);
+            this.HPLabel.AutoSize = true;
+            this.HPLabel.Location = new System.Drawing.Point(3, 42);
+            this.HPLabel.Name = "HPLabel";
+            this.HPLabel.Size = new System.Drawing.Size(205, 26);
+            this.HPLabel.TabIndex = 0;
+            this.HPLabel.Text = "CurrentHP / MaxHP";
+            this.HPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SkillsFlowLayout
             // 
             this.SkillsFlowLayout.AutoScroll = true;
+            this.SkillsFlowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SkillsFlowLayout.Controls.Add(this.label7);
             this.SkillsFlowLayout.Controls.Add(this.label8);
             this.SkillsFlowLayout.Controls.Add(this.label9);
@@ -295,7 +281,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(147, 26);
             this.label7.TabIndex = 5;
-            this.label7.Text = "Consentration";
+            this.label7.Text = "Concentration";
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
@@ -392,6 +378,7 @@
             // ConditionsFlowLayout
             // 
             this.ConditionsFlowLayout.AutoScroll = true;
+            this.ConditionsFlowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ConditionsFlowLayout.Controls.Add(this.label18);
             this.ConditionsFlowLayout.Controls.Add(this.label19);
             this.ConditionsFlowLayout.Controls.Add(this.label20);
@@ -569,44 +556,19 @@
             this.label1.Text = "Select Character";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button6
+            // WeaponFlowLayout
             // 
-            this.button6.Location = new System.Drawing.Point(1297, 59);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 37);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Initiase Weapons";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(1297, 102);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 37);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "See  All Weapons";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(330, 155);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.UseWaitCursor = true;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.WeaponFlowLayout.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.WeaponFlowLayout.Location = new System.Drawing.Point(402, 242);
+            this.WeaponFlowLayout.Name = "WeaponFlowLayout";
+            this.WeaponFlowLayout.Size = new System.Drawing.Size(220, 140);
+            this.WeaponFlowLayout.TabIndex = 12;
             // 
             // ViewAllCharacters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 961);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -621,8 +583,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.SkillsFlowLayout.ResumeLayout(false);
@@ -630,7 +590,6 @@
             this.ConditionsFlowLayout.ResumeLayout(false);
             this.ConditionsFlowLayout.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -674,15 +633,12 @@
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label HPLabel;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label HelmetLabel;
+        private System.Windows.Forms.Label ArmorLabel;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label CharacterName;
+        private System.Windows.Forms.FlowLayoutPanel WeaponFlowLayout;
     }
 }
