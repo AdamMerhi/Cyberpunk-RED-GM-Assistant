@@ -184,7 +184,7 @@ namespace Cyberpunk_RED_GM_Assistant
             maxBodyArmorLbl.Text = activeCharacter.BodyArmor.ToString();
             label3.Text = $"Select an Action for {activeCharacter.Name}";
 
-            AddWeapon(activeCharacter);
+            AddWeapons(activeCharacter);
         }
 
         // needs character id in parameters to generate label with correct conditions
@@ -205,8 +205,10 @@ namespace Cyberpunk_RED_GM_Assistant
 
         // needs character id in parameters to get weapon IDs
         // then searches for weapon IDs and formats attributes into panels
-        private void AddWeapon(Character c)
+        private void AddWeapons(Character c)
         {
+            weaponsFPnl.Controls.Clear();
+
             foreach(Weapon w in c.weaponList)
             {
                 // for each weapon create a new flow layout panel and add to the weapons flow panel
@@ -921,6 +923,17 @@ namespace Cyberpunk_RED_GM_Assistant
 
             charsInQueue.Remove(selectedCharacter);
             UpdateInitiativeQueue();
+        }
+
+        private void startTurnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(selectedCharacter == null)
+            {
+                return;
+            }
+
+            activeCharacter = selectedCharacter;
+            UpdateCurrentTurn();
         }
     }
 }

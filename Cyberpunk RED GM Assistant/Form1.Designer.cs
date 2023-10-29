@@ -766,6 +766,7 @@
             this.startTurnToolStripMenuItem.Name = "startTurnToolStripMenuItem";
             this.startTurnToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.startTurnToolStripMenuItem.Text = "Start Turn";
+            this.startTurnToolStripMenuItem.Click += new System.EventHandler(this.startTurnToolStripMenuItem_Click);
             // 
             // removeFromQueueToolStripMenuItem
             // 
